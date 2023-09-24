@@ -1,17 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
-import Welcome from './components/Welcome';
-import StateComponent from './components/StateComponent';
-import InputComponent from './components/InputComponent';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.css";
+import Welcome from "./components/Welcome";
+import GoalButton from "./components/signup/GoalButton";
+import ModeSelection from "./components/Page/ModeSelection";
 
 function App() {
   return (
-    <div className="App">
-        <Welcome username={"김윤희"} age={23} height={172} ></Welcome>
-        <StateComponent></StateComponent>
-        <InputComponent></InputComponent>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/mode" element={<ModeSelection></ModeSelection>}></Route>
+        <Route path="/home" element={<Welcome></Welcome>}></Route>
+        <Route path="/goal" element={<GoalButton></GoalButton>}></Route>
+      </Routes>
+    </BrowserRouter>
   );
-};
+}
 
 export default App;
