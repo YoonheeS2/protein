@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Discover, Activity, Home, Heart } from "iconic-react";
 import styled from "styled-components";
 
 const Navigation = styled.div`
@@ -8,9 +9,8 @@ const Navigation = styled.div`
     bottom: 0;
     width: 100%;
     height: 60px;
-
     display: flex;
-    border: solid 2px;
+    border: solid 0.5px #fdfdfd;
   }
 
   nav > div {
@@ -20,25 +20,49 @@ const Navigation = styled.div`
     align-items: center;
   }
 `;
+const IconHome = styled(Home)`
+  margin-right: 5px;
+  margin-left: 10px;
+`;
+
+const IconDiscover = styled(Discover)`
+  margin-right: 5px;
+  margin-left: 10px;
+`;
+
+const IconActivity = styled(Activity)`
+  margin-right: 5px;
+  margin-left: 10px;
+`;
+
+const IconHeart = styled(Heart)`
+  margin-right: 5px;
+  margin-left: 10px;
+`;
 
 const Nav = () => {
   return (
     <Navigation>
       <nav>
         <div>
-          <NavLink to="/">
-            {/* <FontAwesomeIcon icon={faThumbsUp} /> */}
-            Home
+          <NavLink to="/diet">
+            <IconActivity></IconActivity>
           </NavLink>
         </div>
         <div>
-          <NavLink to="/recommend">Recommend</NavLink>
+          <NavLink to="/community">
+            <IconHome></IconHome>
+          </NavLink>
         </div>
         <div>
-          <NavLink to="/search">Search</NavLink>
+          <NavLink to="/">
+            <IconDiscover></IconDiscover>
+          </NavLink>
         </div>
         <div>
-          <NavLink to="/mypage">MyPage</NavLink>
+          <NavLink to="/">
+            <IconHeart></IconHeart>
+          </NavLink>
         </div>
       </nav>
     </Navigation>
