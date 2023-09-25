@@ -3,6 +3,7 @@ import "./App.css";
 import StyledComponent from "./components/StyledComponent";
 import ProfileDetailPage01 from "./pages/ProfileDetailPage01";
 import ProfileDetailPage02 from "./pages/ProfileDetailPage02";
+import ModeSelection from "./pages/ModeSelection";
 
 function App() {
   return (
@@ -16,6 +17,10 @@ function App() {
         <Route
           path="/signup2"
           element={<ProfileDetailPage02></ProfileDetailPage02>}
+        ></Route>
+        <Route
+          path="/modeSelect"
+          element={<ModeSelection></ModeSelection>}
         ></Route>
       </Routes>
     </BrowserRouter>

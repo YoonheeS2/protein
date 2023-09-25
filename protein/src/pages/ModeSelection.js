@@ -1,11 +1,9 @@
 import React from 'react'
-import GoalButton from '../signup/GoalButton'
+import GoalButton from '../components/signup/GoalButton'
 import styled from 'styled-components'
-import ButtonComponent from '../signup/ButtonComponent';
+import ButtonComponent from '../components/signup/ButtonComponent';
 
-const ModeSelection = () => {
-
-  const Title = styled.div`
+const Title = styled.div`
   display: flex;
   margin-top:46px;
   font-weight: bold;
@@ -13,15 +11,16 @@ const ModeSelection = () => {
   justify-content: center;
   text-align: center;
   margin-bottom : 5px;
-  `;
+`;
 
-  const Text = styled.div`
+const Text = styled.div`
   font-size:12px;
   color:#7B6F72;
   justify-content: center;
   text-align: center;
-  `;
+`;
 
+const ModeSelection = () => {
   return (
     <div>
     <Title>당신의 목표는 무엇입니까?</Title>

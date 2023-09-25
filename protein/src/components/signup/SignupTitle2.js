@@ -23,9 +23,15 @@ const MainTitle = styled.div`
 
 const Description = styled.div`
   font-size: 11px;
+  color: #000000;
+  font-weight: normal;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
 `;
 
-const SignupTitle = ({ title, description }) => {
+const SignupTitle2 = ({ title, description }) => {
   return (
     <Block>
       <MainTitle>{title}</MainTitle>
@@ -34,4 +40,4 @@ const SignupTitle = ({ title, description }) => {
   );
 };
 
-export default SignupTitle;
+export default SignupTitle2;
