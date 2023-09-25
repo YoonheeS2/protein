@@ -5,6 +5,7 @@ import ProfileDetailPage02 from "./pages/ProfileDetailPage02";
 import Nav from "./components/common/Nav";
 import DietPage from "./pages/DietPage";
 import CommunityPage from "./pages/CommunityPage";
+import ModeSelection from "./pages/ModeSelection";
 
 function App() {
   return (
@@ -19,6 +20,10 @@ function App() {
         <Route
           path="/signup2"
           element={<ProfileDetailPage02></ProfileDetailPage02>}
+        ></Route>
+        <Route
+          path="/modeSelect"
+          element={<ModeSelection></ModeSelection>}
         ></Route>
       </Routes>
       <Nav></Nav>

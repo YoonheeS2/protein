@@ -1,17 +1,18 @@
 import React from "react";
-import { User } from "iconic-react";
+import { Lock, Sms, User } from "iconic-react";
 import styled from "styled-components";
 
 const InputContainer = styled.div`
   display: flex;
   align-items: center;
-  border: 1px solid #ccc;
+  border: 0px;
   padding: 5px;
   border-radius: 5px;
   width: 100%; // 원하는 너비로 조정하세요.
   margin-left: 20px;
   margin-right: 20px;
   height: 48px;
+  background: #f1f1f1;
 `;
 
 const Input = styled.input`
@@ -19,10 +20,22 @@ const Input = styled.input`
   outline: none;
   flex: 1;
   padding: 5px;
+  background: #f1f1f1;
 `;
 
 // Iconic 아이콘을 스타일링하기 위한 스타일 컴포넌트
-const Icon = styled(User)`
+
+const IconUser = styled(User)`
+  margin-right: 5px;
+  margin-left: 10px;
+`;
+
+const IconSms = styled(Sms)`
+  margin-right: 5px;
+  margin-left: 10px;
+`;
+
+const IconLock = styled(Lock)`
   margin-right: 5px;
   margin-left: 10px;
 `;
@@ -32,14 +45,39 @@ const Text = styled.span`
   font-size: 14px; /* 텍스트의 크기를 조정하세요. */
 `;
 
-const IconInput = ({ placeholder, rightSpan }) => {
+const IconInput = ({ icontype, placeholder, rightSpan }) => {
   return (
     <InputContainer>
-      <Icon size={20} color="#333" /> {/* 아이콘의 크기와 색상을 조정하세요. */}
+      <SelectedIcon icontype={icontype}></SelectedIcon>
       <Input type="text" placeholder={placeholder} />
       {rightSpan && <Text>오른쪽 텍스트</Text>}
     </InputContainer>
   );
+};
+
+const SelectedIcon = ({ icontype }) => {
+  console.log(icontype);
+  if (icontype === "user") {
+    return (
+      <IconUser size={20} color="#000">
+        아이콘
+      </IconUser>
+    );
+  } else if (icontype === "sms") {
+    return (
+      <IconSms size={20} color="#000">
+        아이콘
+      </IconSms>
+    );
+  } else if (icontype === "lock") {
+    return (
+      <IconLock size={20} color="#000">
+        아이콘
+      </IconLock>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default IconInput;

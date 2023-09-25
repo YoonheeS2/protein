@@ -1,8 +1,10 @@
 import React from "react";
-import SignupTitle from "../components/signup/SignupTitle";
+import SignupTitle1 from "../components/signup/SignupTitle1";
 import styled from "styled-components";
 import IconInput from "../components/signup/IconInput";
 import PrivacyCheckbox from "../components/signup/PrivacyCheckbox";
+import { Lock, Sms, User } from "iconic-react";
+import ButtonComponent from "../components/signup/ButtonComponent";
 
 const PageBlock = styled.div`
   display: flex;
@@ -20,19 +22,25 @@ const InputForm = styled.div`
   justify-content: space-between;
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 24px 21px;
+`
 const ProfileDetailPage01 = () => {
   return (
     <PageBlock>
-      <SignupTitle
-        title={"당신의 프로필을 만들어 봅시다!"}
-        description={
-          "이것은 우리가 당신에 대해 더 많이 알도록 도와줄 것입니다!"
+      <SignupTitle1
+        title={"환영합니다 !"}
+        logo={
+          "PROTEIN BODY"
         }
-      ></SignupTitle>
+      ></SignupTitle1>
       <InputForm>
-        <IconInput></IconInput>
-        <IconInput></IconInput>
-        <IconInput></IconInput>
+        <IconInput icontype={"user"} placeholder={"이름"}></IconInput>
+        <IconInput icontype={"sms"} placeholder={"이메일"}></IconInput>
+        <IconInput icontype={"lock"} placeholder={"비밀번호"}></IconInput>
       </InputForm>
       <br></br>
       <PrivacyCheckbox
@@ -40,6 +48,9 @@ const ProfileDetailPage01 = () => {
           "귀하는 당사의 개인 정보 보호 정책 및 이용 약관에 계속 동의합니다"
         }
       ></PrivacyCheckbox>
+      <ButtonContainer>
+        <ButtonComponent text="완성하기"></ButtonComponent>
+      </ButtonContainer>
     </PageBlock>
   );
 };
