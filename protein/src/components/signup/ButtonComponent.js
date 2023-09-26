@@ -1,26 +1,50 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
+import { ArrowRight2 } from "iconic-react";
 
 const BasicButton = styled.button`
-  height : 60px;
-  width : 315px;
+  display: flex;
+  height: 60px;
+  width: 315px;
   border-radius: 48px;
-  background-color: #A0BBFF;
+  background-color: #a0bbff;
   padding: 10px 20px;
   border: 0px;
-`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
 const Text = styled.div`
-  text-size : 16px;
+  font-size: 16px;
   font-weight: bold;
-  color : #ffffff;
-`
+  color: #ffffff;
+`;
 
-const ButtonComponent = ({text}) => {
+const IconNext = styled(ArrowRight2)`
+  margin-right: 5px;
+  margin-left: 10px;
+  color: #ffffff; //흰색으로 지정 어떻게 하나요?
+  fill: none;
+`;
+
+export const SelectedIcon = ({ icontype }) => {
+  console.log(icontype);
+  if (icontype === "ArrowRight2") {
+    return (
+      <IconNext size={20} color="#000">
+        아이콘
+      </IconNext>
+    );
+  }
+};
+
+const ButtonComponent = ({ icontype, text }) => {
   return (
     <BasicButton>
-        <Text>{text}</Text>
+      <Text>{text}</Text>
+      <SelectedIcon icontype={icontype}></SelectedIcon>
     </BasicButton>
-  )
-}
+  );
+};
 
-export default ButtonComponent
+export default ButtonComponent;

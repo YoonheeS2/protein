@@ -7,10 +7,10 @@ const Block = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 20px;
 `;
 
 const MainTitle = styled.div`
+  display: flex;
   font-size: 20px;
   color: #000000;
   font-weight: normal;
@@ -21,13 +21,13 @@ const MainTitle = styled.div`
 `;
 
 const Logo = styled.div`
-font-size: 20px;
-color: #000000;
-font-weight: bold;
-text-decoration: none;
-font-style: normal;
-font-variant: normal;
-text-transform: none;
+  font-size: 20px;
+  color: #000000;
+  font-weight: bold;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
 `;
 
 const SignupTitle = ({ title, logo }) => {

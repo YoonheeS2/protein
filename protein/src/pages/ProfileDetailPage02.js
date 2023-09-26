@@ -5,21 +5,28 @@ import IconInput from "../components/signup/IconInput";
 import PrivacyCheckbox from "../components/signup/PrivacyCheckbox";
 import IconSelect from "../components/signup/IconSelect";
 import IconSelectBox from "../components/signup/IconSelectBox";
+import IconInput2 from "../components/signup/IconInput2";
+import ButtonComponent from "../components/signup/ButtonComponent";
 
 const PageBlock = styled.div`
   display: flex;
-  height: 500px;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 `;
 
 const InputForm = styled.div`
   display: flex;
-  width: 340px;
-  height: 170px;
   flex-direction: column;
-  height: 40%;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+`;
+
+const InputForm2 = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
 
 const handleGenderChange = (selectedGender) => {
@@ -36,9 +43,18 @@ const ProfileDetailPage02 = () => {
       ></SignupTitle2>
       <InputForm>
         <IconSelectBox onChange={handleGenderChange} />
-        <IconInput></IconInput>
-        <IconInput></IconInput>
+        <IconInput icontype={"Calendar"} placeholder={"생년월일"}></IconInput>
+        <InputForm2>
+          <IconInput2 placeholder={"현재 체중"} rightSpan={"Kg"}></IconInput2>
+          <IconInput2 placeholder={"목표 체중"} rightSpan={"Kg"}></IconInput2>
+        </InputForm2>
+        <IconInput
+          icontype={"ArrowSwapVertical"}
+          placeholder={"키"}
+          rightSpan={"Kg"}
+        ></IconInput>
       </InputForm>
+      <ButtonComponent text={"다음"} icontype={"ArrowRight2"}></ButtonComponent>
     </PageBlock>
   );
 };

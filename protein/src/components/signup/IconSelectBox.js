@@ -6,13 +6,10 @@ const SelectContainer = styled.div`
   display: flex;
   align-items: center;
   border: 0px;
-  padding: 5px;
   border-radius: 5px;
-  width: 100%; // 원하는 너비로 조정하세요.
-  margin-left: 20px;
-  margin-right: 20px;
+  width: 368px; // 원하는 너비로 조정하세요.
   height: 48px;
-  background: #f1f1f1;
+  background: #f7f8f8;
 `;
 
 const IconGender = styled(Profile2User)`
@@ -25,7 +22,7 @@ const Select = styled.select`
   outline: none;
   flex: 1;
   padding: 5px;
-  background: #f1f1f1;
+  background: #f7f8f8;
 `;
 
 const Option = styled.option`
@@ -49,16 +46,18 @@ const IconSelectBox = ({ onChange }) => {
   };
 
   return (
-    <SelectContainer>
-      <IconGender></IconGender>
-      <Select value={selectedGender} onChange={handleGenderChange}>
-        <Option value="" disabled>
-          성별 선택
-        </Option>
-        <Option value="female">여성</Option>
-        <Option value="male">남성</Option>
-      </Select>
-    </SelectContainer>
+    <div>
+      <SelectContainer>
+        <IconGender></IconGender>
+        <Select value={selectedGender} onChange={handleGenderChange}>
+          <Option value="" disabled>
+            성별 선택
+          </Option>
+          <Option value="female">여성</Option>
+          <Option value="male">남성</Option>
+        </Select>
+      </SelectContainer>
+    </div>
   );
 };
 

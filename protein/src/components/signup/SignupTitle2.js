@@ -7,7 +7,6 @@ const Block = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 20px;
 `;
 
 const MainTitle = styled.div`
@@ -22,6 +21,7 @@ const MainTitle = styled.div`
 `;
 
 const Description = styled.div`
+  display: flex;
   font-size: 11px;
   color: #000000;
   font-weight: normal;

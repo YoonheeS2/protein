@@ -1,5 +1,5 @@
 import React from "react";
-import { Lock, Sms, User } from "iconic-react";
+import { Lock, Sms, User, Calendar, ArrowSwapVertical } from "iconic-react";
 import styled from "styled-components";
 
 const InputContainer = styled.div`
@@ -8,19 +8,18 @@ const InputContainer = styled.div`
   border: 0px;
   padding: 5px;
   border-radius: 5px;
-  width: 100%; // 원하는 너비로 조정하세요.
-  margin-left: 20px;
-  margin-right: 20px;
+  width: 368px; // 원하는 너비로 조정하세요.
   height: 48px;
-  background: #f1f1f1;
+  background-color: #f7f8f8;
 `;
 
 const Input = styled.input`
   border: none;
   outline: none;
-  flex: 1;
+  display: flex;
+  width: 368px;
   padding: 5px;
-  background: #f1f1f1;
+  background: #f7f8f8;
 `;
 
 // Iconic 아이콘을 스타일링하기 위한 스타일 컴포넌트
@@ -40,6 +39,16 @@ const IconLock = styled(Lock)`
   margin-left: 10px;
 `;
 
+const IconCalendar = styled(Calendar)`
+  margin-right: 5px;
+  margin-left: 10px;
+`;
+
+const IconSwap = styled(ArrowSwapVertical)`
+  margin-right: 5px;
+  margin-left: 10px;
+`;
+
 const Text = styled.span`
   margin-left: 10px; /* 텍스트와 입력 필드 사이의 간격을 조정하세요. */
   font-size: 14px; /* 텍스트의 크기를 조정하세요. */
@@ -50,12 +59,12 @@ const IconInput = ({ icontype, placeholder, rightSpan }) => {
     <InputContainer>
       <SelectedIcon icontype={icontype}></SelectedIcon>
       <Input type="text" placeholder={placeholder} />
-      {rightSpan && <Text>오른쪽 텍스트</Text>}
+      {rightSpan && <Text>{rightSpan}</Text>}
     </InputContainer>
   );
 };
 
-const SelectedIcon = ({ icontype }) => {
+export const SelectedIcon = ({ icontype }) => {
   console.log(icontype);
   if (icontype === "user") {
     return (
@@ -74,6 +83,18 @@ const SelectedIcon = ({ icontype }) => {
       <IconLock size={20} color="#000">
         아이콘
       </IconLock>
+    );
+  } else if (icontype === "Calendar") {
+    return (
+      <IconCalendar size={20} color="#000">
+        아이콘
+      </IconCalendar>
+    );
+  } else if (icontype === "ArrowSwapVertical") {
+    return (
+      <IconSwap size={20} color="#000">
+        아이콘
+      </IconSwap>
     );
   } else {
     return null;

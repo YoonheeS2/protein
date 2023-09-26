@@ -32,30 +32,26 @@ const Text = styled.div`
   text-size: 14px;
 `;
 
-const ProfileDetailPage01 = () => {
+const LoginPage = () => {
   return (
     <PageBlock>
       <SignupTitle1 title={"환영합니다 !"} logo={"PROTEIN BODY"}></SignupTitle1>
       <InputForm>
-        <IconInput icontype={"user"} placeholder={"이름"}></IconInput>
         <IconInput icontype={"sms"} placeholder={"이메일"}></IconInput>
         <IconInput icontype={"lock"} placeholder={"비밀번호"}></IconInput>
       </InputForm>
       <br></br>
-      <PrivacyCheckbox
-        label={
-          "귀하는 당사의 개인 정보 보호 정책 및 이용 약관에 계속 동의합니다"
-        }
-      ></PrivacyCheckbox>
+      <Text>
+        <Link>비밀번호를 잊으셨나요?</Link>
+      </Text>
       <ButtonContainer>
         <ButtonComponent text="완성하기"></ButtonComponent>
       </ButtonContainer>
       <Text>
-        계정이 있으신가요?
-        <Link>로그인</Link>
+        아직 계정이 없으십니까? <Link>회원가입</Link>
       </Text>
     </PageBlock>
   );
 };
 
-export default ProfileDetailPage01;
+export default LoginPage;

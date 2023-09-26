@@ -6,6 +6,7 @@ import Nav from "./components/common/Nav";
 import DietPage from "./pages/DietPage";
 import CommunityPage from "./pages/CommunityPage";
 import ModeSelection from "./pages/ModeSelection";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           path="/modeSelect"
           element={<ModeSelection></ModeSelection>}
         ></Route>
+        <Route path="/login" element={<LoginPage></LoginPage>}></Route>
       </Routes>
       <Nav></Nav>
     </BrowserRouter>
