@@ -6,18 +6,19 @@ const InputContainer = styled.div`
   display: flex;
   align-items: center;
   border: 0px;
-  padding: 5px;
   border-radius: 5px;
-  width: 368px; // 원하는 너비로 조정하세요.
+  width: 100%; // 원하는 너비로 조정하세요.
+  min-width: 315px;
   height: 48px;
   background-color: #f7f8f8;
+  margin-bottom: 7px;
 `;
 
 const Input = styled.input`
   border: none;
   outline: none;
   display: flex;
-  width: 368px;
+  width: 100%;
   padding: 5px;
   background: #f7f8f8;
 `;

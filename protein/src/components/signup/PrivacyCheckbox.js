@@ -8,6 +8,7 @@ const CheckboxContainer = styled.label`
   cursor: pointer;
   margin-right: 20px;
   margin-left: 20px;
+  max-width: 304px;
 `;
 
 const CheckboxInput = styled.input`

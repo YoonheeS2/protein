@@ -7,6 +7,7 @@ const Block = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin-bottom: 46px;
 `;
 
 const MainTitle = styled.div`

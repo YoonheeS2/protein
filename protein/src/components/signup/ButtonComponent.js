@@ -31,7 +31,7 @@ export const SelectedIcon = ({ icontype }) => {
   console.log(icontype);
   if (icontype === "ArrowRight2") {
     return (
-      <IconNext size={20} color="#000">
+      <IconNext size={20} color="#fff">
         아이콘
       </IconNext>
     );
