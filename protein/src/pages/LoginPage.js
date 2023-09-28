@@ -12,6 +12,7 @@ const PageBlock = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 46px;
 `;
 
 const InputForm = styled.div`
@@ -45,7 +46,7 @@ const LoginPage = () => {
         <Link>비밀번호를 잊으셨나요?</Link>
       </Text>
       <ButtonContainer>
-        <ButtonComponent text="완성하기"></ButtonComponent>
+        <ButtonComponent text="로그인"></ButtonComponent>
       </ButtonContainer>
       <Text>
         아직 계정이 없으십니까? <Link>회원가입</Link>

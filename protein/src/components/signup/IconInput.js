@@ -8,7 +8,7 @@ const InputContainer = styled.div`
   border: 0px;
   border-radius: 5px;
   width: 100%; // 원하는 너비로 조정하세요.
-  min-width: 315px;
+  min-width: 340px;
   height: 48px;
   background-color: #f7f8f8;
   margin-bottom: 7px;

@@ -12,17 +12,16 @@ const Block = styled.div`
 const MainTitle = styled.div`
   font-size: 20px;
   color: #000000;
-  font-weight: normal;
-  text-decoration: none;
+  font-weight: bold;
   font-style: normal;
   font-variant: normal;
   text-transform: none;
-  font-weight: 700;
+  margin-bottom: 7px;
 `;
 
 const Description = styled.div`
   display: flex;
-  font-size: 11px;
+  font-size: 12px;
   color: #000000;
   font-weight: normal;
   text-decoration: none;

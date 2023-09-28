@@ -7,11 +7,13 @@ import DietPage from "./pages/DietPage";
 import CommunityPage from "./pages/CommunityPage";
 import ModeSelection from "./pages/ModeSelection";
 import LoginPage from "./pages/LoginPage";
+import MainPage from "./pages/MainPage";
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/main" element={<MainPage />}></Route>
         <Route path="/diet" element={<DietPage />}></Route>
         <Route path="/community" element={<CommunityPage />}></Route>
         <Route
@@ -32,5 +34,3 @@ function App() {
     </BrowserRouter>
   );
 }
-
-export default App;
