@@ -11,6 +11,7 @@ const InputContainer = styled.div`
   width: 181px; // 원하는 너비로 조정하세요.
   height: 48px;
   background-color: #f7f8f8;
+  margin: 0px 4px 10px 4px;
 `;
 
 const Input = styled.input`

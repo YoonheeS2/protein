@@ -29,6 +29,7 @@ const Description = styled.div`
   font-style: normal;
   font-variant: normal;
   text-transform: none;
+  margin-top:8px;
 `;
 
 const SignupTitle2 = ({ title, description }) => {

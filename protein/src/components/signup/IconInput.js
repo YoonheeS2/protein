@@ -51,7 +51,7 @@ const IconSwap = styled(ArrowSwapVertical)`
 `;
 
 const Text = styled.span`
-  margin-left: 10px; /* 텍스트와 입력 필드 사이의 간격을 조정하세요. */
+  margin-right: 13px; /* 텍스트와 입력 필드 사이의 간격을 조정하세요. */
   font-size: 14px; /* 텍스트의 크기를 조정하세요. */
 `;
 

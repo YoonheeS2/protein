@@ -10,6 +10,9 @@ const SelectContainer = styled.div`
   width: 368px; // 원하는 너비로 조정하세요.
   height: 48px;
   background: #f7f8f8;
+  margin-top: 46px;
+  margin-bottom: 10px;
+
 `;
 
 const IconGender = styled(Profile2User)`

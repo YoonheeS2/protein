@@ -15,6 +15,10 @@ const PageBlock = styled.div`
   padding-top: 46px;
 `;
 
+const PrivacyCheckboxBlock = styled.div`
+  margin-top: 20px;
+`;
+
 const InputForm = styled.div`
   display: flex;
   flex-direction: column;
@@ -42,11 +46,13 @@ const ProfileDetailPage01 = () => {
         <IconInput icontype={"sms"} placeholder={"이메일"}></IconInput>
         <IconInput icontype={"lock"} placeholder={"비밀번호"}></IconInput>
       </InputForm>
+      <PrivacyCheckboxBlock>
       <PrivacyCheckbox
         label={
           "귀하는 당사의 개인 정보 보호 정책 및 이용 약관에 계속 동의합니다"
         }
       ></PrivacyCheckbox>
+      </PrivacyCheckboxBlock>
       <ButtonContainer>
         <ButtonComponent text="완성하기"></ButtonComponent>
       </ButtonContainer>
