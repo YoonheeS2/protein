@@ -16,6 +16,11 @@ const PageBlock = styled.div`
   padding-top: 46px;
 `;
 
+const genderselection = styled.div`
+  margin-top: 20px;
+`;
+
+
 const InputForm = styled.div`
   display: flex;
   flex-direction: column;
@@ -42,7 +47,9 @@ const ProfileDetailPage02 = () => {
         description="이것은 우리가 당신에 대해 더 많이 알도록 도와줄 것입니다!"
       ></SignupTitle2>
       <InputForm>
+      <genderselection>
         <IconSelectBox onChange={handleGenderChange} />
+      </genderselection>
         <IconInput icontype={"Calendar"} placeholder={"생년월일"}></IconInput>
         <InputForm2>
           <IconInput2 placeholder={"현재 체중"} rightSpan={"Kg"}></IconInput2>
@@ -51,7 +58,7 @@ const ProfileDetailPage02 = () => {
         <IconInput
           icontype={"ArrowSwapVertical"}
           placeholder={"키"}
-          rightSpan={"Kg"}
+          rightSpan={"cm"}
         ></IconInput>
       </InputForm>
       <ButtonComponent text={"다음"} icontype={"ArrowRight2"}></ButtonComponent>

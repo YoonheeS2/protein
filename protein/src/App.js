@@ -8,6 +8,8 @@ import CommunityPage from "./pages/CommunityPage";
 import ModeSelection from "./pages/ModeSelection";
 import LoginPage from "./pages/LoginPage";
 import DietDetailPage from "./pages/DietDetailPage";
+import ProfilePage from "./pages/ProfilePage";
+
 import MainPage from "./pages/MainPage";
 
 function App() {
@@ -31,6 +33,7 @@ function App() {
           element={<ModeSelection></ModeSelection>}
         ></Route>
         <Route path="/login" element={<LoginPage></LoginPage>}></Route>
+        <Route path="/profile" element={<ProfilePage></ProfilePage>}></Route>
       </Routes>
       <Nav></Nav>
     </BrowserRouter>

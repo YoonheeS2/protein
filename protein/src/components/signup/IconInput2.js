@@ -11,6 +11,7 @@ const InputContainer = styled.div`
   height: 48px;
   margin: 0px 4px 7px 4px;
   background-color: #f7f8f8;
+  margin: 0px 4px 10px 4px;
 `;
 
 const Input = styled.input`

@@ -4,8 +4,8 @@ import { ArrowRight2 } from "iconic-react";
 
 const BasicButton = styled.button`
   display: flex;
-  height: 60px;
-  width: 315px;
+  height: 70px;
+  width: 368px;
   border-radius: 48px;
   background-color: #a0bbff;
   margin-top: 46px;
@@ -14,6 +14,7 @@ const BasicButton = styled.button`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  margin-top: 46px;
 `;
 
 const Text = styled.div`

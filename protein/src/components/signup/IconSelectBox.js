@@ -7,12 +7,12 @@ const SelectContainer = styled.div`
   align-items: center;
   border: 0px;
   border-radius: 5px;
-  width: 100%; // 원하는 너비로 조정하세요.
-  min-width: 340px;
+  width: 368px; // 원하는 너비로 조정하세요.
   height: 48px;
   background: #f7f8f8;
   margin-top: 46px;
   margin-bottom: 10px;
+
 `;
 
 const IconGender = styled(Profile2User)`
@@ -24,6 +24,7 @@ const Select = styled.select`
   border: none;
   outline: none;
   flex: 1;
+  padding: 5px;
   background: #f7f8f8;
 `;
 
@@ -50,7 +51,7 @@ const IconSelectBox = ({ onChange }) => {
   return (
     <div>
       <SelectContainer>
-        <IconGender size={20} color="#000"></IconGender>
+        <IconGender></IconGender>
         <Select value={selectedGender} onChange={handleGenderChange}>
           <Option value="" disabled>
             성별 선택
