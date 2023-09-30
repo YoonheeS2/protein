@@ -6,6 +6,7 @@ import styled from "styled-components";
 const Navigation = styled.div`
   nav {
     position: fixed;
+    background-color: #fff;
     bottom: 0;
     width: 100%;
     height: 60px;
