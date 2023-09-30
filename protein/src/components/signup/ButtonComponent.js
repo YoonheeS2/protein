@@ -8,12 +8,14 @@ const BasicButton = styled.button`
   width: 315px;
   border-radius: 48px;
   background-color: #a0bbff;
-  padding: 10px 20px;
+  margin-top: 46px;
+  margin-bottom: 30px;
   border: 0px;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 `;
+
 const Text = styled.div`
   font-size: 16px;
   font-weight: bold;

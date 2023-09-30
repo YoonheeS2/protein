@@ -8,11 +8,13 @@ import CommunityPage from "./pages/CommunityPage";
 import ModeSelection from "./pages/ModeSelection";
 import LoginPage from "./pages/LoginPage";
 import DietDetailPage from "./pages/DietDetailPage";
+import MainPage from "./pages/MainPage";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/main" element={<MainPage />}></Route>
         <Route path="/diet" element={<DietPage />}></Route>
         <Route path="/diet/detail" element={<DietDetailPage />}></Route>
         <Route path="/community" element={<CommunityPage />}></Route>

@@ -13,13 +13,13 @@ const PageBlock = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 46px;
 `;
 
 const InputForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 `;
 
 const InputForm2 = styled.div`

@@ -6,10 +6,10 @@ const InputContainer = styled.div`
   display: flex;
   align-items: center;
   border: 0px;
-  padding: 5px;
   border-radius: 5px;
   width: 181px; // 원하는 너비로 조정하세요.
   height: 48px;
+  margin: 0px 4px 7px 4px;
   background-color: #f7f8f8;
 `;
 
