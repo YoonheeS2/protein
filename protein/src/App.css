@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+.evalButton {
+  margin-left: 10px; /* 왼쪽에 10px의 마진을 추가하여 간격을 띄웁니다. */
+}
+

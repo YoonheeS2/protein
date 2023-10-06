@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { startTransition } from 'react';
 import styled from 'styled-components';
 import { Alarm } from "iconic-react";
 
@@ -44,7 +44,7 @@ const SelectedIcon = ({ icontype }) => {
     }
   };
 
-const SettingsIconsPage = ({icontype}) => {
+const SettingsIcons = ({icontype}) => {
   return (
     <IconsContainer>
       <div>
@@ -54,15 +54,19 @@ const SettingsIconsPage = ({icontype}) => {
         <IconLabel>알람 설정</IconLabel>
       </div>
       <div>
-        <CircleIcon>아이콘2</CircleIcon>
+      <CircleIcon>
+            <SelectedIcon icontype={"alarm"}/>
+        </CircleIcon>
         <IconLabel>커뮤니티 관리</IconLabel>
       </div>
       <div>
-        <CircleIcon>아이콘3</CircleIcon>
+      <CircleIcon>
+            <SelectedIcon icontype={"alarm"}/>
+      </CircleIcon>
         <IconLabel>팔로잉 관리</IconLabel>
       </div>
     </IconsContainer>
   );
 };
 
-export default SettingsIconsPage;
+export default SettingsIcons;
