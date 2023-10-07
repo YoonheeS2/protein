@@ -1,6 +1,6 @@
 import React from "react";
 import AppHeader from "../components/common/AppHeader";
-import TipBox from "../main/TipBox";
+import TipBox from "../components/profile/TipBox";
 
 const MainPage = () => {
   return (
