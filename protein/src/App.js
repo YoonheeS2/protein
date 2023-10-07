@@ -11,6 +11,7 @@ import DietDetailPage from "./pages/DietDetailPage";
 import ProfilePage from "./pages/ProfilePage";
 
 import MainPage from "./pages/MainPage";
+import SearchPopup from "./components/main/SearchPopup";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         ></Route>
         <Route path="/login" element={<LoginPage></LoginPage>}></Route>
         <Route path="/profile" element={<ProfilePage></ProfilePage>}></Route>
+        <Route path="/popup" element={<SearchPopup/>}></Route>
       </Routes>
       <Nav></Nav>
     </BrowserRouter>
