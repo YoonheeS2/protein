@@ -1,6 +1,6 @@
 import React, { startTransition } from 'react';
 import styled from 'styled-components';
-import { Alarm } from "iconic-react";
+import { Alarm, DirectInbox, Heart } from "iconic-react";
 
 
 const IconsContainer = styled.div`
@@ -26,8 +26,15 @@ const IconLabel = styled.div`
 `;
 
 const IconAlarm = styled(Alarm)`
+
+`;
+
+const IconDirectInbox = styled(DirectInbox)`
   margin-right: 5px;
   margin-left: 10px;
+`;
+
+const IconHeart = styled(Heart)`
 `;
 
 
@@ -39,10 +46,21 @@ const SelectedIcon = ({ icontype }) => {
           아이콘
         </IconAlarm>
       );
+    } else if (icontype === "directInbox") {
+      return (
+        <IconDirectInbox size={20} color="#000">
+          아이콘
+        </IconDirectInbox>
+      );
+    } else if (icontype === "heart") {
+      return (
+        <IconHeart size={20} color="#000">
+          아이콘
+        </IconHeart>
+      );
     } else {
-      return null;
-    }
-  };
+      return null;}
+    };
 
 const SettingsIcons = ({icontype}) => {
   return (
@@ -55,13 +73,13 @@ const SettingsIcons = ({icontype}) => {
       </div>
       <div>
       <CircleIcon>
-            <SelectedIcon icontype={"alarm"}/>
+            <SelectedIcon icontype={"directInbox"}/>
         </CircleIcon>
         <IconLabel>커뮤니티 관리</IconLabel>
       </div>
       <div>
       <CircleIcon>
-            <SelectedIcon icontype={"alarm"}/>
+            <SelectedIcon icontype={"heart"}/>
       </CircleIcon>
         <IconLabel>팔로잉 관리</IconLabel>
       </div>
