@@ -8,6 +8,7 @@ import CommunityPage from "./pages/CommunityPage";
 import ModeSelection from "./pages/ModeSelection";
 import LoginPage from "./pages/LoginPage";
 import MainPage from "./pages/MainPage";
+import SearchPopup from "./components/main/SearchPopup";
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
           element={<ModeSelection></ModeSelection>}
         ></Route>
         <Route path="/login" element={<LoginPage></LoginPage>}></Route>
+        <Route path="/popup" element={<SearchPopup/>}></Route>
       </Routes>
       <Nav></Nav>
     </BrowserRouter>
