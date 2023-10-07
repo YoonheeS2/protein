@@ -15,12 +15,7 @@ const ProgressBarWrapper = styled.div`
 const ProgressBarFill = styled.div`
   width: ${(props) => props.progress}%;
   height: 100%;
-  background-color: linear-gradient(
-    90deg,
-    #e7eaf2 0%,
-    #f2f5ff 0.01%,
-    #1a73e9 105.44%
-  );
+  background-color: #000;
   border-radius: 10px;
   transition: width 0.3s ease-in-out;
 `;

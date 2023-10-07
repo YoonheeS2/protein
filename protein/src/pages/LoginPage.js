@@ -34,6 +34,11 @@ const Text = styled.div`
 `;
 
 const LoginPage = () => {
+
+  const handleClick = () =>{
+    
+  }
+
   return (
     <PageBlock>
       <SignupTitle1 title={"환영합니다 !"} logo={"PROTEIN BODY"}></SignupTitle1>
@@ -46,7 +51,7 @@ const LoginPage = () => {
         <Link>비밀번호를 잊으셨나요?</Link>
       </Text>
       <ButtonContainer>
-        <ButtonComponent text="로그인"></ButtonComponent>
+        <ButtonComponent text="로그인" onClick={}></ButtonComponent>
       </ButtonContainer>
       <Text>
         아직 계정이 없으십니까? <Link>회원가입</Link>

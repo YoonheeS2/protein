@@ -52,12 +52,13 @@ const MainPage = () => {
   };
 
   const getMainPageData = () => {
-    // axios.get("/api/v1/meal/log/summary").then((response) => {
-    //   console.log(response.data);
-    //   let percentFromServer =
-    //     (response.data.calories / response.data.recomandedCalories) * 100;
-    //   setPercent(percentFromServer);
-    // });
+    axios.get("/api/v1/meal/log/summary").then((response) => {
+      console.log(response.data);
+      let percentFromServer =
+        (response.data.calories / response.data.recomandedCalories) * 100;
+      console.log(percentFromServer);
+      setPercent(percentFromServer);
+    });
   };
 
   return (
