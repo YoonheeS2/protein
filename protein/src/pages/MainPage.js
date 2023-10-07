@@ -35,7 +35,6 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
   },
 };
-import TipBox from "../components/profile/TipBox";
 
 const MainPage = () => {
   const [percent, setPercent] = useState(0);

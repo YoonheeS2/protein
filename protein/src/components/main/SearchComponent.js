@@ -1,6 +1,6 @@
-import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const InputContainer = styled.div`
   display: flex;
@@ -43,6 +43,7 @@ const Text = styled.span`
 
 const SearchComponent = ({ icontype, placeholder }) => {
   const [searchText, setSearchText] = useState("");
+  const [searchResults, setSearchResult] = useState([]);
   const handleTransferButton = () => {
     let requestOption = {
       url: "/api/v1/product/search",
@@ -50,12 +51,13 @@ const SearchComponent = ({ icontype, placeholder }) => {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
       },
-      param: {
-        productName: searchText,
-      },
     };
-    axios(requestOption).then((data) => {
-      console.log(data.data);
+    // axios(requestOption).then((data) => {
+    //   console.log(data.data);
+    // });
+    axios(requestOption).then((response) => {
+      console.log(response.data);
+      setSearchResult(response.data);
     });
   };
 
@@ -77,6 +79,9 @@ const SearchComponent = ({ icontype, placeholder }) => {
         <Input type="text" onChange={handleChange} placeholder={placeholder} />
         <button onClick={handleTransferButton}>전송</button>
       </BoxContainer>
+      {searchResults.map((result) => {
+        return <p>{result.productName}</p>;
+      })}
     </InputContainer>
   );
 };
