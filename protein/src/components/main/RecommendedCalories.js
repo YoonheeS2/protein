@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const CaloriesContainer = styled.div`
@@ -26,15 +26,14 @@ const EatenCalories = styled.div`
   font-size: 14px;
   font-weight: normal;
   color: #22215b;
-  font-family: ABeeZee;
 `;
 
-const RecommendedCalories = ({ eatendata, recomdata }) => {
+const RecommendedCalories = ({ eaten, recom }) => {
   return (
     <CaloriesContainer>
-      <EatenCalories>{eatendata}</EatenCalories>
+      <EatenCalories>{eaten}</EatenCalories>
       <Text>/</Text>
-      <RecomCalories>{recomdata}</RecomCalories>
+      <RecomCalories>{recom}</RecomCalories>
       <Text>kcal</Text>
     </CaloriesContainer>
   );

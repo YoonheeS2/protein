@@ -39,6 +39,8 @@ const customStyles = {
 const MainPage = () => {
   const [percent, setPercent] = useState(0);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [calories, setCalories] = useState(0);
+  const [recpcalories, setRecoCalories] = useState(0);
   useEffect(() => {
     getMainPageData();
   }, []);
@@ -54,6 +56,8 @@ const MainPage = () => {
   const getMainPageData = () => {
     axios.get("/api/v1/meal/log/summary").then((response) => {
       console.log(response.data);
+      setCalories(response.data.calories);
+      setRecoCalories(response.data.recomandedCalories);
       let percentFromServer =
         (response.data.calories / response.data.recomandedCalories) * 100;
       console.log(percentFromServer);
@@ -68,8 +72,8 @@ const MainPage = () => {
       <ProgressBar progress={percent}></ProgressBar>
       <div style={{ marginLeft: "auto" }}>
         <RecommendedCalories
-          eatendata={"0"}
-          recomdata={"2000"}
+          eaten={calories}
+          recom={recpcalories}
         ></RecommendedCalories>
       </div>
       <CircleLine>

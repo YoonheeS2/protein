@@ -41,7 +41,7 @@ const Text = styled.span`
   font-weight: bold;
 `;
 
-const SearchComponent = ({ icontype, placeholder }) => {
+const SearchComponent = ({ placeholder }) => {
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResult] = useState([]);
   const handleTransferButton = () => {
