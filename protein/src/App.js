@@ -12,6 +12,7 @@ import ProfilePage from "./pages/ProfilePage";
 
 import MainPage from "./pages/MainPage";
 import SearchPopup from "./components/main/SearchPopup";
+import PostCreatePage from "./pages/PostCreatePage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/main" element={<MainPage />}></Route>
         <Route path="/diet" element={<DietPage />}></Route>
         <Route path="/diet/detail" element={<DietDetailPage />}></Route>
+        <Route path="/postCreate" element={<PostCreatePage />}></Route>
         <Route path="/community" element={<CommunityPage />}></Route>
         <Route
           path="/signup"
