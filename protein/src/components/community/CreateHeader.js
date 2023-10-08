@@ -9,7 +9,7 @@ const HeaderContainer = styled.div`
   padding-left: 14px;
   padding-right: 14px;
   border-bottom: 1px solid #ccc;
-
+  width: 100%;
 `;
 
 const UserImage = styled.div`
