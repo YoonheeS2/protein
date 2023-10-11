@@ -1,26 +1,32 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Container = styled.div`
   border: 1px solid #ccc;
   padding: 20px;
   border-radius: 12px;
   margin: 30px 20px;
-  position: relative; /* 부모 컨테이너를 기준으로 자식을 배치하기 위해 position 속성 추가 */
+  position: relative;
 `;
 
 const SectionTitle = styled.h2`
   font-weight: bold;
   font-size: 1.5em;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 `;
 
 const InputRow = styled.div`
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
 `;
 
 const InputLabel = styled.span`
   margin-right: 10px;
+`;
+
+const UnitLabel = styled.span`
+  margin-left: 5px;
 `;
 
 const EditButton = styled.button`
@@ -41,19 +47,21 @@ const Dietinfor = () => {
       </InputRow>
       <InputRow>
         <InputLabel>키:</InputLabel>
-        <input type="text" placeholder="키 입력" />
+        <input type="text" placeholder="키 입력 " />
+        <UnitLabel>cm</UnitLabel>
       </InputRow>
       <InputRow>
         <InputLabel>몸무게:</InputLabel>
-        <input type="text" placeholder="몸무게 입력" />
+        <input type="text" placeholder="몸무게 입력 " />
+        <UnitLabel>kg</UnitLabel>
       </InputRow>
       <InputRow>
         <InputLabel>목표체중:</InputLabel>
         <input type="text" placeholder="목표체중 입력" />
+        <UnitLabel>kg</UnitLabel>
       </InputRow>
     </Container>
   );
 };
 
 export default Dietinfor;
-
