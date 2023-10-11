@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import CreateHeader from "./CreateHeader";
-import { Gallery } from "iconic-react";
 
 const Container = styled.div`
   display: flex;
@@ -28,12 +27,6 @@ const InputStyle = styled.textarea`
   font-weight: bold;
 `;
 
-const IconGallery = styled(Gallery)`
-  margin-right: 10px;
-  margin-left: 10px;
-  margin-top: 14px;
-`;
-
 const FixedContainer = styled.div`
   position: fixed;
   bottom: 0px;
@@ -48,6 +41,9 @@ const AddImageButton = styled.button`
   font-size: 24px;
   color: #1da1f2;
   cursor: pointer;
+  border-radius: 50%;
+  padding: 10px;
+  margin-left: auto;
 `;
 
 const ImageUploadContainer = styled.div`
@@ -70,6 +66,18 @@ const ImageUploadInput = styled.input`
   display: none;
 `;
 
+const PublishButton = styled.button`
+  background-color: #1da1f2;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 315px;
+  margin-top: 11px;
+`;
+
 const PostCreate = () => {
   return (
     <>
@@ -86,9 +94,8 @@ const PostCreate = () => {
         <ImageUploadContainer>
           <ImageUploadInput type="file" id="image-upload" />
         </ImageUploadContainer>
-        <IconGallery size={30} color="#000">
-          아이콘
-        </IconGallery>
+
+        <PublishButton>게시</PublishButton>
       </FixedContainer>
     </>
   );
