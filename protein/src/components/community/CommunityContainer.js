@@ -1,7 +1,20 @@
 import React from "react";
 import Feed from "./Feed";
 import moment from "moment";
+import { Add } from "iconic-react";
+
 const CommunityContainer = () => {
+  const buttonStyle = {
+    backgroundColor: "#5F89F5",
+    color: "white",
+    padding: "25px",
+    borderRadius: "50%",
+    cursor: "pointer",
+    position: "fixed",
+    right: "5px",
+    bottom: "80px",
+  };
+
   const posts = [
     {
       username: "NullpointE",
@@ -31,7 +44,10 @@ const CommunityContainer = () => {
     },
   ];
   return (
-    <div>cm 
+    <div>
+      <button style={buttonStyle}>
+        <Add size={30} color="white" style={{ fontSize: "60px" }} />
+      </button>
       {posts.map((post, index) => (
         <Feed
           key={index}

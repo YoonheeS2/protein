@@ -13,6 +13,7 @@ import ProfilePage from "./pages/ProfilePage";
 import MainPage from "./pages/MainPage";
 import SearchPopup from "./components/main/SearchPopup";
 import PostCreatePage from "./pages/PostCreatePage";
+import Sample from "./pages/Sample";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/diet/detail" element={<DietDetailPage />}></Route>
         <Route path="/postCreate" element={<PostCreatePage />}></Route>
         <Route path="/community" element={<CommunityPage />}></Route>
+        <Route path="/sample" element={<Sample />}></Route>
         <Route
           path="/signup"
           element={<ProfileDetailPage01></ProfileDetailPage01>}
@@ -37,7 +39,7 @@ function App() {
         ></Route>
         <Route path="/login" element={<LoginPage></LoginPage>}></Route>
         <Route path="/profile" element={<ProfilePage></ProfilePage>}></Route>
-        <Route path="/popup" element={<SearchPopup/>}></Route>
+        <Route path="/popup" element={<SearchPopup />}></Route>
       </Routes>
       <Nav></Nav>
     </BrowserRouter>
