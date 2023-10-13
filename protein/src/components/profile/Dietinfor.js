@@ -12,7 +12,7 @@ const Container = styled.div`
 const SectionTitle = styled.h2`
   font-weight: bold;
   font-size: 1.5em;
-  margin-bottom: 0px;
+  margin-bottom: 10px;
 `;
 
 const InputRow = styled.div`
@@ -26,7 +26,7 @@ const InputLabel = styled.span`
 `;
 
 const UnitLabel = styled.span`
-  margin-left: 5px;
+  margin-left: -50px;
 `;
 
 const EditButton = styled.button`

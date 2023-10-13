@@ -6,14 +6,13 @@ const IconsContainer = styled.div`
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
-  margin-bottom: 20px; /* Added margin at the bottom */
 `;
 
 const CircleIcon = styled.div`
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: #ccc;
+  background-color: #e6e6e6;
   display: flex;
   flex-direction: column;
   align-items: center;

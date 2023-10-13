@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const ProfileContainer = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ const ProfileImage = styled.div`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #ccc; /* Add the actual profile image here */
+  background-color: #a9e2f3; /* Add the actual profile image here */
   margin-right: 10px;
 `;
 
@@ -29,22 +29,22 @@ const UserName = styled.span`
 const SupportMessage = styled.span`
   font-size: 12px;
   font-weight: normal;
-  color: #555;
+  color: #e6e6e6;
 `;
 
 const UserProfile = () => {
-    const user = {
-      name: '조연아',
-      supportMessage: '항상 응원합니다!',
-    };
-  
-    return (
-      <ProfileContainer>
-        <ProfileImage />
-        <ProfileInfo>
-          <UserName>{`${user.name}님 항상 응원합니다!`}</UserName>
-        </ProfileInfo>
-      </ProfileContainer>
-    );
+  const user = {
+    name: "조연아",
+    supportMessage: "항상 응원합니다!",
   };
+
+  return (
+    <ProfileContainer>
+      <ProfileImage />
+      <ProfileInfo>
+        <UserName>{`${user.name}님 항상 응원합니다!`}</UserName>
+      </ProfileInfo>
+    </ProfileContainer>
+  );
+};
 export default UserProfile;
