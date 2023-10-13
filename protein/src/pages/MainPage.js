@@ -88,7 +88,7 @@ const MainPage = () => {
     setIsOpen(false);
   };
   const getMainPageData = () => {
-    axios.get("/api/v1/meal/log/summary").then((response) => {
+    axios.get("/api/v1/meal/log/summary/today/1").then((response) => {
       setCalories(response.data.calories);
       setRecoCalories(response.data.recomandedCalories);
       let percentFromServer =
@@ -136,8 +136,11 @@ const MainPage = () => {
       </BoxIngredientWrap>
       <ModeRecomText mode={"일반모드"} name={"윤희"}></ModeRecomText>
       <BoxIngredientWrap>
-      <BoxModeRecom main={"물"} value={"체내 수분량 늘리기"}></BoxModeRecom>
-      <BoxModeRecom main={"샐러드"} value={"포만감을 유지해줘요!"}></BoxModeRecom>
+        <BoxModeRecom main={"물"} value={"체내 수분량 늘리기"}></BoxModeRecom>
+        <BoxModeRecom
+          main={"샐러드"}
+          value={"포만감을 유지해줘요!"}
+        ></BoxModeRecom>
       </BoxIngredientWrap>
     </PageBlock>
   );
