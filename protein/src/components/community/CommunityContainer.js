@@ -31,7 +31,7 @@ const CommunityContainer = () => {
     },
   ];
   return (
-    <div>
+    <div>cm 
       {posts.map((post, index) => (
         <Feed
           key={index}

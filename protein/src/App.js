@@ -12,7 +12,8 @@ import ProfilePage from "./pages/ProfilePage";
 
 import MainPage from "./pages/MainPage";
 import SearchPopup from "./components/main/SearchPopup";
-import SamplePage from "./Sample/SamplePage";
+import PostCreatePage from "./pages/PostCreatePage";
+import SamplePage from "./pages/SamplePage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/main" element={<MainPage />}></Route>
         <Route path="/diet" element={<DietPage />}></Route>
         <Route path="/diet/detail" element={<DietDetailPage />}></Route>
+        <Route path="/postCreate" element={<PostCreatePage />}></Route>
         <Route path="/community" element={<CommunityPage />}></Route>
         <Route
           path="/signup"
@@ -36,8 +38,8 @@ function App() {
         ></Route>
         <Route path="/login" element={<LoginPage></LoginPage>}></Route>
         <Route path="/profile" element={<ProfilePage></ProfilePage>}></Route>
-        <Route path="/popup" element={<SearchPopup/>}></Route>
-        <Route path="/sample" element={<SamplePage/>}></Route>
+        <Route path="/popup" element={<SearchPopup />}></Route>
+        <Route path="/news" element={<SamplePage />}></Route>
       </Routes>
       <Nav></Nav>
     </BrowserRouter>
