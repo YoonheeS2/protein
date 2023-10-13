@@ -76,6 +76,18 @@ const MainPage = () => {
   const [recpcalories, setRecoCalories] = useState(0);
   const [circleColor, setCirlcleColor] = useState("#C8DDFA");
 
+  const [summaryMealToday, setSummaryMealToday] = useState({
+    success: false,
+    result: {
+      calories: 0,
+      protein: 0,
+      carbohydrate: 0,
+      fat: 0,
+    },
+    errorMsg: null,
+  });
+
+  //사용자가 컴포넌트를 렌더링 시작할때 기능을 수행시키기위한 훅
   useEffect(() => {
     getMainPageData();
   }, []);
@@ -87,14 +99,17 @@ const MainPage = () => {
   const closeModal = () => {
     setIsOpen(false);
   };
+
+  // 회원정보를 조회하는 API 요청 실행메서드
   const getMainPageData = () => {
     axios.get("/api/v1/meal/log/summary/today/1").then((response) => {
-      setCalories(response.data.calories);
-      setRecoCalories(response.data.recomandedCalories);
-      let percentFromServer =
-        (response.data.calories / response.data.recomandedCalories) * 100;
-      console.log(percentFromServer);
-      setPercent(percentFromServer);
+      //응답 데이터 확인
+      console.log("-------response--------");
+      console.log(response.data);
+      console.log("-------response end--------");
+      //사용자 데이터 조회 성공 이후 스테이트 변경
+      setSummaryMealToday(response.data);
+      console.log(summaryMealToday);
     });
   };
 
@@ -117,9 +132,18 @@ const MainPage = () => {
         <CircleComponent color="#C8DDFA" />
       </CircleLine>
       <RecomContainer>
-        <Recommened value="100" name="단백질"></Recommened>
-        <Recommened value="100" name="단백질"></Recommened>
-        <Recommened value="100" name="단백질"></Recommened>
+        <Recommened
+          value={summaryMealToday.result.protein}
+          name="단백질"
+        ></Recommened>
+        <Recommened
+          value={summaryMealToday.result.fat}
+          name="지방"
+        ></Recommened>
+        <Recommened
+          value={summaryMealToday.result.carbohydrate}
+          name="탄수화물"
+        ></Recommened>
       </RecomContainer>
       <SearchContainer>
         <SearchText name={"딸기 샌드위치"}></SearchText>

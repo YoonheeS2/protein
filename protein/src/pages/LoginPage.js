@@ -31,6 +31,10 @@ const Text = styled.div`
   text-size: 14px;
 `;
 
+const handleLoginButtonClick = () => {};
+
+const handleChanges = () => {};
+
 const LoginPage = observer(() => {
   const handleClick = () => {};
 
