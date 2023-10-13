@@ -2,11 +2,9 @@ import React from "react";
 import SignupTitle1 from "../components/signup/SignupTitle1";
 import styled from "styled-components";
 import IconInput from "../components/signup/IconInput";
-import PrivacyCheckbox from "../components/signup/PrivacyCheckbox";
-import { Lock, Sms, User } from "iconic-react";
 import ButtonComponent from "../components/signup/ButtonComponent";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
+import { observer } from "mobx-react";
 const PageBlock = styled.div`
   display: flex;
   flex-direction: column;
@@ -33,7 +31,7 @@ const Text = styled.div`
   text-size: 14px;
 `;
 
-const LoginPage = () => {
+const LoginPage = observer(() => {
   const handleClick = () => {};
 
   return (
@@ -55,6 +53,6 @@ const LoginPage = () => {
       </Text>
     </PageBlock>
   );
-};
+});
 
 export default LoginPage;
