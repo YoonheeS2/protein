@@ -1,12 +1,12 @@
-import React from 'react'
-import SearchComponent from './SearchComponent'
+import React from "react";
+import SearchComponent from "./SearchComponent";
+import Modal from "react-modal";
 
 const SearchPopup = () => {
   return (
     <div>
-    <SearchComponent></SearchComponent>
+      <SearchComponent></SearchComponent>
     </div>
-  )
-}
-
-export default SearchPopup
+  );
+};
+export default SearchPopup;

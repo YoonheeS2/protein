@@ -42,7 +42,7 @@ const SearchInput = () => {
         <SearchNormal size={20} /> {/* 검색 아이콘 */}
       </IconWrapper>
       <Input type="text" placeholder="검색어를 입력하세요" />
-      <ArrowButton>취소</ArrowButton> {/* 화살표 버튼 */}
+      <ArrowButton>검색</ArrowButton> {/* 화살표 버튼 */}
     </SearchInputWrapper>
   );
 };

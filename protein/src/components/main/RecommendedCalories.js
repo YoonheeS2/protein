@@ -4,7 +4,7 @@ import styled from "styled-components";
 const CaloriesContainer = styled.div`
   display: flex;
   flex-direction: row;
-  margin-right: 15px;
+  margin-right: 22px;
 `;
 
 const RecomCalories = styled.div`
