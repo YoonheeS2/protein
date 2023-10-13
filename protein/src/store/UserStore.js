@@ -1,7 +1,7 @@
 import { observable, action } from "mobx";
 import { makeAutoObservable } from "mobx";
 
-export class UserStore {
+export default class UserStore {
   secondsPassed = 0;
 
   constructor(root) {
