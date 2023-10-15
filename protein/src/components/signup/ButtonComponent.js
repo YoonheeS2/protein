@@ -41,9 +41,9 @@ export const SelectedIcon = ({ icontype }) => {
   }
 };
 
-const ButtonComponent = ({ icontype, text }) => {
+const ButtonComponent = ({ icontype, text, handleClick }) => {
   return (
-    <BasicButton>
+    <BasicButton onClick={handleClick}>
       <Text>{text}</Text>
       <SelectedIcon icontype={icontype}></SelectedIcon>
     </BasicButton>
