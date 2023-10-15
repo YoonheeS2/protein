@@ -22,6 +22,7 @@ const SignUpSummaryPage = () => {
     let nextStep = step;
     nextStep = nextStep + 1;
     console.log(nextStep);
+    console.log(signupData);
     setStep(nextStep);
   };
 
@@ -52,11 +53,10 @@ const SignUpSummaryPage = () => {
 
   const changeSignupData = (e) => {
     console.log(`${e.target.name} 내가 입력한 인풋 ${e.target.value}`);
-    if (e.target.name === "name") {
-      setSignUpData(...signupData,{
-        signupData[e.target.name] : e.target.value
-      });
-    }
+    setSignUpData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   return (

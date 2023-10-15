@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import SignupTitle1 from "../components/signup/SignupTitle1";
 import styled from "styled-components";
 import IconInput from "../components/signup/IconInput";
 import PrivacyCheckbox from "../components/signup/PrivacyCheckbox";
-import { Lock, Sms, User } from "iconic-react";
 import ButtonComponent from "../components/signup/ButtonComponent";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
+import axios from "axios";
 
 const PageBlock = styled.div`
   display: flex;
@@ -37,28 +37,59 @@ const Text = styled.div`
   text-size: 14px;
 `;
 
-const ProfileDetailPage01 = () => {
+const ProfileDetailPage01 = ({ nextStep, handleChange }) => {
+  const [privacyAgreed, setPrivacyAgreed] = useState(false);
+
+  const handlePrivacyCheckboxChange = (e) => {
+    console.log(e);
+    setPrivacyAgreed(e);
+  };
+
+  const handleSignupButtonClick = () => {
+    if (!privacyAgreed) {
+      alert("개인 정보 보호 정책 및 이용 약관에 동의해야 합니다.");
+      return;
+    }
+  };
+
   return (
     <PageBlock>
       <SignupTitle1 title={"환영합니다 !"} logo={"PROTEIN BODY"}></SignupTitle1>
       <InputForm>
-        <IconInput icontype={"user"} placeholder={"이름"}></IconInput>
-        <IconInput icontype={"sms"} placeholder={"이메일"}></IconInput>
-        <IconInput icontype={"lock"} placeholder={"비밀번호"}></IconInput>
+        <IconInput
+          icontype={"user"}
+          placeholder={"이름"}
+          handleChange={handleChange}
+          name={"name"}
+        ></IconInput>
+        <IconInput
+          icontype={"sms"}
+          placeholder={"이메일"}
+          handleChange={handleChange}
+          name={"mail"}
+        ></IconInput>
+        <IconInput
+          icontype={"lock"}
+          placeholder={"비밀번호"}
+          handleChange={handleChange}
+          name={"password"}
+        ></IconInput>
       </InputForm>
       <PrivacyCheckboxBlock>
-      <PrivacyCheckbox
-        label={
-          "귀하는 당사의 개인 정보 보호 정책 및 이용 약관에 계속 동의합니다"
-        }
-      ></PrivacyCheckbox>
+        <PrivacyCheckbox
+          label={"개인 정보 보호 정책 및 이용 약관에 동의합니다"}
+          onChange={handlePrivacyCheckboxChange}
+        ></PrivacyCheckbox>
       </PrivacyCheckboxBlock>
       <ButtonContainer>
-        <ButtonComponent text="완성하기"></ButtonComponent>
+        <ButtonComponent
+          text="완성하기"
+          handleClick={nextStep}
+        ></ButtonComponent>
       </ButtonContainer>
       <Text>
-        계정이 있으신가요?
-        <Link>로그인</Link>
+        계정이 이미 있으신가요?
+        <Link to="/login">로그인</Link>
       </Text>
     </PageBlock>
   );

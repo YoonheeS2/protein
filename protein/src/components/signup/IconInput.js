@@ -55,12 +55,23 @@ const Text = styled.span`
   font-size: 14px; /* 텍스트의 크기를 조정하세요. */
 `;
 
-const IconInput = ({ icontype, placeholder, rightSpan, handleChange }) => {
+const IconInput = ({
+  icontype,
+  placeholder,
+  rightSpan,
+  handleChange,
+  name,
+}) => {
   return (
     <InputContainer>
       <SelectedIcon icontype={icontype}></SelectedIcon>
       {/* handleChange 변경 감지 이벤트 바인딩 가능한 Props 추가 */}
-      <Input type="text" placeholder={placeholder} onChange={handleChange} />
+      <Input
+        type="text"
+        placeholder={placeholder}
+        onChange={handleChange}
+        name={name}
+      />
       {rightSpan && <Text>{rightSpan}</Text>}
     </InputContainer>
   );

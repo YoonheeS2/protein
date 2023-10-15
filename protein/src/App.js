@@ -14,6 +14,7 @@ import MainPage from "./pages/MainPage";
 import SearchPopup from "./components/main/SearchPopup";
 import PostCreatePage from "./pages/PostCreatePage";
 import SamplePage from "./pages/SamplePage";
+import SignUpSummaryPage from "./pages/SignUpSummaryPage";
 
 function App() {
   return (
@@ -26,15 +27,7 @@ function App() {
         <Route path="/community" element={<CommunityPage />}></Route>
         <Route
           path="/signup"
-          element={<ProfileDetailPage01></ProfileDetailPage01>}
-        ></Route>
-        <Route
-          path="/signup2"
-          element={<ProfileDetailPage02></ProfileDetailPage02>}
-        ></Route>
-        <Route
-          path="/modeSelect"
-          element={<ModeSelection></ModeSelection>}
+          element={<SignUpSummaryPage></SignUpSummaryPage>}
         ></Route>
         <Route path="/login" element={<LoginPage></LoginPage>}></Route>
         <Route path="/profile" element={<ProfilePage></ProfilePage>}></Route>
