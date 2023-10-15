@@ -52,9 +52,6 @@ const SearchComponent = ({ placeholder }) => {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
       },
     };
-    // axios(requestOption).then((data) => {
-    //   console.log(data.data);
-    // });
     axios(requestOption).then((response) => {
       console.log(response.data);
       setSearchResult(response.data);

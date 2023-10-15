@@ -147,10 +147,15 @@ const MainPage = () => {
       </RecomContainer>
       <SearchContainer>
         <SearchText name={"딸기 샌드위치"}></SearchText>
-        <SearchButton onClick={handleModalButton} />
-        {modalIsOpen && (
+        <SearchButton handleClick={handleModalButton} />
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="검색기능"
+        >
           <SearchPopup isOpen={modalIsOpen} onClose={closeModal} />
-        )}
+        </Modal>
       </SearchContainer>
       <BoxIngredientWrap>
         <BoxIngredient name={"단백질"} value={"100g"}></BoxIngredient>

@@ -17,13 +17,13 @@ const Search = styled.span`
   font-weight: 700;
   font-size: 10px;
   line-height: 10px;
-  color: #859EF5;
+  color: #859ef5;
 `;
 
-const SearchButton = () => {
+const SearchButton = ({ handleClick }) => {
   return (
     <div>
-      <Button>
+      <Button onClick={handleClick}>
         <Search>검색</Search>
       </Button>
     </div>
