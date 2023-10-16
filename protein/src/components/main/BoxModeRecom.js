@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Box = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   width: 148px;
@@ -11,6 +11,7 @@ const Box = styled.div`
   border-radius: 4px;
   border: 1px solid #a3b6f7;
   margin-right: 7px;
+  padding-left: 10px;
 `;
 
 const RecomMain = styled.span`

@@ -6,6 +6,7 @@ const Container = styled.div`
   justify-content: left;
   flex-direction: column;
   margin-top: 30px;
+  margin-bottom: 15px;
   margin-right: 100px;
 `;
 
@@ -27,15 +28,13 @@ const Text = styled.span`
 
 const ModeRecomText = ({ mode, name }) => {
   return (
-    <div>
-      <Container>
-        <Name>{mode}</Name>
-        <SecondLine>
-          <Name>{name}</Name>
-          <Text>님에게 추천하는 권장 식사</Text>
-        </SecondLine>
-      </Container>
-    </div>
+    <Container>
+      <Name>{mode}</Name>
+      <SecondLine>
+        <Name>{name}</Name>
+        <Text>님에게 추천하는 권장 식사</Text>
+      </SecondLine>
+    </Container>
   );
 };
 

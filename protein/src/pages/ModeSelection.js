@@ -7,7 +7,7 @@ const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  aligh-item: center;
+  align-items: center;
   padding: 10px;
 `;
 const Title = styled.div`

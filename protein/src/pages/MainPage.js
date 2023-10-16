@@ -66,16 +66,20 @@ const customStyles = {
 const RecomContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  
 `;
 const MainPage = () => {
   const [percent, setPercent] = useState(0);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [calories, setCalories] = useState(0);
-  const [recpcalories, setRecoCalories] = useState(0);
-  const [circleColor, setCirlcleColor] = useState("#C8DDFA");
-
+  const [recpcalories, setRecCalories] = useState(0);
+  const [carbohydrateCircleColor, setCarbohydrateCircleColor] =
+    useState("#C8DDFA");
+  const [proteinCircleColor, setProteinCircleColor] = useState("#C8DDFA");
+  const [fatCircleColor, setFatCircleColor] = useState("#C8DDFA");
+  const [randomTip, setRandomTip] = useState("");
   const [summaryMealToday, setSummaryMealToday] = useState({
     success: false,
     result: {
@@ -107,9 +111,39 @@ const MainPage = () => {
       console.log("-------response--------");
       console.log(response.data);
       console.log("-------response end--------");
-      //사용자 데이터 조회 성공 이후 스테이트 변경
+      const todayCalories = response.data.result.calories;
+      const todayCarbohydrate = response.data.result.carbohydrate;
+      const todayProtein = response.data.result.protein;
+      const todayFat = response.data.result.fat;
+      axios.get("/api/v1/user/1").then((userResponse) => {
+        const recommendCalories = userResponse.data.result.recommendedCalories;
+        setRecCalories(recommendCalories);
+        // percent 계산
+        const calculatedPercent = (todayCalories / recommendCalories) * 100;
+        setPercent(calculatedPercent);
+        const recCarbohydrate =
+          userResponse.data.result.recommendTotalCarbohydrate;
+        const recProtein = userResponse.data.result.recommendProtein;
+        const recFat = userResponse.data.result.recommendTotalFat;
+        if (todayCarbohydrate > recCarbohydrate) {
+          setCarbohydrateCircleColor("#1A73E9");
+        } else {
+          setCarbohydrateCircleColor("#C8DDFA");
+        }
+        if (todayProtein > recProtein) {
+          setProteinCircleColor("#1A73E9");
+        } else {
+          setProteinCircleColor("#C8DDFA");
+        }
+        if (todayFat > recFat) {
+          setFatCircleColor("#1A73E9");
+        } else {
+          setFatCircleColor("#C8DDFA");
+        }
+      });
       setSummaryMealToday(response.data);
       console.log(summaryMealToday);
+      setCalories(todayCalories);
     });
   };
 
@@ -125,13 +159,17 @@ const MainPage = () => {
         ></RecommendedCalories>
       </div>
       <CircleLine>
-        <CircleComponent color="#1A73E9" />
+        <CircleComponent color={proteinCircleColor} />
         <Line />
-        <CircleComponent color="#1A73E9" />
+        <CircleComponent color={fatCircleColor} />
         <Line />
-        <CircleComponent color="#C8DDFA" />
+        <CircleComponent color={carbohydrateCircleColor} />
       </CircleLine>
       <RecomContainer>
+        <Recommened
+          value={summaryMealToday.result.carbohydrate}
+          name="탄수화물"
+        ></Recommened>
         <Recommened
           value={summaryMealToday.result.protein}
           name="단백질"
@@ -139,10 +177,6 @@ const MainPage = () => {
         <Recommened
           value={summaryMealToday.result.fat}
           name="지방"
-        ></Recommened>
-        <Recommened
-          value={summaryMealToday.result.carbohydrate}
-          name="탄수화물"
         ></Recommened>
       </RecomContainer>
       <SearchContainer>
@@ -158,10 +192,10 @@ const MainPage = () => {
         </Modal>
       </SearchContainer>
       <BoxIngredientWrap>
+        <BoxIngredient name={"탄수화물"} value={"100g"}></BoxIngredient>
+        <BoxIngredient name={"당"} value={"100g"}></BoxIngredient>
         <BoxIngredient name={"단백질"} value={"100g"}></BoxIngredient>
-        <BoxIngredient name={"단백질"} value={"100g"}></BoxIngredient>
-        <BoxIngredient name={"단백질"} value={"100g"}></BoxIngredient>
-        <BoxIngredient name={"단백질"} value={"100g"}></BoxIngredient>
+        <BoxIngredient name={"지방"} value={"100g"}></BoxIngredient>
       </BoxIngredientWrap>
       <ModeRecomText mode={"일반모드"} name={"윤희"}></ModeRecomText>
       <BoxIngredientWrap>

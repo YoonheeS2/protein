@@ -6,7 +6,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin: 5px 29px;
+  margin: 0px 30px 0px 30px;
 `
 
 const Recom = styled.span`
