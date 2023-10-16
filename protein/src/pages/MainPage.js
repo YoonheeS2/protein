@@ -153,6 +153,7 @@ const MainPage = () => {
     <PageBlock>
       <AppHeader title={"PROTEIN BODY"}></AppHeader>
       <TipBox text={"수분을 많이 섭취하면 포만감을 유지하기 좋아요!"}></TipBox>
+      <TipBox text={"브랜치 테스트용"}></TipBox>
       <ProgressBar progress={percent}></ProgressBar>
       <div style={{ marginLeft: "auto" }}>
         <RecommendedCalories
