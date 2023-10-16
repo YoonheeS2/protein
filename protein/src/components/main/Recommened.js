@@ -1,31 +1,33 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin: 0px 30px 0px 30px;
-`
+  width: 33.3%;
+`;
 
 const Recom = styled.span`
-font-size: 14px;
-color: #000;
-`
+  font-size: 14px;
+  color: #000;
+`;
 
 const Name = styled.span`
-font-size: 14px;
-color: #000;
-`
+  font-size: 14px;
+  color: #000;
+  white-space: nowrap;
+`;
 
-const Recommened = ({value, name}) => {
+const Recommened = ({ value, name }) => {
   return (
     <Container>
-        <Recom>{value}</Recom>
-        <Name>{name}</Name>
+      <Recom>{value}</Recom>
+      <Name>{name}</Name>
     </Container>
-  )
-}
+  );
+};
 
-export default Recommened
+export default Recommened;

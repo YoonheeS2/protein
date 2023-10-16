@@ -67,8 +67,7 @@ const RecomContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  
+  width: 300px;
 `;
 const MainPage = () => {
   const [percent, setPercent] = useState(0);
@@ -106,7 +105,7 @@ const MainPage = () => {
 
   // 회원정보를 조회하는 API 요청 실행메서드
   const getMainPageData = () => {
-    axios.get("/api/v1/meal/log/summary/today/1").then((response) => {
+    axios.get("/api/v1/meal/log/summary/today/3").then((response) => {
       //응답 데이터 확인
       console.log("-------response--------");
       console.log(response.data);
@@ -115,8 +114,11 @@ const MainPage = () => {
       const todayCarbohydrate = response.data.result.carbohydrate;
       const todayProtein = response.data.result.protein;
       const todayFat = response.data.result.fat;
-      axios.get("/api/v1/user/1").then((userResponse) => {
-        const recommendCalories = userResponse.data.result.recommendedCalories;
+      axios.get("/api/v1/user/3").then((userResponse) => {
+        console.log(userResponse.data);
+        console.log(userResponse.data.result.recommendCalories);
+        const recommendCalories = userResponse.data.result.recommendCalories;
+        console.log(recommendCalories);
         setRecCalories(recommendCalories);
         // percent 계산
         const calculatedPercent = (todayCalories / recommendCalories) * 100;
@@ -158,6 +160,7 @@ const MainPage = () => {
           recom={recpcalories}
         ></RecommendedCalories>
       </div>
+
       <CircleLine>
         <CircleComponent color={proteinCircleColor} />
         <Line />
