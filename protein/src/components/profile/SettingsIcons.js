@@ -1,86 +1,63 @@
-import React, { startTransition } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 import { Alarm, DirectInbox, Heart } from "iconic-react";
-
 
 const IconsContainer = styled.div`
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
 `;
-
 const CircleIcon = styled.div`
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: #ccc;
+  background-color: ${({ selected }) =>
+    selected ? "#5F89F5" : "#ccc"}; // 색상 변경
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 5px;
+  cursor: pointer;
 `;
-
 const IconLabel = styled.div`
   font-size: 12px;
   text-align: center;
 `;
 
-const IconAlarm = styled(Alarm)`
+const SettingsIcons = () => {
+  const [selectedIcon, setSelectedIcon] = useState(null);
 
-`;
+  const handleIconClick = (icontype) => {
+    setSelectedIcon(icontype);
+  };
 
-const IconDirectInbox = styled(DirectInbox)`
-  margin-right: 5px;
-  margin-left: 10px;
-`;
-
-const IconHeart = styled(Heart)`
-`;
-
-
-const SelectedIcon = ({ icontype }) => {
-    console.log(icontype);
-    if (icontype === "alarm") {
-      return (
-        <IconAlarm size={20} color="#000">
-          아이콘
-        </IconAlarm>
-      );
-    } else if (icontype === "directInbox") {
-      return (
-        <IconDirectInbox size={20} color="#000">
-          아이콘
-        </IconDirectInbox>
-      );
-    } else if (icontype === "heart") {
-      return (
-        <IconHeart size={20} color="#000">
-          아이콘
-        </IconHeart>
-      );
-    } else {
-      return null;}
-    };
-
-const SettingsIcons = ({icontype}) => {
   return (
     <IconsContainer>
       <div>
-        <CircleIcon>
-            <SelectedIcon icontype={"alarm"}/>
+        <CircleIcon
+          selected={selectedIcon === "alarm"}
+          onClick={() => handleIconClick("alarm")}
+        >
+          <Alarm size={20} color="#000" />
         </CircleIcon>
         <IconLabel>알람 설정</IconLabel>
       </div>
       <div>
-      <CircleIcon>
-            <SelectedIcon icontype={"directInbox"}/>
+        <CircleIcon
+          selected={selectedIcon === "directInbox"}
+          onClick={() => handleIconClick("directInbox")}
+        >
+          <DirectInbox size={20} color="#000" />
         </CircleIcon>
         <IconLabel>커뮤니티 관리</IconLabel>
       </div>
       <div>
-      <CircleIcon>
-            <SelectedIcon icontype={"heart"}/>
-      </CircleIcon>
+        <CircleIcon
+          selected={selectedIcon === "heart"}
+          onClick={() => handleIconClick("heart")}
+        >
+          <Heart size={20} color="#000" />
+        </CircleIcon>
         <IconLabel>팔로잉 관리</IconLabel>
       </div>
     </IconsContainer>

@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Settings, CheckCircle } from 'react-feather'; // 필요한 아이콘을 import합니다.
+import React from "react";
+import styled from "styled-components";
+import { Settings, CheckCircle } from "react-feather"; // 필요한 아이콘을 import합니다.
 
 const Container = styled.div`
   margin: 20px 20px; /* 상하 20px의 여백을 추가 */
@@ -36,7 +36,7 @@ const OtherElement = () => {
       <IconRow>
         <CheckCircle size={24} />
         <IconLabel>
-        <button>앱평가하기</button>
+          <button>앱평가하기</button>
         </IconLabel>
       </IconRow>
     </Container>

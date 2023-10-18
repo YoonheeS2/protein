@@ -1,13 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-const Background = styled.button`
+const ButtonContainer = styled.button`
   display: flex;
-  width: 95%; // 원하는 너비로 조정하세요.
+  width: 95%;
   min-width: 340px;
   height: 100px;
-  border: 0px;
-  background-color: #ffffff;
+  border: 0;
+  background-color: ${(props) =>
+    props.isSelected
+      ? "#5F89F5"
+      : "#ffffff"}; /* Change background color when selected */
   flex-direction: column;
   border-radius: 15px;
   text-align: left;
@@ -27,12 +30,12 @@ const Description = styled.div`
   color: #7b6f72;
 `;
 
-const GoalButton = ({ title, description }) => {
+const GoalButton = ({ title, description, onSelect, isSelected }) => {
   return (
-    <Background>
+    <ButtonContainer onClick={onSelect} isSelected={isSelected}>
       <Title>{title}</Title>
       <Description>{description}</Description>
-    </Background>
+    </ButtonContainer>
   );
 };
 

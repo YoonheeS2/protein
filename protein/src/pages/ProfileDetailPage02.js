@@ -24,6 +24,7 @@ const InputForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 20px 0; /* Added margin for spacing */
 `;
 
 const InputForm2 = styled.div`
@@ -31,6 +32,7 @@ const InputForm2 = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  margin-bottom: 20px; /* Added margin for spacing */
 `;
 
 const handleGenderChange = (selectedGender) => {
