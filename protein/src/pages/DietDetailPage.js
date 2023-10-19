@@ -14,20 +14,18 @@ const Container = styled.div`
   margin-bottom: 20px;
 `;
 
-const TimeSelection = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-`;
-
-const TimeButton = styled.button`
-  background-color: ${(props) => (props.selected ? "#007BFF" : "#E0E0E0")};
-  color: ${(props) => (props.selected ? "#FFFFFF" : "#000000")};
+const Dropdown = styled.select`
+  appearance: none;
+  background-color: #fff;
   border: none;
-  padding: 10px 20px;
-  border-radius: 10px;
   cursor: pointer;
-  outline: none;
+  padding-right: 24px;
+  background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"%3E%3Cpath fill="%23CBDDFF" d="M2 3L0 0h4z"/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: right 2% top 80%;
+  background-size: 0.65em auto;
+  font-size: 1em;
+  outline: none; /* 클릭했을 때의 테두리 제거 */
 `;
 
 const DietDetailPage = () => {
@@ -35,28 +33,20 @@ const DietDetailPage = () => {
 
   return (
     <div>
-      <AppHeader title={selectedTime}></AppHeader>
+      <AppHeader
+        title={
+          <Dropdown
+            value={selectedTime}
+            onChange={(e) => setSelectedTime(e.target.value)}
+          >
+            <option value="아침">아침</option>
+            <option value="점심">점심</option>
+            <option value="저녁">저녁</option>
+            <option value="야식">야식</option>
+          </Dropdown>
+        }
+      ></AppHeader>
       <Container>
-        <TimeSelection>
-          <TimeButton
-            selected={selectedTime === "아침"}
-            onClick={() => setSelectedTime("아침")}
-          >
-            아침
-          </TimeButton>
-          <TimeButton
-            selected={selectedTime === "점심"}
-            onClick={() => setSelectedTime("점심")}
-          >
-            점심
-          </TimeButton>
-          <TimeButton
-            selected={selectedTime === "저녁"}
-            onClick={() => setSelectedTime("저녁")}
-          >
-            저녁
-          </TimeButton>
-        </TimeSelection>
         <ScrollableTimePicker></ScrollableTimePicker>
       </Container>
       <SearchInput></SearchInput>
