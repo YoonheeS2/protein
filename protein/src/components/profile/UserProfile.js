@@ -34,7 +34,7 @@ const SupportMessage = styled.span`
   color: #555;
 `;
 
-const UserProfile = () => {
+const UserProfile = ({ profileData }) => {
   const user = {
     name: "조연아",
     supportMessage: "항상 응원합니다!",
@@ -44,7 +44,7 @@ const UserProfile = () => {
     <ProfileContainer>
       <ProfileImage />
       <ProfileInfo>
-        <UserName>{`${user.name}님 항상 응원합니다!`}</UserName>
+        <UserName>{`${profileData.result.name}님 항상 응원합니다!`}</UserName>
       </ProfileInfo>
     </ProfileContainer>
   );

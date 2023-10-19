@@ -24,7 +24,7 @@ const InputForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px 0; /* Added margin for spacing */
+  margin: 20px 0;
 `;
 
 const InputForm2 = styled.div`
@@ -32,15 +32,27 @@ const InputForm2 = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px; /* Added margin for spacing */
+  margin-bottom: 20px;
 `;
 
 const handleGenderChange = (selectedGender) => {
-  // 선택한 성별을 처리하는 로직을 여기에 추가하세요.
   console.log("선택한 성별:", selectedGender);
 };
 
-const ProfileDetailPage02 = ({ nextStep }) => {
+const ProfileDetailPage02 = ({ nextStep, handleChange }) => {
+  const handleBirthDateChange = (e) => {
+    let value = e.target.value.replace(/\D/g, "");
+    if (value.length <= 4) {
+      e.target.value = value;
+    } else if (value.length <= 6) {
+      e.target.value = value.slice(0, 4) + "-" + value.slice(4);
+    } else {
+      e.target.value =
+        value.slice(0, 4) + "-" + value.slice(4, 6) + "-" + value.slice(6, 8);
+    }
+    handleChange(e);
+  };
+
   return (
     <PageBlock>
       <SignupTitle2
@@ -51,15 +63,32 @@ const ProfileDetailPage02 = ({ nextStep }) => {
         <genderselection>
           <IconSelectBox onChange={handleGenderChange} />
         </genderselection>
-        <IconInput icontype={"Calendar"} placeholder={"생년월일"}></IconInput>
+        <IconInput
+          icontype={"Calendar"}
+          placeholder={"생년월일"}
+          handleChange={handleBirthDateChange}
+          name={"birthDate"}
+        ></IconInput>
         <InputForm2>
-          <IconInput2 placeholder={"현재 체중"} rightSpan={"Kg"}></IconInput2>
-          <IconInput2 placeholder={"목표 체중"} rightSpan={"Kg"}></IconInput2>
+          <IconInput2
+            placeholder={"현재 체중"}
+            rightSpan={"Kg"}
+            handleChange={handleChange}
+            name={"weight"}
+          ></IconInput2>
+          <IconInput2
+            placeholder={"목표 체중"}
+            handleChange={handleChange}
+            name={"goalWeight"}
+            rightSpan={"Kg"}
+          ></IconInput2>
         </InputForm2>
         <IconInput
           icontype={"ArrowSwapVertical"}
           placeholder={"키"}
           rightSpan={"cm"}
+          handleChange={handleChange}
+          name={"height"}
         ></IconInput>
       </InputForm>
       <ButtonComponent

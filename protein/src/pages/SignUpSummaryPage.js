@@ -3,6 +3,7 @@ import ProfileDetailPage01 from "./ProfileDetailPage01";
 import ProfileDetailPage02 from "./ProfileDetailPage02";
 import ModeSelection from "./ModeSelection";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SignUpSummaryPage = () => {
   const [step, setStep] = useState(1);
@@ -18,11 +19,11 @@ const SignUpSummaryPage = () => {
     modeType: "NORMAL",
   });
 
+  const navigate = useNavigate();
+
   const nextStep = () => {
     let nextStep = step;
     nextStep = nextStep + 1;
-    console.log(nextStep);
-    console.log(signupData);
     setStep(nextStep);
   };
 
@@ -32,7 +33,6 @@ const SignUpSummaryPage = () => {
     if (nextStep < 1) {
       nextStep = 1;
     }
-    console.log(nextStep);
     setStep(nextStep);
   };
 
@@ -41,7 +41,10 @@ const SignUpSummaryPage = () => {
       .post("api/v1/user/signup", signupData)
       .then((response) => {
         if (response.status === 200) {
+          localStorage.setItem("username", signupData.name);
+
           alert("회원가입 성공");
+          navigate("/main");
         } else {
           alert(response.data.errorMsg);
         }
@@ -52,7 +55,6 @@ const SignUpSummaryPage = () => {
   };
 
   const changeSignupData = (e) => {
-    console.log(`${e.target.name} 내가 입력한 인풋 ${e.target.value}`);
     setSignUpData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -67,8 +69,15 @@ const SignUpSummaryPage = () => {
           handleChange={changeSignupData}
         />
       )}
-      {step === 2 && <ProfileDetailPage02 nextStep={nextStep} />}
-      {step === 3 && <ModeSelection />}
+      {step === 2 && (
+        <ProfileDetailPage02
+          nextStep={nextStep}
+          handleChange={changeSignupData}
+        />
+      )}
+      {step === 3 && (
+        <ModeSelection signup={signup} handleChange={changeSignupData} />
+      )}
     </div>
   );
 };

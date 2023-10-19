@@ -53,9 +53,11 @@ const LoginPage = observer(() => {
       },
     };
     axios(requestOption).then((response) => {
-      console.log(response.status);
+      console.log(response.data);
       if (response.status === 200) {
         alert("로그인 성공");
+        localStorage.setItem("userId", response.data.result);
+
         //메인으로 이동하는 코드
         navigate("/main");
       } else {

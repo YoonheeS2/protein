@@ -29,40 +29,28 @@ const Text = styled.div`
   text-align: center;
 `;
 
-const ModeSelection = () => {
+const ModeSelection = ({ signup, signupData, handleChange }) => {
   const [selectedMode, setSelectedMode] = useState(null);
 
   const handleModeSelect = (mode) => {
+    console.log(mode);
     setSelectedMode((prevSelectedMode) =>
       prevSelectedMode === mode ? null : mode
     );
+    handleComplete();
   };
 
   const handleComplete = () => {
     if (selectedMode) {
-      const userId = "123";
-
-      const requestData = {
-        modeType: selectedMode,
-      };
-
-      axios
-        .put(
-          `http://ec2-43-200-165-23.ap-northeast-2.compute.amazonaws.com:8081/api/v1/user/${userId}/mode`,
-          requestData
-        )
-        .then((response) => {
-          if (response.status === 200 && response.data.success) {
-            alert("모드 선택 완료");
-          } else {
-            alert("모드 선택 중 오류가 발생했습니다.");
-          }
-        })
-        .catch((error) => {
-          console.error("모드 선택 중 오류:", error);
-        });
+      handleChange({
+        target: {
+          name: "modeType",
+          value: selectedMode,
+        },
+      });
+      signup(); // 서버로 데이터 전송
     } else {
-      alert("모드를 선택하세요.");
+      alert("모드를 선택해주세요.");
     }
   };
 
@@ -76,18 +64,24 @@ const ModeSelection = () => {
           description="특별 관리가 필요한 사람이 아닌 건강한 사람의 균형 잡힌 식단모드에요."
           onSelect={() => handleModeSelect("NORMAL")}
           isSelected={selectedMode === "NORMAL"}
+          handleChange={handleChange}
+          name={"NORMAL"}
         />
         <GoalButton
           title="다이어트모드"
           description="체지방 감소를 우선으로 건강한 다이어트모드에요."
           onSelect={() => handleModeSelect("DIET")}
           isSelected={selectedMode === "DIET"}
+          handleChange={handleChange}
+          name={"diet"}
         />
         <GoalButton
           title="근력키우기모드"
           description="근육량을 늘리고, 운동 능력을 향상시키는데 도움이 되는 식단이에요."
           onSelect={() => handleModeSelect("STRENGTHEN")}
           isSelected={selectedMode === "STRENGTHEN"}
+          handleChange={handleChange}
+          name={"protein"}
         />
       </ButtonContainer>
       <ButtonContainer>

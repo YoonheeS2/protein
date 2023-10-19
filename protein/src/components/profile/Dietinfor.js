@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -37,25 +37,20 @@ const EditButton = styled.button`
   margin-left: 10px;
 `;
 
-const Dietinfor = () => {
-  const [dietInfo, setDietInfo] = useState({
-    category: "",
-    height: "",
-    weight: "",
-    targetWeight: "",
-  });
-
+const Dietinfor = ({ profileData }) => {
+  console.log(profileData);
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setDietInfo({
-      ...dietInfo,
-      [name]: value,
-    });
   };
 
-  const handleSaveClick = () => {
-    console.log("Saved diet information:", dietInfo);
+  const handleSaveClick = () => {};
+
+  const changeValue = (value) => {
+    if (value === "NORMAL") {
+      return "일반모드";
+    }
   };
+  // componentDidMount와 같은 효과로, 컴포넌트가 마운트될 때 한번만 실행됩니다.
 
   return (
     <Container>
@@ -67,7 +62,7 @@ const Dietinfor = () => {
           type="text"
           placeholder="식단 카테고리 입력"
           name="category"
-          value={dietInfo.category}
+          value={changeValue(profileData.result.mode)}
           onChange={handleInputChange}
         />
       </InputRow>
@@ -77,7 +72,7 @@ const Dietinfor = () => {
           type="text"
           placeholder="키 입력"
           name="height"
-          value={dietInfo.height}
+          value={profileData.result.height}
           onChange={handleInputChange}
         />
       </InputRow>
@@ -87,7 +82,7 @@ const Dietinfor = () => {
           type="text"
           placeholder="몸무게 입력"
           name="weight"
-          value={dietInfo.weight}
+          value={profileData.result.weight}
           onChange={handleInputChange}
         />
       </InputRow>
@@ -97,7 +92,7 @@ const Dietinfor = () => {
           type="text"
           placeholder="목표체중 입력"
           name="targetWeight"
-          value={dietInfo.targetWeight}
+          value={profileData.result.goalWeight}
           onChange={handleInputChange}
         />
       </InputRow>
