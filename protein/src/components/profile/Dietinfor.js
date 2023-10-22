@@ -11,7 +11,7 @@ const Container = styled.div`
 
 const SectionTitle = styled.h2`
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 1.3em;
   margin-bottom: 10px;
 `;
 
@@ -72,7 +72,7 @@ const Dietinfor = ({ profileData }) => {
           type="text"
           placeholder="키 입력"
           name="height"
-          value={profileData.result.height}
+          value={`${profileData.result.height} cm`}
           onChange={handleInputChange}
         />
       </InputRow>
@@ -82,7 +82,7 @@ const Dietinfor = ({ profileData }) => {
           type="text"
           placeholder="몸무게 입력"
           name="weight"
-          value={profileData.result.weight}
+          value={`${profileData.result.weight} kg`}
           onChange={handleInputChange}
         />
       </InputRow>
@@ -92,7 +92,7 @@ const Dietinfor = ({ profileData }) => {
           type="text"
           placeholder="목표체중 입력"
           name="targetWeight"
-          value={profileData.result.goalWeight}
+          value={`${profileData.result.goalWeight} kg`}
           onChange={handleInputChange}
         />
       </InputRow>

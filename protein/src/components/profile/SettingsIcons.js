@@ -11,8 +11,7 @@ const CircleIcon = styled.div`
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: ${({ selected }) =>
-    selected ? "#5F89F5" : "#ccc"}; // 색상 변경
+  background-color: #f6f6f6;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -11,14 +11,14 @@ const Container = styled.div`
 
 const SectionTitle = styled.h2`
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 1.3em;
   margin-bottom: 10px;
 `;
 
 const IconRow = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 17px;
 `;
 
 const IconLabel = styled.span`
@@ -30,11 +30,11 @@ const OtherElement = () => {
     <Container>
       <SectionTitle>Other</SectionTitle>
       <IconRow>
-        <Settings size={24} />
+        <Settings size={20} />
         <IconLabel>환결설정</IconLabel>
       </IconRow>
       <IconRow>
-        <CheckCircle size={24} />
+        <CheckCircle size={20} />
         <IconLabel>
           <button>앱평가하기</button>
         </IconLabel>

@@ -47,7 +47,7 @@ const ProfilePage = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ marginLeft: "22px", marginRight: "22px" }}>
       <AppHeader title={"profile"} />
       {/* UserProfile 컴포넌트에 profileData를 props로 전달합니다. */}
       <UserProfile profileData={profileData} />

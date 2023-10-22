@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Discover, Activity, Home, Heart } from "iconic-react";
+import { Messages3, Calendar2, Home, Profile } from "iconic-react";
 import styled from "styled-components";
 
 const Navigation = styled.div`
@@ -21,48 +21,71 @@ const Navigation = styled.div`
     align-items: center;
   }
 `;
+
 const IconHome = styled(Home)`
   margin-right: 5px;
   margin-left: 10px;
+  color: ${(props) => (props.active ? "#1A73E9" : "black")};
 `;
 
-const IconDiscover = styled(Discover)`
+const IconDiscover = styled(Messages3)`
   margin-right: 5px;
   margin-left: 10px;
+  color: ${(props) => (props.active ? "#1A73E9" : "black")};
 `;
 
-const IconActivity = styled(Activity)`
+const IconCalendar = styled(Calendar2)`
   margin-right: 5px;
   margin-left: 10px;
+  color: ${(props) => (props.active ? "#1A73E9" : "black")};
 `;
 
-const IconHeart = styled(Heart)`
+const IconProfile = styled(Profile)`
   margin-right: 5px;
   margin-left: 10px;
+  color: ${(props) => (props.active ? "#1A73E9" : "black")};
 `;
 
 const Nav = () => {
+  const [activeButton, setActiveButton] = useState("main");
+
   return (
     <Navigation>
       <nav>
         <div>
-          <NavLink to="/diet">
-            <IconActivity></IconActivity>
+          <NavLink
+            to="/main"
+            onClick={() => setActiveButton("main")}
+            className={activeButton === "main" ? "active" : ""}
+          >
+            <IconHome active={activeButton === "main"}></IconHome>
           </NavLink>
         </div>
         <div>
-          <NavLink to="/community">
-            <IconHome></IconHome>
+          <NavLink
+            to="/diet"
+            onClick={() => setActiveButton("diet")}
+            className={activeButton === "diet" ? "active" : ""}
+          >
+            <IconCalendar active={activeButton === "diet"}></IconCalendar>
           </NavLink>
         </div>
         <div>
-          <NavLink to="/">
-            <IconDiscover></IconDiscover>
+          <NavLink
+            to="/community"
+            onClick={() => setActiveButton("community")}
+            className={activeButton === "community" ? "active" : ""}
+          >
+            <IconDiscover active={activeButton === "community"}></IconDiscover>
           </NavLink>
         </div>
         <div>
-          <NavLink to="/">
-            <IconHeart></IconHeart>
+          <NavLink
+            to="/profile"
+            onClick={() => setActiveButton("profile")}
+            className={activeButton === "profile" ? "active" : ""}
+          >
+            <IconProfile active={activeButton === "profile"}></IconProfile>
           </NavLink>
         </div>
       </nav>
