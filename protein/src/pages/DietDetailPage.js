@@ -29,7 +29,23 @@ const Dropdown = styled.select`
 `;
 
 const DietDetailPage = () => {
-  const [selectedTime, setSelectedTime] = useState("아침"); // Default is "아침"
+  const [selectedTime, setSelectedTime] = useState("아침");
+  const [searchResults, setSearchResults] = useState([]); // 검색 결과를 저장하기 위한 state
+  const [selectedFoods, setSelectedFoods] = useState([]); // 선택된 음식들을 저장하기 위한 state
+
+  const handleSearch = (query) => {
+    // TODO: 여기에 음식 검색 로직 추가
+    // 가짜 데이터를 사용하여 예시를 만듭니다.
+    const fakeData = [
+      { name: "사과", calorie: 50 },
+      { name: "바나나", calorie: 100 },
+    ];
+    setSearchResults(fakeData);
+  };
+
+  const handleSelectFood = (food) => {
+    setSelectedFoods([...selectedFoods, food]);
+  };
 
   return (
     <div>
@@ -37,7 +53,10 @@ const DietDetailPage = () => {
         title={
           <Dropdown
             value={selectedTime}
-            onChange={(e) => setSelectedTime(e.target.value)}
+            onChange={(e) => {
+              console.log(e.target.value);
+              setSelectedTime(e.target.value);
+            }}
           >
             <option value="아침">아침</option>
             <option value="점심">점심</option>
@@ -49,8 +68,13 @@ const DietDetailPage = () => {
       <Container>
         <ScrollableTimePicker></ScrollableTimePicker>
       </Container>
-      <SearchInput></SearchInput>
-      <FavoFoodList></FavoFoodList>
+      <SearchInput onSearch={handleSearch}></SearchInput>
+      {searchResults.map((food, index) => (
+        <div key={index} onClick={() => handleSelectFood(food)}>
+          {food.name} - {food.calorie}kcal
+        </div>
+      ))}
+      <FavoFoodList foods={selectedFoods}></FavoFoodList>
     </div>
   );
 };

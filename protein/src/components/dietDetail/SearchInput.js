@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { SearchNormal } from "iconic-react"; // 검색 아이콘 예시, 필요에 따라 아이콘을 변경하세요.
+import { SearchNormal } from "iconic-react";
+import axios from "axios";
 
 const SearchInputWrapper = styled.div`
   display: flex;
   align-items: center;
-  background-color: #f0f0f0; /* 배경색 설정 */
-  border-radius: 10px; /* 둥근 테두리 설정 */
-  padding: 8px; /* 여백 설정 */
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 8px;
   margin-right: 14px;
   margin-left: 14px;
-  min-width: 345px; /* 필요한 크기로 조정하세요 */
+  min-width: 345px;
 `;
 
 const IconWrapper = styled.div`
@@ -28,21 +29,52 @@ const Input = styled.input`
 `;
 
 const ArrowButton = styled.button`
-  color: #000; /* 화살표 버튼 텍스트 색상 설정 */
+  color: #000;
   border: none;
   border-radius: 4px;
   padding: 4px 8px;
   cursor: pointer;
 `;
 
-const SearchInput = () => {
+const SearchInput = ({ onProductFound }) => {
+  const [inputValue, setInputValue] = useState("");
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleSearchClick = async () => {
+    try {
+      const response = await axios.get("/api/v1/product/search", {
+        params: {
+          query: inputValue,
+        },
+      });
+
+      if (
+        response.data &&
+        response.data.products &&
+        response.data.products.length > 0
+      ) {
+        onProductFound(response.data.products[0]);
+      }
+    } catch (error) {
+      console.error("Error fetching product", error);
+    }
+  };
+
   return (
     <SearchInputWrapper>
       <IconWrapper>
-        <SearchNormal size={20} /> {/* 검색 아이콘 */}
+        <SearchNormal size={20} />
       </IconWrapper>
-      <Input type="text" placeholder="검색어를 입력하세요" />
-      <ArrowButton>검색</ArrowButton> {/* 화살표 버튼 */}
+      <Input
+        type="text"
+        placeholder="검색어를 입력하세요"
+        value={inputValue}
+        onChange={handleInputChange}
+      />
+      <ArrowButton onClick={handleSearchClick}>검색</ArrowButton>
     </SearchInputWrapper>
   );
 };
