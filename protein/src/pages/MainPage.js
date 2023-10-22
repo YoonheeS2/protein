@@ -17,6 +17,7 @@ import ModeRecomText from "../components/main/ModeRecomText";
 import BoxModeRecom from "../components/main/BoxModeRecom";
 import MealData from "../components/data/RecommendedMeal.json";
 
+console.log(MealData);
 const PageBlock = styled.div`
   display: flex;
   flex-direction: column;
@@ -28,6 +29,14 @@ const Line = styled.div`
   width: 75px;
   height: 2px;
   background-color: #1a73e9;
+`;
+
+const LeftBlock = styled.div`
+  margin: 0px auto 0px 22px;
+`;
+
+const RightBlock = styled.div`
+  margin: 0px 22px 0px auto;
 `;
 
 const CircleLine = styled.div`
@@ -44,6 +53,7 @@ const SearchContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 22px;
+  width:100%;
 `;
 
 const BoxIngredientWrap = styled.div`
@@ -108,7 +118,8 @@ const MainPage = () => {
     },
     errorMsg: null,
   });
-
+  const [modeType, setModeType] = useState("일반모드");
+  const [name, setName] = useState("userName");
   //사용자가 컴포넌트를 렌더링 시작할때 기능을 수행시키기위한 훅
   useEffect(() => {
     console.log(MealData);
@@ -125,7 +136,7 @@ const MainPage = () => {
 
   // 회원정보를 조회하는 API 요청 실행메서드
   const getMainPageData = () => {
-    axios.get("/api/v1/meal/log/summary/today/3").then((response) => {
+    axios.get("/api/v1/meal/log/summary/today/22").then((response) => {
       //응답 데이터 확인
       console.log("-------response--------");
       console.log(response.data);
@@ -134,7 +145,7 @@ const MainPage = () => {
       const todayCarbohydrate = response.data.result.carbohydrate;
       const todayProtein = response.data.result.protein;
       const todayFat = response.data.result.fat;
-      axios.get("/api/v1/user/3").then((userResponse) => {
+      axios.get("/api/v1/user/22").then((userResponse) => {
         console.log(userResponse.data);
         console.log(userResponse.data.result.recommendCalories);
         const recommendCalories = userResponse.data.result.recommendCalories;
@@ -162,9 +173,21 @@ const MainPage = () => {
         } else {
           setFatCircleColor("#C8DDFA");
         }
+        // ----------
+        let mode = userResponse.data.result.mode;
+        if (mode == "NORMAL") {
+          setModeType("일반모드");
+        } else if (mode == "DIET") {
+          setModeType("다이어트모드");
+        } else if (mode == "BULK_UP") {
+          setModeType("근력모드");
+        }
+        // ----------
+        let userName = userResponse.data.result.name;
+        setName(userName);
       });
       setSummaryMealToday(response.data);
-      console.log(summaryMealToday);
+      // console.log(summaryMealToday);
       setCalories(todayCalories);
     });
   };
@@ -201,8 +224,10 @@ const MainPage = () => {
           name="지방"
         ></Recommened>
       </RecomContainer>
+      <LeftBlock>
       <SearchContainer>
         <SearchText name={searchResult.result.productName}></SearchText>
+        <RightBlock>
         <SearchButton handleClick={handleModalButton} />
         <Modal
           isOpen={modalIsOpen}
@@ -216,7 +241,9 @@ const MainPage = () => {
             setResult={setSearchResult}
           />
         </Modal>
+        </RightBlock>
       </SearchContainer>
+      </LeftBlock>
       <BoxIngredientWrap>
         <BoxIngredient
           name={"탄수화물"}
@@ -235,7 +262,9 @@ const MainPage = () => {
           value={searchResult.result.totalFat}
         ></BoxIngredient>
       </BoxIngredientWrap>
-      <ModeRecomText mode={"일반모드"} name={"윤희"}></ModeRecomText>
+      <LeftBlock>
+        <ModeRecomText mode={modeType} name={name}></ModeRecomText>
+      </LeftBlock>
       <BoxIngredientWrap>
         <BoxModeRecom main={"물"} value={"체내 수분량 늘리기"}></BoxModeRecom>
         <BoxModeRecom

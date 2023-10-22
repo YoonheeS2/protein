@@ -90,9 +90,7 @@ const SearchComponent = ({ placeholder, setResult }) => {
           <Text>전송</Text>
         </BoxButton>
       </BoxContainer>
-      {searchResults.map((result) => {
-        return <p>{result.productName}</p>;
-      })}
+      {searchResults && <p>{searchResults.productName}</p>}
     </InputContainer>
   );
 };
