@@ -32,9 +32,13 @@ const Recomvalue = styled.span`
   line-height: 18px;
 `;
 
+const RecomImage = styled.image`
+ width: 100px;
+`
 const BoxModeRecom = ({ main, value }) => {
   return (
     <Box>
+      <RecomImage src="../../../public/ModeRecom/salad.png"></RecomImage>
       <RecomMain>{main}</RecomMain>
       <Recomvalue>{value}</Recomvalue>
     </Box>

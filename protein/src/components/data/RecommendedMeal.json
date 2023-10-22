@@ -4,7 +4,7 @@
         "mode": "normal",
         "food": "물 1L",
         "value": "체내 수분량 늘리기",
-        "img" :
+        "img" : ""
       },
       {
         "mode": "normal",
@@ -50,7 +50,6 @@
         "mode": "bulk_up",
         "food": "계란찜 2알",
         "value": "166kcal"
-        
       }
     ]
   }

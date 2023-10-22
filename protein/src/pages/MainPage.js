@@ -15,6 +15,7 @@ import SearchText from "../components/main/SearchText";
 import BoxIngredient from "../components/main/BoxIngredient";
 import ModeRecomText from "../components/main/ModeRecomText";
 import BoxModeRecom from "../components/main/BoxModeRecom";
+import MealData from "../components/data/RecommendedMeal.json";
 
 const PageBlock = styled.div`
   display: flex;
@@ -74,6 +75,24 @@ const MainPage = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [calories, setCalories] = useState(0);
   const [recpcalories, setRecCalories] = useState(0);
+  const [searchResult, setSearchResult] = useState({
+    success: true,
+    result: {
+      productId: 0,
+      productName: "string",
+      brandName: "string",
+      calories: 0,
+      protein: 0,
+      totalCarbohydrate: 0,
+      sugars: 0,
+      totalFat: 0,
+      saturatedFat: 0,
+      transFat: 0,
+      sodium: 0,
+      cholesterol: 0,
+    },
+    errorMsg: "string",
+  });
   const [carbohydrateCircleColor, setCarbohydrateCircleColor] =
     useState("#C8DDFA");
   const [proteinCircleColor, setProteinCircleColor] = useState("#C8DDFA");
@@ -92,6 +111,7 @@ const MainPage = () => {
 
   //사용자가 컴포넌트를 렌더링 시작할때 기능을 수행시키기위한 훅
   useEffect(() => {
+    console.log(MealData);
     getMainPageData();
   }, []);
 
@@ -160,7 +180,6 @@ const MainPage = () => {
           recom={recpcalories}
         ></RecommendedCalories>
       </div>
-
       <CircleLine>
         <CircleComponent color={proteinCircleColor} />
         <Line />
@@ -183,7 +202,7 @@ const MainPage = () => {
         ></Recommened>
       </RecomContainer>
       <SearchContainer>
-        <SearchText name={"딸기 샌드위치"}></SearchText>
+        <SearchText name={searchResult.result.productName}></SearchText>
         <SearchButton handleClick={handleModalButton} />
         <Modal
           isOpen={modalIsOpen}
@@ -191,14 +210,30 @@ const MainPage = () => {
           style={customStyles}
           contentLabel="검색기능"
         >
-          <SearchPopup isOpen={modalIsOpen} onClose={closeModal} />
+          <SearchPopup
+            isOpen={modalIsOpen}
+            onClose={closeModal}
+            setResult={setSearchResult}
+          />
         </Modal>
       </SearchContainer>
       <BoxIngredientWrap>
-        <BoxIngredient name={"탄수화물"} value={"100g"}></BoxIngredient>
-        <BoxIngredient name={"당"} value={"100g"}></BoxIngredient>
-        <BoxIngredient name={"단백질"} value={"100g"}></BoxIngredient>
-        <BoxIngredient name={"지방"} value={"100g"}></BoxIngredient>
+        <BoxIngredient
+          name={"탄수화물"}
+          value={searchResult.result.totalCarbohydrate}
+        ></BoxIngredient>
+        <BoxIngredient
+          name={"당"}
+          value={searchResult.result.sugars}
+        ></BoxIngredient>
+        <BoxIngredient
+          name={"단백질"}
+          value={searchResult.result.protein}
+        ></BoxIngredient>
+        <BoxIngredient
+          name={"지방"}
+          value={searchResult.result.totalFat}
+        ></BoxIngredient>
       </BoxIngredientWrap>
       <ModeRecomText mode={"일반모드"} name={"윤희"}></ModeRecomText>
       <BoxIngredientWrap>

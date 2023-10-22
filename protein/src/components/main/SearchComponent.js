@@ -18,6 +18,17 @@ const Box = styled.div`
   align-items: center;
   justify-content: center;
   width: 60px;
+  height: 30px;
+  padding: 5px;
+  background-color: #d1e1fb;
+`;
+
+const BoxButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 30px;
   padding: 5px;
   background-color: #d1e1fb;
 `;
@@ -41,11 +52,11 @@ const Text = styled.span`
   font-weight: bold;
 `;
 
-const SearchComponent = ({ placeholder }) => {
+const SearchComponent = ({ placeholder, setResult }) => {
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResult] = useState([]);
   const handleTransferButton = () => {
-    let requestOption = {
+    const requestOption = {
       url: "/api/v1/product/search",
       method: "GET",
       headers: {
@@ -53,15 +64,16 @@ const SearchComponent = ({ placeholder }) => {
       },
     };
     axios(requestOption).then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       setSearchResult(response.data);
+      setResult(response.data);
     });
   };
 
   const handleChange = (e) => {
     //첫번째 인자 e
     // 우리가 원하는 인풋에 값은 e.target.value
-    console.log(e.target.value);
+    // console.log(e.target.value);
     const { value } = e.target;
     setSearchText(value);
   };
@@ -74,7 +86,9 @@ const SearchComponent = ({ placeholder }) => {
         </Box>
         {/* INPUT 에서 입력받은 값을 handleChange 를 통해 전달 */}
         <Input type="text" onChange={handleChange} placeholder={placeholder} />
-        <button onClick={handleTransferButton}>전송</button>
+        <BoxButton onClick={handleTransferButton}>
+          <Text>전송</Text>
+        </BoxButton>
       </BoxContainer>
       {searchResults.map((result) => {
         return <p>{result.productName}</p>;
