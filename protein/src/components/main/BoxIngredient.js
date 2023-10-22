@@ -35,7 +35,7 @@ const BoxIngredient = ({ name, value }) => {
   return (
     <Box>
       <IngreName>{name}</IngreName>
-      <IngreValue>{value}</IngreValue>
+      <IngreValue>{value}g</IngreValue>
     </Box>
   );
 };
