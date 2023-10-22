@@ -45,16 +45,6 @@ const FoodEatTime = styled.div`
 `;
 
 const IndividualInfo = ({ title, meals, calories, foodList }) => {
-  foodList = [
-    {
-      foodName: "윤희",
-      foodEatTime: "12:00pm",
-    },
-    {
-      foodName: "윤희",
-      foodEatTime: "14:00pm",
-    },
-  ];
   // 디자인 확인용 임시 데이터
   return (
     <WholeContainer>
@@ -69,8 +59,8 @@ const IndividualInfo = ({ title, meals, calories, foodList }) => {
       {foodList.map((food) => {
         return (
           <IndividualDetailInfo
-            foodName={food.foodName}
-            foodEatTime={food.foodEatTime}
+            foodName={food.productName}
+            foodEatTime={food.calories}
           ></IndividualDetailInfo>
         );
       })}

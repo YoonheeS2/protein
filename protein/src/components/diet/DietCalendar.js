@@ -1,4 +1,6 @@
-import React from "react";
+import axios from "axios";
+import moment from "moment";
+import React, { useEffect } from "react";
 import Calendar from "react-calendar";
 // import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
@@ -34,13 +36,15 @@ const CalendarCustom = styled.div`
   // 타일 클릭시 스타일 지정
   .react-calendar__tile--now:enabled:hover,
   .react-calendar__tile--now:enabled:focus {
-    color: ;
+    color: red;
   }
 `;
 
-const DietCalendar = () => {
+const DietCalendar = ({ handleClick }) => {
   const value = new Date();
-  const handleChange = () => {};
+  const handleChange = (e) => {
+    handleClick(e);
+  };
 
   return (
     <CalendarCustom>
