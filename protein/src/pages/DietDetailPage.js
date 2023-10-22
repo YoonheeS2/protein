@@ -6,6 +6,7 @@ import FavoFoodList from "../components/dietDetail/FavoFoodList";
 import styled from "styled-components";
 import TimePickerCustom from "../components/dietDetail/ScrollableTimePicker";
 import ScrollableTimePicker from "../components/dietDetail/ScrollableTimePicker";
+import axios from "axios";
 
 const Container = styled.div`
   margin-top: 20px;
@@ -25,26 +26,61 @@ const Dropdown = styled.select`
   background-position: right 2% top 80%;
   background-size: 0.65em auto;
   font-size: 1em;
-  outline: none; /* 클릭했을 때의 테두리 제거 */
+  outline: none;
+`;
+
+const SaveButton = styled.button`
+  width: 90%;
+  padding: 12px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  position: fixed; // 이 부분 추가
+  top: calc(50% + 270px); // 버튼을 현재 위치에서 고정
+  left: 50%;
+  transform: translateX(-50%); // 화면 중앙으로 정렬
+
+  &:hover {
+    background-color: #0056b3;
+  }
 `;
 
 const DietDetailPage = () => {
   const [selectedTime, setSelectedTime] = useState("아침");
-  const [searchResults, setSearchResults] = useState([]); // 검색 결과를 저장하기 위한 state
-  const [selectedFoods, setSelectedFoods] = useState([]); // 선택된 음식들을 저장하기 위한 state
+  const [searchedFoods, setSearchedFoods] = useState([]);
 
-  const handleSearch = (query) => {
-    // TODO: 여기에 음식 검색 로직 추가
-    // 가짜 데이터를 사용하여 예시를 만듭니다.
-    const fakeData = [
-      { name: "사과", calorie: 50 },
-      { name: "바나나", calorie: 100 },
-    ];
-    setSearchResults(fakeData);
+  const handleSearchedFoods = (food) => {
+    console.log(searchedFoods);
+    setSearchedFoods([food]);
   };
 
-  const handleSelectFood = (food) => {
-    setSelectedFoods([...selectedFoods, food]);
+  const handleSaveFoods = () => {
+    const dataToSave = {
+      selectedMeal: selectedTime,
+      foods: searchedFoods,
+    };
+    searchedFoods.map((data) => {
+      const sendData = {
+        userId: localStorage.getItem("userId"),
+        productId: data.productId,
+        mealType: "BREAKFAST",
+        mealDateTime: "2023-10-22T10:53:36.320Z",
+      };
+      const requestObj = {
+        url: "/api/v1/meal/log",
+        method: "POST",
+        data: sendData,
+      };
+      axios(requestObj).then((response) => {
+        console.log(response);
+      });
+    });
+    console.log(searchedFoods);
+    alert("저장되었습니다!");
   };
 
   return (
@@ -53,28 +89,20 @@ const DietDetailPage = () => {
         title={
           <Dropdown
             value={selectedTime}
-            onChange={(e) => {
-              console.log(e.target.value);
-              setSelectedTime(e.target.value);
-            }}
+            onChange={(e) => setSelectedTime(e.target.value)}
           >
-            <option value="아침">아침</option>
-            <option value="점심">점심</option>
-            <option value="저녁">저녁</option>
-            <option value="야식">야식</option>
+            <option value="BREAKFAST">아침</option>
+            <option value="LUNCH">점심</option>
+            <option value="DINNER">저녁</option>
           </Dropdown>
         }
       ></AppHeader>
       <Container>
         <ScrollableTimePicker></ScrollableTimePicker>
       </Container>
-      <SearchInput onSearch={handleSearch}></SearchInput>
-      {searchResults.map((food, index) => (
-        <div key={index} onClick={() => handleSelectFood(food)}>
-          {food.name} - {food.calorie}kcal
-        </div>
-      ))}
-      <FavoFoodList foods={selectedFoods}></FavoFoodList>
+      <SearchInput onProductFound={handleSearchedFoods}></SearchInput>
+      <FavoFoodList foods={searchedFoods}></FavoFoodList>
+      <SaveButton onClick={handleSaveFoods}>저장</SaveButton>
     </div>
   );
 };

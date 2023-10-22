@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import IconButton from "./IconButton";
+import { Add } from "iconic-react";
 
 const FavoBlock = styled.div`
   display: flex;
@@ -22,6 +22,7 @@ const Title = styled.div`
 const ItemBlock = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
 `;
 
 const ItemTitle = styled.div`
@@ -40,36 +41,65 @@ const ItemCalories = styled.div`
   font-weight: 400;
   line-height: 18px;
   word-wrap: break-word;
+  margin-right: 10px;
 `;
 
-const ItemList = [
-  {
-    itemName: "삶은달걀",
-    calories: 1000,
-  },
-  {
-    itemName: "삶은달걀",
-    calories: 1000,
-  },
-];
+const PlusIcon = styled(Add)`
+  color: #000;
+  cursor: pointer;
+`;
 
-const FavoFoodList = () => {
+const FavoFoodList = ({ foods }) => {
+  const [selectedFoods, setSelectedFoods] = useState([]);
+
+  const handleFoodClick = (food) => {
+    console.log(food);
+    const isExist = selectedFoods.find(
+      (selectedFood) => selectedFood.itemName === food.itemName
+    );
+
+    if (!isExist) {
+      setSelectedFoods([...selectedFoods, food]);
+    }
+  };
+
   return (
     <FavoBlock>
-      <Title>자주먹은 음식</Title>
-      {ItemList.map(({ itemName, calories }) => {
-        return <FavoFoodItem itemName={itemName} calories={calories} />;
+      <Title>검색한 음식 결과</Title>
+      {foods.map(({ itemName, calories, productId }, index) => {
+        return (
+          <FavoFoodItem
+            key={index}
+            itemName={itemName}
+            calories={calories}
+            productId={productId}
+            onFoodClick={handleFoodClick}
+          />
+        );
+      })}
+
+      <Title>선택된 음식</Title>
+      {selectedFoods.map(({ itemName, calories, productId }, index) => {
+        return (
+          <ItemBlock key={index}>
+            <ItemTitle>{itemName}</ItemTitle>
+            <ItemCalories>{calories}kcal</ItemCalories>
+          </ItemBlock>
+        );
       })}
     </FavoBlock>
   );
 };
 
-const FavoFoodItem = ({ itemName, calories }) => {
+const FavoFoodItem = ({ itemName, calories, productId, onFoodClick }) => {
   return (
     <ItemBlock>
       <ItemTitle>{itemName}</ItemTitle>
       <ItemCalories>{calories}kcal</ItemCalories>
-      <IconButton></IconButton>
+      <PlusIcon
+        size={20}
+        onClick={() => onFoodClick({ itemName, calories, productId })}
+      />
     </ItemBlock>
   );
 };

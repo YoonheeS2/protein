@@ -45,18 +45,18 @@ const SearchInput = ({ onProductFound }) => {
 
   const handleSearchClick = async () => {
     try {
-      const response = await axios.get("/api/v1/product/search", {
-        params: {
-          query: inputValue,
-        },
+      const response = await axios.post("/api/v1/product/search", {
+        productName: inputValue,
       });
 
-      if (
-        response.data &&
-        response.data.products &&
-        response.data.products.length > 0
-      ) {
-        onProductFound(response.data.products[0]);
+      if (response.data && response.data.success) {
+        const product = {
+          itemName: response.data.result.productName, // 여기를 수정
+          calories: response.data.result.calories,
+          productId: response.data.result.productId,
+        };
+        // 아래와 같이 onSearch 또는 onProductFound를 호출
+        onProductFound(product);
       }
     } catch (error) {
       console.error("Error fetching product", error);
