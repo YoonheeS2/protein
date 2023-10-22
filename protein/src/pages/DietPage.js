@@ -6,6 +6,7 @@ import WeekSelector from "../components/diet/WeekSelector";
 import IndividualInfo from "../components/diet/IndividualInfo";
 import axios from "axios";
 import moment from "moment";
+import { useNavigate } from "react-router-dom"; // useNavigate로 수정
 
 const DietContainer = styled.div`
   padding: 0px 10px 10px 10px;
@@ -14,6 +15,8 @@ const DietContainer = styled.div`
 
 const DietPage = () => {
   const [todayMeal, setTodayMeal] = useState([]);
+  const [selectedDate, setSelectedDate] = useState("");
+  const navigate = useNavigate(); // useNavigate 훅 사용
 
   useEffect(() => {
     getTodayMeal(new Date());
@@ -22,6 +25,7 @@ const DietPage = () => {
   const getTodayMeal = (date) => {
     const userId = localStorage.getItem("userId");
     const mealDateString = moment(date).format("YYYY-MM-DD");
+    setSelectedDate(mealDateString);
 
     const requestOption = {
       url: `/api/v1/meal/log/${userId}/${mealDateString}`,
@@ -37,9 +41,18 @@ const DietPage = () => {
     });
   };
 
+  const goToDetail = () => {
+    navigate("/diet/detail", { state: { selectedDate: selectedDate } });
+  };
+
   return (
     <div>
-      <AppHeader title={"PROTEIN BODY"} backButton={true}></AppHeader>
+      <AppHeader
+        title={"PROTEIN BODY"}
+        backButton={true}
+        type={"diet"}
+        addEvent={goToDetail}
+      ></AppHeader>
       <DietContainer>
         <DietCalendar handleClick={getTodayMeal}></DietCalendar>
       </DietContainer>
@@ -55,17 +68,17 @@ const DietPage = () => {
       {todayMeal.LUNCH && (
         <IndividualInfo
           title={"아침"}
-          calories={todayMeal.BREAKFAST.calories}
-          meals={todayMeal.BREAKFAST.length}
-          foodList={todayMeal.BREAKFAST}
+          calories={todayMeal.LUNCH.calories}
+          meals={todayMeal.LUNCH.length}
+          foodList={todayMeal.LUNCH}
         ></IndividualInfo>
       )}
       {todayMeal.DINNER && (
         <IndividualInfo
           title={"아침"}
-          calories={todayMeal.BREAKFAST.calories}
-          meals={todayMeal.BREAKFAST.length}
-          foodList={todayMeal.BREAKFAST}
+          calories={todayMeal.DINNER.calories}
+          meals={todayMeal.DINNER.length}
+          foodList={todayMeal.DINNER}
         ></IndividualInfo>
       )}
     </div>

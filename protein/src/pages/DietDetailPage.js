@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppHeader from "../components/common/AppHeader";
 import { TimePicker } from "react-ios-time-picker";
 import SearchInput from "../components/dietDetail/SearchInput";
@@ -7,6 +7,7 @@ import styled from "styled-components";
 import TimePickerCustom from "../components/dietDetail/ScrollableTimePicker";
 import ScrollableTimePicker from "../components/dietDetail/ScrollableTimePicker";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const Container = styled.div`
   margin-top: 20px;
@@ -51,6 +52,14 @@ const SaveButton = styled.button`
 
 const DietDetailPage = () => {
   const [selectedTime, setSelectedTime] = useState("아침");
+  const [searchResults, setSearchResults] = useState([]); // 검색 결과를 저장하기 위한 state
+  const [selectedFoods, setSelectedFoods] = useState([]); // 선택된 음식들을 저장하기 위한 state
+  const location = useLocation();
+  const { selectedDate } = location.state;
+
+  useEffect(() => {
+    console.log(selectedDate);
+  }, []);
   const [searchedFoods, setSearchedFoods] = useState([]);
 
   const handleSearchedFoods = (food) => {
