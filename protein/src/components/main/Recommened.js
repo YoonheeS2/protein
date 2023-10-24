@@ -13,6 +13,7 @@ const Container = styled.div`
 const Recom = styled.span`
   font-size: 14px;
   color: #000;
+  margin-bottom: 5px;
 `;
 
 const Name = styled.span`
@@ -24,7 +25,7 @@ const Name = styled.span`
 const Recommened = ({ value, name }) => {
   return (
     <Container>
-      <Recom>{value}</Recom>
+      <Recom>{value}g</Recom>
       <Name>{name}</Name>
     </Container>
   );

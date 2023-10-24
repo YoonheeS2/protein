@@ -31,7 +31,7 @@ const ButtonContainer = styled.div`
 `;
 
 const Text = styled.div`
-  text-size: 14px;
+  font-size: 14px;
 `;
 
 const LoginPage = observer(() => {

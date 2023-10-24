@@ -6,11 +6,11 @@ const Box = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 68px;
-  height: 70px;
+  width: 86px;
+  height: 90px;
   border-radius: 4px;
   border: 1px solid #c4c4c4;
-  margin-right: 7px;
+  margin-right: 8px;
 `;
 
 const IngreName = styled.span`

@@ -16,7 +16,9 @@ import BoxIngredient from "../components/main/BoxIngredient";
 import ModeRecomText from "../components/main/ModeRecomText";
 import BoxModeRecom from "../components/main/BoxModeRecom";
 import MealData from "../components/data/RecommendedMeal.json";
+import LineComponent from "../components/main/LineComponent";
 
+console.log(MealData);
 const PageBlock = styled.div`
   display: flex;
   flex-direction: column;
@@ -30,12 +32,21 @@ const Line = styled.div`
   background-color: #1a73e9;
 `;
 
+const LeftBlock = styled.div`
+  margin: 0px auto 0px 22px;
+`;
+
+const RightBlock = styled.div`
+  margin: 0px 22px 0px auto;
+`;
+
 const CircleLine = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   margin-top: 30px;
+  margin-bottom: 8px;
 `;
 
 const SearchContainer = styled.div`
@@ -43,7 +54,8 @@ const SearchContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 22px;
+  margin-top: 30px;
+  width: 100%;
 `;
 
 const BoxIngredientWrap = styled.div`
@@ -79,7 +91,7 @@ const MainPage = () => {
     success: true,
     result: {
       productId: 0,
-      productName: "string",
+      productName: "궁금하신 제품",
       brandName: "string",
       calories: 0,
       protein: 0,
@@ -108,7 +120,8 @@ const MainPage = () => {
     },
     errorMsg: null,
   });
-
+  const [modeType, setModeType] = useState("일반모드");
+  const [name, setName] = useState("userName");
   //사용자가 컴포넌트를 렌더링 시작할때 기능을 수행시키기위한 훅
   useEffect(() => {
     console.log(MealData);
@@ -125,7 +138,7 @@ const MainPage = () => {
 
   // 회원정보를 조회하는 API 요청 실행메서드
   const getMainPageData = () => {
-    axios.get("/api/v1/meal/log/summary/today/3").then((response) => {
+    axios.get("/api/v1/meal/log/summary/today/22").then((response) => {
       //응답 데이터 확인
       console.log("-------response--------");
       console.log(response.data);
@@ -134,7 +147,7 @@ const MainPage = () => {
       const todayCarbohydrate = response.data.result.carbohydrate;
       const todayProtein = response.data.result.protein;
       const todayFat = response.data.result.fat;
-      axios.get("/api/v1/user/3").then((userResponse) => {
+      axios.get("/api/v1/user/22").then((userResponse) => {
         console.log(userResponse.data);
         console.log(userResponse.data.result.recommendCalories);
         const recommendCalories = userResponse.data.result.recommendCalories;
@@ -162,9 +175,21 @@ const MainPage = () => {
         } else {
           setFatCircleColor("#C8DDFA");
         }
+        // ----------
+        let mode = userResponse.data.result.mode;
+        if (mode == "NORMAL") {
+          setModeType("일반모드");
+        } else if (mode == "DIET") {
+          setModeType("다이어트모드");
+        } else if (mode == "BULK_UP") {
+          setModeType("근력모드");
+        }
+        // ----------
+        let userName = userResponse.data.result.name;
+        setName(userName);
       });
       setSummaryMealToday(response.data);
-      console.log(summaryMealToday);
+      // console.log(summaryMealToday);
       setCalories(todayCalories);
     });
   };
@@ -182,9 +207,9 @@ const MainPage = () => {
       </div>
       <CircleLine>
         <CircleComponent color={proteinCircleColor} />
-        <Line />
+        <LineComponent />
         <CircleComponent color={fatCircleColor} />
-        <Line />
+        <LineComponent />
         <CircleComponent color={carbohydrateCircleColor} />
       </CircleLine>
       <RecomContainer>
@@ -201,22 +226,24 @@ const MainPage = () => {
           name="지방"
         ></Recommened>
       </RecomContainer>
-      <SearchContainer>
-        <SearchText name={searchResult.result.productName}></SearchText>
-        <SearchButton handleClick={handleModalButton} />
-        <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          style={customStyles}
-          contentLabel="검색기능"
-        >
-          <SearchPopup
+      <LeftBlock>
+        <SearchContainer>
+          <SearchText name={searchResult.result.productName}></SearchText>
+          <SearchButton handleClick={handleModalButton} />
+          <Modal
             isOpen={modalIsOpen}
-            onClose={closeModal}
-            setResult={setSearchResult}
-          />
-        </Modal>
-      </SearchContainer>
+            onRequestClose={closeModal}
+            style={customStyles}
+            contentLabel="검색기능"
+          >
+            <SearchPopup
+              isOpen={modalIsOpen}
+              onClose={closeModal}
+              setResult={setSearchResult}
+            />
+          </Modal>
+        </SearchContainer>
+      </LeftBlock>
       <BoxIngredientWrap>
         <BoxIngredient
           name={"탄수화물"}
@@ -235,13 +262,11 @@ const MainPage = () => {
           value={searchResult.result.totalFat}
         ></BoxIngredient>
       </BoxIngredientWrap>
-      <ModeRecomText mode={"일반모드"} name={"윤희"}></ModeRecomText>
+      <LeftBlock>
+        <ModeRecomText mode={modeType} name={name}></ModeRecomText>
+      </LeftBlock>
       <BoxIngredientWrap>
-        <BoxModeRecom main={"물"} value={"체내 수분량 늘리기"}></BoxModeRecom>
-        <BoxModeRecom
-          main={"샐러드"}
-          value={"포만감을 유지해줘요!"}
-        ></BoxModeRecom>
+        <BoxModeRecom></BoxModeRecom>
       </BoxIngredientWrap>
     </PageBlock>
   );
