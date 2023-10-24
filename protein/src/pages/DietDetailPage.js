@@ -77,7 +77,7 @@ const DietDetailPage = () => {
         userId: localStorage.getItem("userId"),
         productId: data.productId,
         mealType: "BREAKFAST",
-        mealDateTime: "2023-10-22T10:53:36.320Z",
+        mealDateTime: new Date(selectedDate),
       };
       const requestObj = {
         url: "/api/v1/meal/log",
