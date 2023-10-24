@@ -16,6 +16,7 @@ import BoxIngredient from "../components/main/BoxIngredient";
 import ModeRecomText from "../components/main/ModeRecomText";
 import BoxModeRecom from "../components/main/BoxModeRecom";
 import MealData from "../components/data/RecommendedMeal.json";
+import LineComponent from "../components/main/LineComponent";
 
 console.log(MealData);
 const PageBlock = styled.div`
@@ -45,6 +46,7 @@ const CircleLine = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 30px;
+  margin-bottom: 8px;
 `;
 
 const SearchContainer = styled.div`
@@ -52,8 +54,8 @@ const SearchContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 22px;
-  width:100%;
+  margin-top: 30px;
+  width: 100%;
 `;
 
 const BoxIngredientWrap = styled.div`
@@ -89,7 +91,7 @@ const MainPage = () => {
     success: true,
     result: {
       productId: 0,
-      productName: "string",
+      productName: "궁금하신 제품",
       brandName: "string",
       calories: 0,
       protein: 0,
@@ -205,9 +207,9 @@ const MainPage = () => {
       </div>
       <CircleLine>
         <CircleComponent color={proteinCircleColor} />
-        <Line />
+        <LineComponent />
         <CircleComponent color={fatCircleColor} />
-        <Line />
+        <LineComponent />
         <CircleComponent color={carbohydrateCircleColor} />
       </CircleLine>
       <RecomContainer>
@@ -225,24 +227,22 @@ const MainPage = () => {
         ></Recommened>
       </RecomContainer>
       <LeftBlock>
-      <SearchContainer>
-        <SearchText name={searchResult.result.productName}></SearchText>
-        <RightBlock>
-        <SearchButton handleClick={handleModalButton} />
-        <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          style={customStyles}
-          contentLabel="검색기능"
-        >
-          <SearchPopup
+        <SearchContainer>
+          <SearchText name={searchResult.result.productName}></SearchText>
+          <SearchButton handleClick={handleModalButton} />
+          <Modal
             isOpen={modalIsOpen}
-            onClose={closeModal}
-            setResult={setSearchResult}
-          />
-        </Modal>
-        </RightBlock>
-      </SearchContainer>
+            onRequestClose={closeModal}
+            style={customStyles}
+            contentLabel="검색기능"
+          >
+            <SearchPopup
+              isOpen={modalIsOpen}
+              onClose={closeModal}
+              setResult={setSearchResult}
+            />
+          </Modal>
+        </SearchContainer>
       </LeftBlock>
       <BoxIngredientWrap>
         <BoxIngredient
@@ -266,11 +266,7 @@ const MainPage = () => {
         <ModeRecomText mode={modeType} name={name}></ModeRecomText>
       </LeftBlock>
       <BoxIngredientWrap>
-        <BoxModeRecom main={"물"} value={"체내 수분량 늘리기"}></BoxModeRecom>
-        <BoxModeRecom
-          main={"샐러드"}
-          value={"포만감을 유지해줘요!"}
-        ></BoxModeRecom>
+        <BoxModeRecom></BoxModeRecom>
       </BoxIngredientWrap>
     </PageBlock>
   );

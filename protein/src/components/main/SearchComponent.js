@@ -54,17 +54,17 @@ const Text = styled.span`
 
 const SearchComponent = ({ placeholder, setResult }) => {
   const [searchText, setSearchText] = useState("");
-  const [searchResults, setSearchResult] = useState([]);
+  const [searchResults, setSearchResult] = useState();
   const handleTransferButton = () => {
     const requestOption = {
       url: "/api/v1/product/search",
-      method: "GET",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      method: "POST",
+      data: {
+        productName: searchText,
       },
     };
     axios(requestOption).then((response) => {
-      // console.log(response.data);
+      console.log(response.data);
       setSearchResult(response.data);
       setResult(response.data);
     });
@@ -90,7 +90,7 @@ const SearchComponent = ({ placeholder, setResult }) => {
           <Text>전송</Text>
         </BoxButton>
       </BoxContainer>
-      {searchResults && <p>{searchResults.productName}</p>}
+      {searchResults && <p>{searchResults.result.productName}</p>}
     </InputContainer>
   );
 };

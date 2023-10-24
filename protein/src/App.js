@@ -15,6 +15,7 @@ import SearchPopup from "./components/main/SearchPopup";
 import PostCreatePage from "./pages/PostCreatePage";
 import SamplePage from "./pages/SamplePage";
 import SignUpSummaryPage from "./pages/SignUpSummaryPage";
+import LineComponent from "./components/main/LineComponent";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage></ProfilePage>}></Route>
         <Route path="/popup" element={<SearchPopup />}></Route>
         <Route path="/news" element={<SamplePage />}></Route>
+        <Route path="/line" element={<LineComponent />}></Route>
       </Routes>
       <Nav></Nav>
     </BrowserRouter>
