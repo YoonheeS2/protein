@@ -6,7 +6,7 @@ import WeekSelector from "../components/diet/WeekSelector";
 import IndividualInfo from "../components/diet/IndividualInfo";
 import axios from "axios";
 import moment from "moment";
-import { useNavigate } from "react-router-dom"; // useNavigate로 수정
+import { useNavigate } from "react-router-dom";
 
 const DietContainer = styled.div`
   padding: 0px 10px 10px 10px;
@@ -16,7 +16,7 @@ const DietContainer = styled.div`
 const DietPage = () => {
   const [todayMeal, setTodayMeal] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
-  const navigate = useNavigate(); // useNavigate 훅 사용
+  const navigate = useNavigate();
 
   useEffect(() => {
     getTodayMeal(new Date());
@@ -24,6 +24,12 @@ const DietPage = () => {
 
   const getTodayMeal = (date) => {
     const userId = localStorage.getItem("userId");
+
+    if (!userId) {
+      console.error("User ID not found!");
+      return;
+    }
+
     const mealDateString = moment(date).format("YYYY-MM-DD");
     setSelectedDate(mealDateString);
 
@@ -34,11 +40,18 @@ const DietPage = () => {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
       },
     };
-    axios(requestOption).then((response) => {
-      console.log(response.data.result);
-      setTodayMeal(response.data.result);
-      console.log(todayMeal);
-    });
+
+    axios(requestOption)
+      .then((response) => {
+        if (response.data && response.data.result) {
+          setTodayMeal(response.data.result);
+        } else {
+          console.error("Unexpected response structure");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching meal data:", error);
+      });
   };
 
   const goToDetail = () => {
@@ -67,7 +80,7 @@ const DietPage = () => {
       )}
       {todayMeal.LUNCH && (
         <IndividualInfo
-          title={"아침"}
+          title={"점심"}
           calories={todayMeal.LUNCH.calories}
           meals={todayMeal.LUNCH.length}
           foodList={todayMeal.LUNCH}
@@ -75,7 +88,7 @@ const DietPage = () => {
       )}
       {todayMeal.DINNER && (
         <IndividualInfo
-          title={"아침"}
+          title={"저녁"}
           calories={todayMeal.DINNER.calories}
           meals={todayMeal.DINNER.length}
           foodList={todayMeal.DINNER}

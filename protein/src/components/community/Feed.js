@@ -15,8 +15,10 @@ const Username = styled.span`
 `;
 
 const Caption = styled.p`
-  margin-top: 8px;
-  margin-left: 14px;
+  margin-top: 6px;
+  font-size: 13px;
+  margin-left: 10px;
+  margin-bottom: 15px;
 `;
 
 const Feed = ({

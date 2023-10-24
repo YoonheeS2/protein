@@ -14,7 +14,9 @@ const UserImage = styled.div`
   width: 31px;
   height: 31px;
   border-radius: 50%;
-  background-color: #ccc; /* 사용자 이미지의 배경색 */
+  background-image: url(${(props) => props.src});
+  background-size: cover;
+  background-position: center;
   margin-right: 12px;
 `;
 
@@ -39,7 +41,7 @@ const FeedHeader = ({ username, userImage, postDate }) => {
   return (
     <HeaderContainer>
       <ProfileContainer>
-        <UserImage />
+        <UserImage src={userImage} />
         <div>
           <Username>{username}</Username>
         </div>
