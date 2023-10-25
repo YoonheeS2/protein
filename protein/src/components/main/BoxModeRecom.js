@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import RecommendedMeal from "../data/RecommendedMeal.json"
+import RecommendedMeal from "../data/RecommendedMeal.json";
+import data from "../data/RecommendedMeal.json";
 
 const BoxIngredientWrap = styled.div`
   display: flex;
@@ -42,47 +43,50 @@ const Recomvalue = styled.span`
 `;
 
 const RecomImage = styled.img`
- width: 40px;
-`
+  width: 40px;
+`;
 const BoxModeRecom = () => {
-  const [data, setData] = useState([]);
   const [selectedMode, setSelectedMode] = useState(null);
+  const [drawData, setDrawData] = useState([]);
 
   const getStaduimInfoList = () => {
-    axios.get('RecommendedMeal')
-        .then((response) => {
-            console.log(response);
-        })
-}
+    axios.get("RecommendedMeal").then((response) => {
+      console.log(response);
+    });
+  };
+
+  function getTwoObjectsByMode(data, mode) {
+    const modeArray = data.filter((item) => {
+      console.log(item);
+      return item.mode === mode;
+    });
+    console.log(modeArray);
+    setDrawData(modeArray.slice(0, 2));
+  }
+
   useEffect(() => {
     // 서버에서 사용자 데이터를 가져옵니다.
-    axios.get('/api/v1/user/22')
+    axios
+      .get(`/api/v1/user/${localStorage.getItem("userId")}`)
       .then((userResponse) => {
-        const userMode = userResponse.data.mode;
+        const userMode = userResponse.data.result.mode;
         setSelectedMode(userMode);
-      })
-
-    fetch('../data/RecommendedMeal.json')
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      })
+        console.log("사용자 모드는: ", userMode);
+        getTwoObjectsByMode(data.data, userMode);
+      });
   }, []);
 
-  
   return (
     <BoxIngredientWrap>
-        <Box>
-          <RecomImage></RecomImage>
-          <RecomMain></RecomMain>
-          <Recomvalue></Recomvalue>
-        </Box>
-
-        <Box>
-          <RecomImage></RecomImage>
-          <RecomMain></RecomMain>
-          <Recomvalue></Recomvalue>
-        </Box>
+      {drawData.map((item) => {
+        return (
+          <Box>
+            <RecomImage></RecomImage>
+            <RecomMain>{item.food}</RecomMain>
+            <Recomvalue>{item.value}</Recomvalue>
+          </Box>
+        );
+      })}
     </BoxIngredientWrap>
   );
 };

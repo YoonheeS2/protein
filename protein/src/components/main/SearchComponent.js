@@ -52,7 +52,18 @@ const Text = styled.span`
   font-weight: bold;
 `;
 
-const SearchComponent = ({ placeholder, setResult }) => {
+const ResultContainer = styled.div`
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const ChooseButton = styled.button`
+  border: 1px solid #dfdfdf;
+`;
+
+const SearchComponent = ({ placeholder, setResult, onClose }) => {
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResult] = useState();
   const handleTransferButton = () => {
@@ -90,7 +101,14 @@ const SearchComponent = ({ placeholder, setResult }) => {
           <Text>전송</Text>
         </BoxButton>
       </BoxContainer>
-      {searchResults && <p>{searchResults.result.productName}</p>}
+      <ResultContainer>
+        {searchResults && (
+          <>
+            <p>{searchResults.result.productName}</p>
+            <ChooseButton onClick={onClose}>선택하기</ChooseButton>
+          </>
+        )}
+      </ResultContainer>
     </InputContainer>
   );
 };

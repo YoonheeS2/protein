@@ -1,10 +1,13 @@
 import React from "react";
 import SearchComponent from "./SearchComponent";
 
-const SearchPopup = ({ setResult }) => {
+const SearchPopup = ({ setResult, onClose }) => {
   return (
     <div>
-      <SearchComponent setResult={setResult}></SearchComponent>
+      <SearchComponent
+        setResult={setResult}
+        onClose={onClose}
+      ></SearchComponent>
     </div>
   );
 };
