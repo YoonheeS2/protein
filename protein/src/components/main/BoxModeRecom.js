@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import RecommendedMeal from "../data/RecommendedMeal.json"
+import RecommendedMeal from "../data/RecommendedMeal.json";
 
 const BoxIngredientWrap = styled.div`
   display: flex;
@@ -42,47 +42,41 @@ const Recomvalue = styled.span`
 `;
 
 const RecomImage = styled.img`
- width: 40px;
-`
+  width: 40px;
+`;
 const BoxModeRecom = () => {
   const [data, setData] = useState([]);
   const [selectedMode, setSelectedMode] = useState(null);
 
-  const getStaduimInfoList = () => {
-    axios.get('RecommendedMeal')
-        .then((response) => {
-            console.log(response);
-        })
-}
+  //   const getStaduimInfoList = () => {
+  //     axios.get('RecommendedMeal')
+  //         .then((response) => {
+  //             console.log(response);
+  //         })
+  // }
   useEffect(() => {
     // 서버에서 사용자 데이터를 가져옵니다.
-    axios.get('/api/v1/user/22')
-      .then((userResponse) => {
-        const userMode = userResponse.data.mode;
-        setSelectedMode(userMode);
-      })
+    axios.get("/api/v1/user/22").then((userResponse) => {
+      const userMode = userResponse.data.mode;
+      setSelectedMode(userMode);
 
-    fetch('../data/RecommendedMeal.json')
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      })
+      const filteredData = RecommendedMeal.data.filter(
+        (item) => item.mode === userMode
+      );
+      setData(filteredData);
+    });
+    console.log(setData);
   }, []);
 
-  
   return (
     <BoxIngredientWrap>
-        <Box>
-          <RecomImage></RecomImage>
-          <RecomMain></RecomMain>
-          <Recomvalue></Recomvalue>
+      {data.map((item, index) => (
+        <Box key={index}>
+          <RecomImage src={item.image} alt={item.food}></RecomImage>
+          <RecomMain>{item.mode}</RecomMain>
+          <Recomvalue>{item.food}</Recomvalue>
         </Box>
-
-        <Box>
-          <RecomImage></RecomImage>
-          <RecomMain></RecomMain>
-          <Recomvalue></Recomvalue>
-        </Box>
+      ))}
     </BoxIngredientWrap>
   );
 };

@@ -52,9 +52,20 @@ const Text = styled.span`
   font-weight: bold;
 `;
 
+const SearchResultBox = styled.button`
+  width: 100%;
+  cursor: pointer; // 포인터 커서를 추가하여 클릭 가능한 것임을 나타냅니다.
+`;
+
+const SearchResult = styled.span`
+  cursor: pointer; // 포인터 커서를 추가하여 클릭 가능한 것임을 나타냅니다.
+`;
+
 const SearchComponent = ({ placeholder, setResult }) => {
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResult] = useState();
+  const [modalIsOpen, setIsOpen] = useState(false);
+
   const handleTransferButton = () => {
     const requestOption = {
       url: "/api/v1/product/search",
@@ -67,6 +78,7 @@ const SearchComponent = ({ placeholder, setResult }) => {
       console.log(response.data);
       setSearchResult(response.data);
       setResult(response.data);
+      setIsOpen(true);
     });
   };
 
@@ -76,6 +88,11 @@ const SearchComponent = ({ placeholder, setResult }) => {
     // console.log(e.target.value);
     const { value } = e.target;
     setSearchText(value);
+  };
+  
+
+  const closeModal = () => {
+    setIsOpen(false); // 팝업 닫기
   };
 
   return (
@@ -90,7 +107,13 @@ const SearchComponent = ({ placeholder, setResult }) => {
           <Text>전송</Text>
         </BoxButton>
       </BoxContainer>
-      {searchResults && <p>{searchResults.result.productName}</p>}
+      {modalIsOpen && (
+        <SearchResultBox onClick={closeModal}>
+          <SearchResult>
+            {searchResults && <p>{searchResults.result.productName}</p>}
+          </SearchResult>
+        </SearchResultBox>
+      )}
     </InputContainer>
   );
 };

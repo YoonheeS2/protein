@@ -1,0 +1,61 @@
+{
+    "data": [
+      {
+        "mode": "NORMAL",
+        "food": "물 1L",
+        "value": "체내 수분량 늘리기",
+        "image" : "/ModeRecom/water.png"
+      },
+      {
+        "mode": "NORMAL",
+        "food": "한식 위주 식단",
+        "value": "포만감을 유지해줘요!",
+        "image" : "/ModeRecom/bibimbap.png"
+      },
+      {
+        "mode": "DIET",
+        "food": "키위샐러드 100g",
+        "value": "32kcal",
+        "image" : "/ModeRecom/kiwi.png"
+      },
+      {
+        "mode": "DIET",
+        "food": "호밀빵 100g",
+        "value": "259kcal",
+        "image" : "/ModeRecom/bread.png"
+      },
+      {
+        "mode": "DIET",
+        "food": "소고기 100g",
+        "value": "250kcal",
+        "image" : "/ModeRecom/beaf.png"
+      },
+      {
+        "mode": "DIET",
+        "food": "유부+두부 200g",
+        "value": "122kcal"
+      },
+      {
+        "mode": "BULK_UP",
+        "food": "닭가슴살 200g",
+        "value": "338kcal",
+        "image" : "/ModeRecom/chicken.png"
+      },
+      {
+        "mode": "BULK_UP",
+        "food": "우유 200ml",
+        "value": "42kcal",
+        "image" : "/ModeRecom/milk.png"
+      },
+      {
+        "mode": "BULK_UP",
+        "food": "흑미밥 180g",
+        "value": "330kcal"
+      },
+      {
+        "mode": "BULK_UP",
+        "food": "계란찜 2알",
+        "value": "166kcal"
+      }
+    ]
+  }
