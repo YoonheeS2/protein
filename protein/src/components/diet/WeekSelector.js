@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import WeekElement from "./WeekElement";
+import moment from "moment";
 
 const WeekSelectTitle = styled.div`
   display: flex;
@@ -10,10 +11,12 @@ const WeekSelectTitle = styled.div`
 
 const LeftArrow = styled.div`
   margin-right: 30px;
+  cursor: pointer;
 `;
 
 const RightArrow = styled.div`
   margin-left: 30px;
+  cursor: pointer;
 `;
 
 const WeekSelectorContainer = styled.div`
@@ -22,51 +25,41 @@ const WeekSelectorContainer = styled.div`
   margin-top: 15px;
 `;
 
-const WeekSelector = () => {
-  let weekMonth = "May";
-  let year = "2023";
+const WeekSelector = ({ handleClick }) => {
+  const [currentWeek, setCurrentWeek] = useState(moment());
 
-  let weekContentsArrayExample = [
-    {
-      dayName: "Mon",
-      day: 13,
-    },
-    {
-      dayName: "Mon",
-      day: 14,
-    },
-    {
-      dayName: "Mon",
-      day: 15,
-    },
-    {
-      dayName: "Mon",
-      day: 16,
-    },
-    {
-      dayName: "Mon",
-      day: 17,
-    },
-    {
-      dayName: "Mon",
-      day: 18,
-    },
-    {
-      dayName: "Mon",
-      day: 19,
-    },
-  ];
+  useEffect(() => {
+    generateWeekDays(currentWeek);
+  }, [currentWeek]);
+
+  const generateWeekDays = (startOfWeek) => {
+    return Array.from({ length: 7 }).map((_, index) =>
+      moment(startOfWeek).startOf("isoWeek").add(index, "days")
+    );
+  };
+
+  const weekDays = generateWeekDays(currentWeek);
+
+  const changeWeek = (amount) => {
+    setCurrentWeek(moment(currentWeek).add(amount, "weeks"));
+  };
 
   return (
     <div>
       <WeekSelectTitle>
-        <LeftArrow>{"<"}</LeftArrow> {weekMonth} {year}
-        <RightArrow>{">"}</RightArrow>
+        <LeftArrow onClick={() => changeWeek(-1)}>{"<"}</LeftArrow>
+        {currentWeek.format("MMMM YYYY")}
+        <RightArrow onClick={() => changeWeek(1)}>{">"}</RightArrow>
       </WeekSelectTitle>
       <WeekSelectorContainer>
-        {weekContentsArrayExample.map((ele) => {
+        {weekDays.map((date) => {
           return (
-            <WeekElement dayName={ele.dayName} day={ele.day}></WeekElement>
+            <WeekElement
+              key={date.format("DD-MM-YYYY")}
+              dayName={date.format("ddd")}
+              day={date.format("DD")}
+              onClick={() => handleClick(date.toDate())}
+            />
           );
         })}
       </WeekSelectorContainer>
