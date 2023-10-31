@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Feed from "./Feed";
+import PostCreate from "./PostCreate";
 import moment from "moment";
 import styled from "styled-components";
 
-// 스타일 컴포넌트로 원형 버튼 스타일 작성
 const WriteButton = styled.button`
   width: 60px;
   height: 60px;
@@ -24,7 +24,8 @@ const WriteButton = styled.button`
 `;
 
 const CommunityContainer = () => {
-  const posts = [
+  // 초기 게시물 데이터
+  const initialPosts = [
     {
       username: "행복티비",
       caption: "오늘은 소고기가 너무 끌려서 단백질 위주의 식사!",
@@ -38,13 +39,17 @@ const CommunityContainer = () => {
         },
       ],
       postDate: moment().format("LL"),
+      onEdit: () => {
+        // 수정 버튼 클릭 시 실행할 동작 추가
+        // 이 함수를 원하는 대로 구현하면 됩니다.
+        console.log("수정 버튼이 클릭되었습니다.");
+      },
     },
     {
       username: "사랑티비",
       caption: "오늘은 초강도로 먹을려구요.",
       imageUrl: "/foodddd.jpg",
       userImageUrl: "/prett.jpg",
-
       comments: [
         {
           commentUsername: "테스트",
@@ -53,13 +58,36 @@ const CommunityContainer = () => {
         },
       ],
       postDate: moment().format("LL"),
+      onEdit: () => {
+        // 수정 버튼 클릭 시 실행할 동작 추가
+        // 이 함수를 원하는 대로 구현하면 됩니다.
+        console.log("수정 버튼이 클릭되었습니다.");
+      },
     },
   ];
 
+  // posts를 useState로 관리합니다.
+  const [posts, setPosts] = useState(initialPosts);
+  const [isCreatingPost, setIsCreatingPost] = useState(false);
+
   const handleWriteButtonClick = () => {
-    // 글쓰기 페이지나 모달 창을 열기 위한 로직 작성
-    console.log("글쓰기 버튼 클릭!");
+    setIsCreatingPost(true);
   };
+
+  const handlePostSubmission = (newPost) => {
+    setPosts([newPost, ...posts]);
+    setIsCreatingPost(false);
+  };
+
+  const handleDeletePost = (indexToDelete) => {
+    setPosts((prevPosts) =>
+      prevPosts.filter((_, index) => index !== indexToDelete)
+    );
+  };
+
+  if (isCreatingPost) {
+    return <PostCreate onSubmit={handlePostSubmission} />;
+  }
 
   return (
     <div>
@@ -72,6 +100,7 @@ const CommunityContainer = () => {
           comments={post.comments}
           userImage={post.userImageUrl}
           postDate={post.postDate}
+          onDelete={() => handleDeletePost(index)}
         />
       ))}
       <WriteButton onClick={handleWriteButtonClick}>+</WriteButton>

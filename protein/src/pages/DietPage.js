@@ -16,9 +16,12 @@ const DietContainer = styled.div`
 const DietPage = () => {
   const [todayMeal, setTodayMeal] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
+  const [weekRange, setWeekRange] = useState({ start: "", end: "" });
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("date : ", moment(new Date()).format("yyyy-mm-dd"));
+    setSelectedDate(moment(new Date()).format("yyyy-mm-dd"));
     getTodayMeal(new Date());
   }, []);
 
@@ -32,6 +35,10 @@ const DietPage = () => {
 
     const mealDateString = moment(date).format("YYYY-MM-DD");
     setSelectedDate(mealDateString);
+
+    const startOfWeek = moment(date).startOf("week").format("YYYY-MM-DD");
+    const endOfWeek = moment(date).endOf("week").format("YYYY-MM-DD");
+    setWeekRange({ start: startOfWeek, end: endOfWeek });
 
     const requestOption = {
       url: `/api/v1/meal/log/${userId}/${mealDateString}`,
@@ -66,10 +73,14 @@ const DietPage = () => {
         type={"diet"}
         addEvent={goToDetail}
       ></AppHeader>
-      <DietContainer>
-        <DietCalendar handleClick={getTodayMeal}></DietCalendar>
-      </DietContainer>
-      <WeekSelector></WeekSelector>
+      <DietCalendar
+        handleClick={getTodayMeal}
+        selectedDate={selectedDate}
+      ></DietCalendar>
+      <WeekSelector
+        weekRange={weekRange}
+        handleClick={getTodayMeal}
+      ></WeekSelector>
       {todayMeal.BREAKFAST && (
         <IndividualInfo
           title={"아침"}

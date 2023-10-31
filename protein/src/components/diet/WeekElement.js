@@ -2,17 +2,18 @@ import React from "react";
 import styled from "styled-components";
 
 const WeekElementRect = styled.div`
-    padding : 10px 10px 10px 10px;
-    width : 14.28%
-    height : 57px;
-    background : #F2F5FF;
-    text-align : center;
-    margin : 2px;
+  padding: 10px 10px 10px 10px;
+  width: 14.28%;
+  height: 57px;
+  background: #f2f5ff;
+  text-align: center;
+  margin: 2px;
+  cursor: pointer;
 `;
 
-const WeekElement = ({ dayName, day }) => {
+const WeekElement = ({ dayName, day, onClick }) => {
   return (
-    <WeekElementRect>
+    <WeekElementRect onClick={onClick}>
       {dayName}
       <br />
       {day}

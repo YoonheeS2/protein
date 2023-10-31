@@ -95,6 +95,7 @@ const DietDetailPage = () => {
   return (
     <div>
       <AppHeader
+        backButton={true}
         title={
           <Dropdown
             value={selectedTime}
