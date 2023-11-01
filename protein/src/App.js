@@ -32,9 +32,7 @@ function App() {
         ></Route>
         <Route path="/login" element={<LoginPage></LoginPage>}></Route>
         <Route path="/profile" element={<ProfilePage></ProfilePage>}></Route>
-        <Route path="/popup" element={<SearchPopup />}></Route>
         <Route path="/news" element={<SamplePage />}></Route>
-        <Route path="/line" element={<LineComponent />}></Route>
       </Routes>
       <Nav></Nav>
     </BrowserRouter>

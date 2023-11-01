@@ -23,6 +23,7 @@ const WeekSelectorContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 15px;
+  padding: 0px 22px 0px 22px;
 `;
 
 const WeekSelector = ({ handleClick }) => {

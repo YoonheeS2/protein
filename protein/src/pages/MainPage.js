@@ -138,60 +138,66 @@ const MainPage = () => {
 
   // 회원정보를 조회하는 API 요청 실행메서드
   const getMainPageData = () => {
-    axios.get("/api/v1/meal/log/summary/today/22").then((response) => {
-      //응답 데이터 확인
-      console.log("-------response--------");
-      console.log(response.data);
-      console.log("-------response end--------");
-      const todayCalories = response.data.result.calories;
-      const todayCarbohydrate = response.data.result.carbohydrate;
-      const todayProtein = response.data.result.protein;
-      const todayFat = response.data.result.fat;
-      axios.get("/api/v1/user/22").then((userResponse) => {
-        console.log(userResponse.data);
-        console.log(userResponse.data.result.recommendCalories);
-        const recommendCalories = userResponse.data.result.recommendCalories;
-        console.log(recommendCalories);
-        setRecCalories(recommendCalories);
-        // percent 계산
-        const calculatedPercent = (todayCalories / recommendCalories) * 100;
-        setPercent(calculatedPercent);
-        const recCarbohydrate =
-          userResponse.data.result.recommendTotalCarbohydrate;
-        const recProtein = userResponse.data.result.recommendProtein;
-        const recFat = userResponse.data.result.recommendTotalFat;
-        if (todayCarbohydrate > recCarbohydrate) {
-          setCarbohydrateCircleColor("#1A73E9");
-        } else {
-          setCarbohydrateCircleColor("#C8DDFA");
-        }
-        if (todayProtein > recProtein) {
-          setProteinCircleColor("#1A73E9");
-        } else {
-          setProteinCircleColor("#C8DDFA");
-        }
-        if (todayFat > recFat) {
-          setFatCircleColor("#1A73E9");
-        } else {
-          setFatCircleColor("#C8DDFA");
-        }
-        // ----------
-        let mode = userResponse.data.result.mode;
-        if (mode == "NORMAL") {
-          setModeType("일반모드");
-        } else if (mode == "DIET") {
-          setModeType("다이어트모드");
-        } else if (mode == "BULK_UP") {
-          setModeType("근력모드");
-        }
-        // ----------
-        let userName = userResponse.data.result.name;
-        setName(userName);
+    axios
+      .get(`/api/v1/meal/log/summary/today/${localStorage.getItem("userId")}`)
+      .then((response) => {
+        //응답 데이터 확인
+        console.log("-------response--------");
+        console.log(response.data);
+        console.log("-------response end--------");
+        const todayCalories = response.data.result.calories;
+        const todayCarbohydrate = response.data.result.carbohydrate;
+        const todayProtein = response.data.result.protein;
+        const todayFat = response.data.result.fat;
+        axios
+          .get(`/api/v1/user/${localStorage.getItem("userId")}`)
+          .then((userResponse) => {
+            console.log(userResponse.data);
+            console.log(userResponse.data.result.recommendCalories);
+            const recommendCalories =
+              userResponse.data.result.recommendCalories;
+            console.log(recommendCalories);
+            setRecCalories(recommendCalories);
+            // percent 계산
+            const calculatedPercent = (todayCalories / recommendCalories) * 100;
+            setPercent(calculatedPercent);
+            const recCarbohydrate =
+              userResponse.data.result.recommendTotalCarbohydrate;
+            const recProtein = userResponse.data.result.recommendProtein;
+            const recFat = userResponse.data.result.recommendTotalFat;
+            if (todayCarbohydrate > recCarbohydrate) {
+              setCarbohydrateCircleColor("#1A73E9");
+            } else {
+              setCarbohydrateCircleColor("#C8DDFA");
+            }
+            if (todayProtein > recProtein) {
+              setProteinCircleColor("#1A73E9");
+            } else {
+              setProteinCircleColor("#C8DDFA");
+            }
+            if (todayFat > recFat) {
+              setFatCircleColor("#1A73E9");
+            } else {
+              setFatCircleColor("#C8DDFA");
+            }
+            // ----------
+            let mode = userResponse.data.result.mode;
+            console.log("mode:", mode);
+            if (mode == "NORMAL") {
+              setModeType("일반모드");
+            } else if (mode == "DIET") {
+              setModeType("다이어트모드");
+            } else if (mode == "BULK_UP") {
+              setModeType("근력모드");
+            }
+            // ----------
+            let userName = userResponse.data.result.name;
+            setName(userName);
+          });
+        setSummaryMealToday(response.data);
+        // console.log(summaryMealToday);
+        setCalories(todayCalories);
       });
-      setSummaryMealToday(response.data);
-      // console.log(summaryMealToday);
-      setCalories(todayCalories);
-    });
   };
 
   return (

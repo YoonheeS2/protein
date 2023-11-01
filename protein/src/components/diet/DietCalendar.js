@@ -5,6 +5,7 @@ import Calendar from "react-calendar";
 import styled from "styled-components";
 
 const CalendarCustom = styled.div`
+  padding: 0px 22px 0px 22px;
   .calender {
     border-bottom: 1px solid #f2f2f2;
     width: 100%;

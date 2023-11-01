@@ -13,17 +13,22 @@ const BoxIngredientWrap = styled.div`
 
 const Box = styled.div`
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
   width: 179px;
   height: 60px;
   border-radius: 4px;
   border: 1px solid #a3b6f7;
   margin-right: 7px;
-  padding-left: 10px;
+  padding: 5px;
 `;
 
+const Box2 = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`;
 const RecomMain = styled.span`
   color: #345a99;
   text-align: center;
@@ -44,6 +49,7 @@ const Recomvalue = styled.span`
 
 const RecomImage = styled.img`
   width: 40px;
+  margin-right: 5px;
 `;
 const BoxModeRecom = () => {
   const [selectedMode, setSelectedMode] = useState(null);
@@ -81,9 +87,11 @@ const BoxModeRecom = () => {
       {drawData.map((item) => {
         return (
           <Box>
-            <RecomImage></RecomImage>
-            <RecomMain>{item.food}</RecomMain>
-            <Recomvalue>{item.value}</Recomvalue>
+            <RecomImage src={item.img}></RecomImage>
+            <Box2>
+              <RecomMain>{item.food}</RecomMain>
+              <Recomvalue>{item.value}</Recomvalue>
+            </Box2>
           </Box>
         );
       })}

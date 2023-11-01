@@ -20,8 +20,8 @@ const DietPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("date : ", moment(new Date()).format("yyyy-mm-dd"));
-    setSelectedDate(moment(new Date()).format("yyyy-mm-dd"));
+    console.log("date : ", moment(new Date()).format("YYYY-MM-DD"));
+    setSelectedDate(moment(new Date()).format("YYYY-MM-DD"));
     getTodayMeal(new Date());
   }, []);
 
@@ -69,7 +69,7 @@ const DietPage = () => {
     <div>
       <AppHeader
         title={"PROTEIN BODY"}
-        backButton={true}
+        backButton={false}
         type={"diet"}
         addEvent={goToDetail}
       ></AppHeader>
