@@ -7,7 +7,7 @@ width: 68px;
 const LineComponent = () => {
   return (
     <div>
-    <HeartBeat src={`/heartBeat.png`}/>
+    <HeartBeat src={`https://yoonhees2.github.io/protein_page/heartBeat.png`}/>
     </div>
   )
 }

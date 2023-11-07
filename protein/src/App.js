@@ -6,6 +6,7 @@ import Nav from "./components/common/Nav";
 import DietPage from "./pages/DietPage";
 import CommunityPage from "./pages/CommunityPage";
 import ModeSelection from "./pages/ModeSelection";
+import IndexPage from "./pages/IndexPage";
 import LoginPage from "./pages/LoginPage";
 import DietDetailPage from "./pages/DietDetailPage";
 import ProfilePage from "./pages/ProfilePage";
@@ -16,23 +17,21 @@ import SamplePage from "./pages/SamplePage";
 import SignUpSummaryPage from "./pages/SignUpSummaryPage";
 import LineComponent from "./components/main/LineComponent";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const isLogin = localStorage.getItem("userId");
-    if (isLogin) {
-      setIsLoggedIn(true);
-    }
-  }, []);
+  //배포시 주석해제
+  // axios.defaults.baseURL =
+  //   "http://ec2-43-200-165-23.ap-northeast-2.compute.amazonaws.com:8081";
+  axios.defaults.headers = {
+    "Content-Type": `application/json`,
+  };
 
   return (
     <BrowserRouter>
-      <Navigate>
-        {isLoggedIn ? <Navigate to="/main" /> : <Navigate to="/login" />}
-      </Navigate>
       <Routes>
+        <Route path="/" element={<IndexPage></IndexPage>}></Route>
         <Route path="/main" element={<MainPage />}></Route>
         <Route path="/diet" element={<DietPage />}></Route>
         <Route path="/diet/detail" element={<DietDetailPage />}></Route>

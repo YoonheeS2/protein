@@ -29,12 +29,12 @@ const CommunityContainer = () => {
     {
       username: "해피",
       caption: "오늘은 소고기가 너무 끌려서 단백질 위주의 식사!",
-      imageUrl: "/foodiimage.jpg",
-      userImageUrl: "/pro.jpg",
+      imageUrl: "https://yoonhees2.github.io/protein_page/foodiimage.jpg",
+      userImageUrl: "https://meet.google.com/avc-tgzr-nic?authuser=0/pro.jpg",
       comments: [
         {
           commentUsername: "일주어터",
-          commentUserImageUrl: "/pro.jpg",
+          commentUserImageUrl: "https://yoonhees2.github.io/protein_page/pro.jpg",
           commentText: "오 ! 포만감 가득하겠네요~~~",
         },
       ],
@@ -48,8 +48,8 @@ const CommunityContainer = () => {
     {
       username: "김연아",
       caption: "오늘은 초강도로 먹을려구요.",
-      imageUrl: "/foodddd.jpg",
-      userImageUrl: "/prett.jpg",
+      imageUrl: "https://yoonhees2.github.io/protein_page/foodddd.jpg",
+      userImageUrl: "https://meet.google.com/avc-tgzr-nic?authuser=0/prett.jpg",
       comments: [
         {
           commentUsername: "테스트",

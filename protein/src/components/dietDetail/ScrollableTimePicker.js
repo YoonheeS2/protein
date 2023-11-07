@@ -15,7 +15,7 @@ function generateNumberArray(begin, end) {
 
 //Todo:
 //datetype 2023-11-07 11:36:00
-const ScrollableTimePicker = (handleDateChange) => {
+const ScrollableTimePicker = ({ handleDateChange }) => {
   const [object, setObject] = useState({
     valueGroups: {
       hour: "00",

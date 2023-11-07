@@ -101,6 +101,14 @@ const DietDetailPage = () => {
   const handleDateChange = (changeTime) => {
     console.log(selectedDate);
     console.log(changeTime);
+    let hour = changeTime.hour;
+    let min = changeTime.min;
+    let decator = changeTime.AM;
+    if (decator === "PM") {
+      hour = hour + 12;
+    }
+    const dateWithTime = `${selectedDate} ${hour}:${min}:00`;
+    setSelectedTime(new Date(dateWithTime));
   };
 
   return (
