@@ -8,6 +8,7 @@ import TimePickerCustom from "../components/dietDetail/ScrollableTimePicker";
 import ScrollableTimePicker from "../components/dietDetail/ScrollableTimePicker";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   margin-top: 20px;
@@ -55,10 +56,15 @@ const DietDetailPage = () => {
   const [searchResults, setSearchResults] = useState([]); // 검색 결과를 저장하기 위한 state
   const [selectedFoods, setSelectedFoods] = useState([]); // 선택된 음식들을 저장하기 위한 state
   const location = useLocation();
+  const navigate = useNavigate();
   const { selectedDate } = location.state || {};
 
   useEffect(() => {
     console.log(selectedDate);
+    if (selectedDate === undefined) {
+      alert("날짜가 지정되지 않아 이전페이지로 돌아갑니다.");
+      navigate("/diet");
+    }
   }, []);
   const [searchedFoods, setSearchedFoods] = useState([]);
 
@@ -92,6 +98,11 @@ const DietDetailPage = () => {
     alert("저장되었습니다!");
   };
 
+  const handleDateChange = (changeTime) => {
+    console.log(selectedDate);
+    console.log(changeTime);
+  };
+
   return (
     <div>
       <AppHeader
@@ -108,7 +119,9 @@ const DietDetailPage = () => {
         }
       ></AppHeader>
       <Container>
-        <ScrollableTimePicker></ScrollableTimePicker>
+        <ScrollableTimePicker
+          handleDateChange={handleDateChange}
+        ></ScrollableTimePicker>
       </Container>
       <SearchInput onProductFound={handleSearchedFoods}></SearchInput>
       <FavoFoodList foods={searchedFoods}></FavoFoodList>

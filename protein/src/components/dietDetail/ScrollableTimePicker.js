@@ -13,24 +13,28 @@ function generateNumberArray(begin, end) {
   return array;
 }
 
-const ScrollableTimePicker = () => {
+//Todo:
+//datetype 2023-11-07 11:36:00
+const ScrollableTimePicker = (handleDateChange) => {
   const [object, setObject] = useState({
     valueGroups: {
-      시: "00",
-      분: "00",
+      hour: "00",
+      min: "00",
       AM: "AM",
     },
     optionGroups: {
-      시: generateNumberArray(0, 12),
-      분: generateNumberArray(0, 59),
-      AM:[
+      hour: generateNumberArray(0, 12),
+      min: generateNumberArray(0, 59),
+      AM: [
         { value: "AM", label: "AM" },
         { value: "PM", label: "PM" },
-      ]
+      ],
     },
   });
 
   const handleChange = (name, value) => {
+    console.log(name, value);
+
     setObject((prevObject) => {
       return {
         ...prevObject,
@@ -40,6 +44,7 @@ const ScrollableTimePicker = () => {
         },
       };
     });
+    handleDateChange(object.valueGroups);
   };
 
   const { optionGroups, valueGroups } = object;
