@@ -55,7 +55,7 @@ const DietDetailPage = () => {
   const [searchResults, setSearchResults] = useState([]); // 검색 결과를 저장하기 위한 state
   const [selectedFoods, setSelectedFoods] = useState([]); // 선택된 음식들을 저장하기 위한 state
   const location = useLocation();
-  const { selectedDate } = location.state;
+  const { selectedDate } = location.state || {};
 
   useEffect(() => {
     console.log(selectedDate);

@@ -27,7 +27,7 @@ const CommunityContainer = () => {
   // 초기 게시물 데이터
   const initialPosts = [
     {
-      username: "행복티비",
+      username: "해피",
       caption: "오늘은 소고기가 너무 끌려서 단백질 위주의 식사!",
       imageUrl: "/foodiimage.jpg",
       userImageUrl: "/pro.jpg",
@@ -46,7 +46,7 @@ const CommunityContainer = () => {
       },
     },
     {
-      username: "사랑티비",
+      username: "김연아",
       caption: "오늘은 초강도로 먹을려구요.",
       imageUrl: "/foodddd.jpg",
       userImageUrl: "/prett.jpg",

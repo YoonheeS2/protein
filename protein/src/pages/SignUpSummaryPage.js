@@ -44,7 +44,7 @@ const SignUpSummaryPage = () => {
           localStorage.setItem("username", signupData.name);
 
           alert("회원가입 성공");
-          navigate("/main");
+          navigate("/login");
         } else {
           alert(response.data.errorMsg);
         }

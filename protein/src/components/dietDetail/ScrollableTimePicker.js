@@ -18,12 +18,15 @@ const ScrollableTimePicker = () => {
     valueGroups: {
       시: "00",
       분: "00",
-      초: "00",
+      AM: "AM",
     },
     optionGroups: {
-      시: generateNumberArray(0, 23),
+      시: generateNumberArray(0, 12),
       분: generateNumberArray(0, 59),
-      초: generateNumberArray(0, 59),
+      AM:[
+        { value: "AM", label: "AM" },
+        { value: "PM", label: "PM" },
+      ]
     },
   });
 

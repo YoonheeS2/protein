@@ -105,7 +105,6 @@ const PostCreate = ({ onSubmit }) => {
 
   const handleUploadClick = () => {
     const newPost = {
-      username: "홍길동",
       caption: postContent,
       imageUrl: uploadedImages[0],
       userImageUrl: "/pro.jpg",
@@ -122,7 +121,7 @@ const PostCreate = ({ onSubmit }) => {
   return (
     <Container>
       <UploadButton onClick={handleUploadClick}>올리기</UploadButton>
-      <FeedHeader username={"홍길동"} userImageUrl="/pro.jpg">
+      <FeedHeader userImageUrl="/pro.jpg">
         <BackButton onClick={handleGoBack}>뒤로가기</BackButton>
       </FeedHeader>
       <InputContainer>

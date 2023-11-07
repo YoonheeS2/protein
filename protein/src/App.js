@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import ProfileDetailPage01 from "./pages/ProfileDetailPage01";
 import ProfileDetailPage02 from "./pages/ProfileDetailPage02";
@@ -9,17 +9,29 @@ import ModeSelection from "./pages/ModeSelection";
 import LoginPage from "./pages/LoginPage";
 import DietDetailPage from "./pages/DietDetailPage";
 import ProfilePage from "./pages/ProfilePage";
-
 import MainPage from "./pages/MainPage";
 import SearchPopup from "./components/main/SearchPopup";
 import PostCreatePage from "./pages/PostCreatePage";
 import SamplePage from "./pages/SamplePage";
 import SignUpSummaryPage from "./pages/SignUpSummaryPage";
 import LineComponent from "./components/main/LineComponent";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const isLogin = localStorage.getItem("userId");
+    if (isLogin) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   return (
     <BrowserRouter>
+      <Navigate>
+        {isLoggedIn ? <Navigate to="/main" /> : <Navigate to="/login" />}
+      </Navigate>
       <Routes>
         <Route path="/main" element={<MainPage />}></Route>
         <Route path="/diet" element={<DietPage />}></Route>

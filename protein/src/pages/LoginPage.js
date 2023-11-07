@@ -78,7 +78,7 @@ const LoginPage = observer(() => {
 
   return (
     <PageBlock>
-      <SignupTitle1 title={"환영합니다 !"} logo={"PROTEIN BODY"}></SignupTitle1>
+      <SignupTitle1 title={"LOGIN"} logo={"PROTEIN BODY"}></SignupTitle1>
       <InputForm>
         <IconInput
           icontype={"sms"}
@@ -104,7 +104,7 @@ const LoginPage = observer(() => {
         ></ButtonComponent>
       </ButtonContainer>
       <Text>
-        아직 계정이 없으십니까? <Link>회원가입</Link>
+        아직 계정이 없으십니까? <Link  to="/signup">회원가입</Link>
       </Text>
     </PageBlock>
   );
