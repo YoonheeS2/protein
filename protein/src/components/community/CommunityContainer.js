@@ -27,6 +27,7 @@ const CommunityContainer = () => {
   // 초기 게시물 데이터
   const initialPosts = [
     {
+      userImage: "/prett.jpg",
       username: "해피",
       caption: "오늘은 소고기가 너무 끌려서 단백질 위주의 식사!",
       imageUrl: "https://yoonhees2.github.io/protein_page/foodiimage.jpg",
@@ -34,7 +35,8 @@ const CommunityContainer = () => {
       comments: [
         {
           commentUsername: "일주어터",
-          commentUserImageUrl: "https://yoonhees2.github.io/protein_page/pro.jpg",
+          commentUserImageUrl:
+            "https://yoonhees2.github.io/protein_page/pro.jpg",
           commentText: "오 ! 포만감 가득하겠네요~~~",
         },
       ],
