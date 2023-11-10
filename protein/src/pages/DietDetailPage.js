@@ -32,8 +32,7 @@ const Dropdown = styled.select`
 `;
 
 const SaveButton = styled.button`
-height: 70px;
-  width: 368px;
+  width: 90%;
   padding: 12px;
   background-color: #007bff;
   border: none;
@@ -83,7 +82,7 @@ const DietDetailPage = () => {
       const sendData = {
         userId: localStorage.getItem("userId"),
         productId: data.productId,
-        mealType: selectedTime,
+        mealType: "BREAKFAST",
         mealDateTime: new Date(selectedDate),
       };
       const requestObj = {
