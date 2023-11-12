@@ -26,12 +26,20 @@ const WeekSelectorContainer = styled.div`
   padding: 0px 22px 0px 22px;
 `;
 
-const WeekSelector = ({ handleClick }) => {
+const WeekSelector = ({ handleClick, selectedDate, weekRange }) => {
   const [currentWeek, setCurrentWeek] = useState(moment());
+  const [weeks, setWeeks] = useState([]);
+  useEffect(() => {
+    generateWeekDays(currentWeek);
+  }, []);
 
   useEffect(() => {
     generateWeekDays(currentWeek);
   }, [currentWeek]);
+
+  useEffect(() => {
+    setWeeks(generateWeekDays(moment(selectedDate)));
+  }, [selectedDate]);
 
   const generateWeekDays = (startOfWeek) => {
     return Array.from({ length: 7 }).map((_, index) =>
@@ -53,7 +61,7 @@ const WeekSelector = ({ handleClick }) => {
         <RightArrow onClick={() => changeWeek(1)}>{">"}</RightArrow>
       </WeekSelectTitle>
       <WeekSelectorContainer>
-        {weekDays.map((date) => {
+        {weeks.map((date) => {
           return (
             <WeekElement
               key={date.format("DD-MM-YYYY")}

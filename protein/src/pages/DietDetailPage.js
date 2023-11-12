@@ -32,7 +32,7 @@ const Dropdown = styled.select`
 `;
 
 const SaveButton = styled.button`
-height: 70px;
+  height: 70px;
   width: 368px;
   padding: 12px;
   background-color: #007bff;
@@ -53,7 +53,7 @@ height: 70px;
 `;
 
 const DietDetailPage = () => {
-  const [selectedTime, setSelectedTime] = useState("아침");
+  const [selectedTime, setSelectedTime] = useState("BREAKFAST");
   const [searchResults, setSearchResults] = useState([]); // 검색 결과를 저장하기 위한 state
   const [selectedFoods, setSelectedFoods] = useState([]); // 선택된 음식들을 저장하기 위한 state
   const location = useLocation();
@@ -79,6 +79,7 @@ const DietDetailPage = () => {
       selectedMeal: selectedTime,
       foods: searchedFoods,
     };
+    console.log(selectedTime);
     searchedFoods.map((data) => {
       const sendData = {
         userId: localStorage.getItem("userId"),
@@ -93,6 +94,9 @@ const DietDetailPage = () => {
       };
       axios(requestObj).then((response) => {
         console.log(response);
+        if (response.data.success === true || response.status == 200) {
+          navigate("/diet");
+        }
       });
     });
     console.log(searchedFoods);
@@ -109,7 +113,7 @@ const DietDetailPage = () => {
       hour = hour + 12;
     }
     const dateWithTime = `${selectedDate} ${hour}:${min}:00`;
-    setSelectedTime(new Date(dateWithTime));
+    // setSelectedTime(new Date(dateWithTime));
   };
 
   return (
