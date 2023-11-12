@@ -66,7 +66,7 @@ const DietPage = () => {
             LUNCH === undefined ||
             DINNER === undefined
           ) {
-            alert(
+            console.log(
               "아침, 점심, 저녁 중 하나 이상의 식사 기록이 누락되었습니다."
             );
           }

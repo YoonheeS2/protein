@@ -30,11 +30,15 @@ const WeekSelector = ({ handleClick, selectedDate, weekRange }) => {
   const [currentWeek, setCurrentWeek] = useState(moment());
   const [weeks, setWeeks] = useState([]);
   useEffect(() => {
-    generateWeekDays(currentWeek);
+    // generateWeekDays(currentWeek);
   }, []);
 
   useEffect(() => {
-    generateWeekDays(currentWeek);
+    console.log("주:", weeks);
+  }, [weeks]);
+
+  useEffect(() => {
+    // generateWeekDays(currentWeek);
   }, [currentWeek]);
 
   useEffect(() => {
@@ -42,16 +46,18 @@ const WeekSelector = ({ handleClick, selectedDate, weekRange }) => {
   }, [selectedDate]);
 
   const generateWeekDays = (startOfWeek) => {
+    setWeeks([]);
     return Array.from({ length: 7 }).map((_, index) =>
       moment(startOfWeek).startOf("isoWeek").add(index, "days")
     );
   };
 
-  const weekDays = generateWeekDays(currentWeek);
-
   const changeWeek = (amount) => {
     setCurrentWeek(moment(currentWeek).add(amount, "weeks"));
   };
+  function isValidDate(date) {
+    return date instanceof moment && date.isValid();
+  }
 
   return (
     <div>
@@ -62,6 +68,10 @@ const WeekSelector = ({ handleClick, selectedDate, weekRange }) => {
       </WeekSelectTitle>
       <WeekSelectorContainer>
         {weeks.map((date) => {
+          if (!isValidDate(date)) {
+            return null; // 유효하지 않은 날짜는 렌더링하지 않음
+          }
+
           return (
             <WeekElement
               key={date.format("DD-MM-YYYY")}
