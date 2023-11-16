@@ -17,6 +17,7 @@ import ModeRecomText from "../components/main/ModeRecomText";
 import BoxModeRecom from "../components/main/BoxModeRecom";
 import MealData from "../components/data/RecommendedMeal.json";
 import LineComponent from "../components/main/LineComponent";
+import HealthyComponent from "../components/main/HealthyComponent";
 
 console.log(MealData);
 const PageBlock = styled.div`
@@ -109,7 +110,23 @@ const MainPage = () => {
     useState("#C8DDFA");
   const [proteinCircleColor, setProteinCircleColor] = useState("#C8DDFA");
   const [fatCircleColor, setFatCircleColor] = useState("#C8DDFA");
-  const [randomTip, setRandomTip] = useState("");
+  const [userResponse, setUserResponse] = useState({
+    success: true,
+    result: {
+      name: "string",
+      height: 0,
+      weight: 0,
+      goalWeight: 0,
+      genderType: "MALE",
+      birthDate: "2023-11-16",
+      mode: "NORMAL",
+      recommendCalories: 0,
+      recommendTotalCarbohydrate: 0,
+      recommendProtein: 0,
+      recommendTotalFat: 0,
+    },
+    errorMsg: "string",
+  });
   const [summaryMealToday, setSummaryMealToday] = useState({
     success: false,
     result: {
@@ -193,6 +210,7 @@ const MainPage = () => {
             // ----------
             let userName = userResponse.data.result.name;
             setName(userName);
+            setUserResponse(userResponse.data);
           });
         setSummaryMealToday(response.data);
         // console.log(summaryMealToday);
@@ -220,18 +238,21 @@ const MainPage = () => {
       </CircleLine>
       <RecomContainer>
         <Recommened
-          value={summaryMealToday.result.carbohydrate}
+          value={userResponse.result.recommendTotalCarbohydrate}
           name="탄수화물"
         ></Recommened>
         <Recommened
-          value={summaryMealToday.result.protein}
+          value={userResponse.result.recommendProtein}
           name="단백질"
         ></Recommened>
         <Recommened
-          value={summaryMealToday.result.fat}
+          value={userResponse.result.recommendTotalFat}
           name="지방"
         ></Recommened>
       </RecomContainer>
+      <LeftBlock>
+        <HealthyComponent></HealthyComponent>
+      </LeftBlock>
       <LeftBlock>
         <SearchContainer>
           <SearchText name={searchResult.result.productName}></SearchText>

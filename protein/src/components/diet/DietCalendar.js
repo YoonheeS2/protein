@@ -22,6 +22,12 @@ const CalendarCustom = styled.div`
     }
   }
 
+  .all-meals-recorded {
+    background-color: #cbddff !important; // 채워진 동그라미의 배경색
+    border-radius: 50% !important;
+    // 추가적인 스타일링
+  }
+
   .react-calendar__month-view__weekdays {
     margin-top: 20px;
     padding-bottom: 20px;
@@ -58,10 +64,11 @@ const CalendarCustom = styled.div`
   }
 `;
 
-const DietCalendar = ({ handleClick, selectedDate }) => {
+const DietCalendar = ({ handleClick, selectedDate, isAllMealsRecorded }) => {
   // 로컬 상태를 삭제하므로, setSelectedDate 관련 코드도 삭제합니다.
 
   const handleChange = (date) => {
+    console.log(date);
     handleClick(date); // date를 바로 handleClick 함수로 전달합니다.
   };
 
@@ -85,6 +92,11 @@ const DietCalendar = ({ handleClick, selectedDate }) => {
         //     ? "selected-date"
         //     : ""
         // }
+        tileClassName={({ date, view }) =>
+          view === "month" && isAllMealsRecorded(date)
+            ? "all-meals-recorded"
+            : ""
+        }
       />
     </CalendarCustom>
   );

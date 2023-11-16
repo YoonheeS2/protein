@@ -18,6 +18,11 @@ const DietPage = () => {
   const [selectedDate, setSelectedDate] = useState("");
   const [weekRange, setWeekRange] = useState({ start: "", end: "" });
   const navigate = useNavigate();
+  const isAllMealsRecorded = (date) => {
+    const dateString = moment(date).format("YYYY-MM-DD");
+    const meals = todayMeal[dateString];
+    return meals && meals.BREAKFAST && meals.LUNCH && meals.DINNER;
+  };
 
   useEffect(() => {
     console.log("date : ", moment(new Date()).format("YYYY-MM-DD"));
@@ -38,6 +43,7 @@ const DietPage = () => {
 
     const startOfWeek = moment(date).startOf("week").format("YYYY-MM-DD");
     const endOfWeek = moment(date).endOf("week").format("YYYY-MM-DD");
+    console.log(weekRange);
     setWeekRange({ start: startOfWeek, end: endOfWeek });
 
     const requestOption = {
@@ -52,6 +58,18 @@ const DietPage = () => {
       .then((response) => {
         if (response.data && response.data.result) {
           setTodayMeal(response.data.result);
+          const { BREAKFAST, LUNCH, DINNER } = response.data.result;
+          console.log("기록", BREAKFAST, LUNCH, DINNER);
+          // 아침, 점심, 저녁 중 하나라도 누락된 경우 경고창 표시
+          if (
+            BREAKFAST === undefined ||
+            LUNCH === undefined ||
+            DINNER === undefined
+          ) {
+            console.log(
+              "아침, 점심, 저녁 중 하나 이상의 식사 기록이 누락되었습니다."
+            );
+          }
         } else {
           console.error("Unexpected response structure");
         }
@@ -76,9 +94,11 @@ const DietPage = () => {
       <DietCalendar
         handleClick={getTodayMeal}
         selectedDate={selectedDate}
+        isAllMealsRecorded={isAllMealsRecorded}
       ></DietCalendar>
       <WeekSelector
         weekRange={weekRange}
+        selectedDate={selectedDate}
         handleClick={getTodayMeal}
       ></WeekSelector>
       {todayMeal.BREAKFAST && (
