@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import FeedHeader from "./FeedHeader"; // 여기를 CreateHeader에서 FeedHeader로 변경했습니다.
+import FeedHeader from "./FeedHeader";
 import { Camera } from "iconic-react";
 import { useNavigate } from "react-router-dom";
 
@@ -54,26 +54,41 @@ const UploadButton = styled.button`
   border-radius: 5px;
   padding: 8px 12px;
   cursor: pointer;
-  position: absolute;
-  top: 10px;
-  right: 10px;
 `;
 
-const BackButton = styled.button`
-  background-color: #ccc;
-  color: white;
+const ModeSelectButton = styled.button`
+  background-color: white;
+  color: black;
   border: none;
   border-radius: 5px;
   padding: 8px 12px;
   cursor: pointer;
-  margin-top: 10px;
-  position: absolute;
-  top: 10px;
-  left: 10px; // 뒤로가기 버튼을 왼쪽 상단에 배치
+  font-size: 15px;
+  font-weight: bold;
+  margin-right: 10px;
 `;
 
 const HiddenFileInput = styled.input`
   display: none;
+`;
+
+const Dropdown = styled.div`
+  display: ${(props) => (props.show ? "block" : "none")};
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+`;
+
+const DropdownItem = styled.div`
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  &:hover {
+    background-color: #f1f1f1;
+  }
 `;
 
 const PostCreate = ({ onSubmit }) => {
@@ -85,6 +100,8 @@ const PostCreate = ({ onSubmit }) => {
     null,
   ]);
   const [postContent, setPostContent] = useState("");
+  const [selectedMode, setSelectedMode] = useState("일반모드");
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const handleImageChange = (index) => (e) => {
     const file = e.target.files[0];
@@ -105,6 +122,7 @@ const PostCreate = ({ onSubmit }) => {
 
   const handleUploadClick = () => {
     const newPost = {
+      category: selectedMode,
       caption: postContent,
       imageUrl: uploadedImages[0],
       userImageUrl: "/pro.jpg",
@@ -114,16 +132,45 @@ const PostCreate = ({ onSubmit }) => {
     onSubmit(newPost);
   };
 
-  const handleGoBack = () => {
-    navigate(-1); // 뒤로가기 버튼 클릭 시 이전 페이지로 이동
+  const handleModeSelect = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  const selectMode = (mode) => {
+    setSelectedMode(mode);
+    setShowDropdown(false);
   };
 
   return (
     <Container>
-      <UploadButton onClick={handleUploadClick}>올리기</UploadButton>
-      <FeedHeader userImageUrl="/pro.jpg">
-        <BackButton onClick={handleGoBack}>뒤로가기</BackButton>
-      </FeedHeader>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          position: "absolute",
+          top: "10px",
+          right: "10px",
+        }}
+      >
+        <ModeSelectButton onClick={handleModeSelect}>
+          {selectedMode}
+        </ModeSelectButton>
+        {showDropdown && (
+          <Dropdown show={showDropdown}>
+            <DropdownItem onClick={() => selectMode("일반모드")}>
+              일반모드
+            </DropdownItem>
+            <DropdownItem onClick={() => selectMode("다이어트모드")}>
+              다이어트모드
+            </DropdownItem>
+            <DropdownItem onClick={() => selectMode("근력모드")}>
+              근력모드
+            </DropdownItem>
+          </Dropdown>
+        )}
+        <UploadButton onClick={handleUploadClick}>올리기</UploadButton>
+      </div>
+      <FeedHeader userImageUrl="/pro.jpg" />
       <InputContainer>
         <InputStyle
           placeholder="어떤 글을 남기시고 싶은가요?"
@@ -139,9 +186,9 @@ const PostCreate = ({ onSubmit }) => {
                   alt="uploaded"
                   style={{ width: "100%", height: "100%" }}
                 />
-              ) : index === 0 ? (
-                <Camera />
-              ) : null}
+              ) : (
+                <Camera style={index === 0 ? {} : { display: "none" }} />
+              )}
               <HiddenFileInput
                 type="file"
                 id={`imageUpload${index}`}
