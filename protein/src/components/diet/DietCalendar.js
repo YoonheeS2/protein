@@ -1,6 +1,6 @@
 import axios from "axios";
 import moment from "moment";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import styled from "styled-components";
 
@@ -12,6 +12,7 @@ const CalendarCustom = styled.div`
   }
   .react-calendar__month-view__days {
     display: grid !important;
+    position: relative;
     grid-template-columns: 14.2% 14.2% 14.2% 14.2% 14.2% 14.2% 14.2%;
 
     .react-calendar__tile {
@@ -23,8 +24,13 @@ const CalendarCustom = styled.div`
   }
 
   .all-meals-recorded {
-    background-color: #cbddff !important; // 채워진 동그라미의 배경색
-    border-radius: 50% !important;
+    position: absolute;
+    background-color: #5f89f5;
+    border-radius: 50%;
+    color: white;
+    width: 30px;
+    height: 30px;
+    z-index: 10;
     // 추가적인 스타일링
   }
 
@@ -64,8 +70,49 @@ const CalendarCustom = styled.div`
   }
 `;
 
-const DietCalendar = ({ handleClick, selectedDate, isAllMealsRecorded }) => {
+const DietCalendar = ({ handleClick, selectedDate }) => {
   // 로컬 상태를 삭제하므로, setSelectedDate 관련 코드도 삭제합니다.
+  const [highlightedDates, setHighlightedDates] = useState([]);
+  const [month, setMonth] = useState();
+  useEffect(() => {
+    // 서버에서 날짜 정보를 가져오는 요청을 보내고 응답을 처리합니다.
+    getMonthAllMealEated();
+    console.log(selectedDate.split("-")[1]);
+    setMonth(selectedDate.split("-")[1]);
+  }, [selectedDate]);
+
+  const getMonthAllMealEated = () => {
+    let insideMonth;
+    if (month === undefined) {
+      let monthInside = new Date();
+      insideMonth = monthInside.getMonth() + 1;
+      console.log("먼쓰는:? ", monthInside);
+    } else {
+      insideMonth = month;
+    }
+    const request = {
+      url: `http://ec2-43-200-165-23.ap-northeast-2.compute.amazonaws.com:8081/api/v1/meal/log/summary/2/month/${insideMonth}`,
+      method: "GET",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      },
+    };
+    axios(request).then(({ data }) => {
+      console.log(data.result.fullMealDate);
+      setHighlightedDates(data.result.fullMealDate);
+    });
+  };
+
+  const tileContent = ({ date, view }) => {
+    if (view === "month") {
+      // date를 ISO 형식의 문자열로 변환하여 highlightedDates 배열에 있는지 확인
+      const isoDate = date.toISOString().split("T")[0];
+      if (highlightedDates.includes(isoDate)) {
+        return <div className="all-meals-recorded"></div>;
+      }
+    }
+    return null;
+  };
 
   const handleChange = (date) => {
     console.log(date);
@@ -86,17 +133,7 @@ const DietCalendar = ({ handleClick, selectedDate, isAllMealsRecorded }) => {
           date.toLocaleString("en", { day: "numeric" })
         }
         showNavigation={false}
-        // tileClassName={({ date, view }) =>
-        //   view === "month" &&
-        //   date.toDateString() === new Date(selectedDate).toDateString() // selectedDate prop을 사용하여 Date 객체로 변환
-        //     ? "selected-date"
-        //     : ""
-        // }
-        tileClassName={({ date, view }) =>
-          view === "month" && isAllMealsRecorded(date)
-            ? "all-meals-recorded"
-            : ""
-        }
+        tileContent={tileContent}
       />
     </CalendarCustom>
   );

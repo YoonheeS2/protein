@@ -16,16 +16,15 @@ const DietContainer = styled.div`
 const DietPage = () => {
   const [todayMeal, setTodayMeal] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
+  const [month, setMonth] = useState();
   const [weekRange, setWeekRange] = useState({ start: "", end: "" });
   const navigate = useNavigate();
-  const isAllMealsRecorded = (date) => {
-    const dateString = moment(date).format("YYYY-MM-DD");
-    const meals = todayMeal[dateString];
-    return meals && meals.BREAKFAST && meals.LUNCH && meals.DINNER;
-  };
 
   useEffect(() => {
     console.log("date : ", moment(new Date()).format("YYYY-MM-DD"));
+    var currentDate = new Date();
+    currentDate = currentDate.getMonth() + 1;
+    setMonth(currentDate);
     setSelectedDate(moment(new Date()).format("YYYY-MM-DD"));
     getTodayMeal(new Date());
   }, []);
@@ -66,7 +65,7 @@ const DietPage = () => {
             LUNCH === undefined ||
             DINNER === undefined
           ) {
-            console.log(
+            alert(
               "아침, 점심, 저녁 중 하나 이상의 식사 기록이 누락되었습니다."
             );
           }
@@ -94,7 +93,6 @@ const DietPage = () => {
       <DietCalendar
         handleClick={getTodayMeal}
         selectedDate={selectedDate}
-        isAllMealsRecorded={isAllMealsRecorded}
       ></DietCalendar>
       <WeekSelector
         weekRange={weekRange}
