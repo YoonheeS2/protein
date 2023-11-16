@@ -5,7 +5,6 @@ import styled from "styled-components";
 // 스타일을 정의합니다.
 const ProgressBarWrapper = styled.div`
   width: 100%;
-  max-width: 368px;
   height: 36px;
   background-color: #f0f0f0; 
   border-radius: 10px;
@@ -30,6 +29,7 @@ const ProgressBarFill = styled.div`
   width: ${(props) => props.progress}%;
   max-width: 368px;
   height: 100%;
+  max-width: 368px;
   background: linear-gradient(
     90deg,
     ${(props) => (props.progress >= 100 ? "#F3DADA" : "#e7eaf2")} 0%,
