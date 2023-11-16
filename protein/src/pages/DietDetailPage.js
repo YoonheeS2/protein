@@ -59,7 +59,7 @@ const DietDetailPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { selectedDate } = location.state || {};
-
+  
   useEffect(() => {
     console.log(selectedDate);
     if (selectedDate === undefined) {
@@ -113,7 +113,7 @@ const DietDetailPage = () => {
       hour = hour + 12;
     }
     const dateWithTime = `${selectedDate} ${hour}:${min}:00`;
-    // setSelectedTime(new Date(dateWithTime));
+    selectedDate(new Date(dateWithTime));
   };
 
   return (
