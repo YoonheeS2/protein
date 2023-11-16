@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import styled from "styled-components";
 
@@ -5,6 +6,7 @@ import styled from "styled-components";
 const ProgressBarWrapper = styled.div`
   max-width: 368px;
   width: 100%;
+  max-width: 368px;
   height: 36px;
   background-color: #f0f0f0;
   border-radius: 10px;
@@ -12,14 +14,27 @@ const ProgressBarWrapper = styled.div`
   margin-top: 30px;
 `;
 
+// axios
+//   .get(`/api/v1/meal/log/summary/today/${localStorage.getItem("userId")}`)
+//   .then((response) => {
+//     const todayCalories = response.data.result.calories;
+//     axios
+//       .get(`/api/v1/user/${localStorage.getItem("userId")}`)
+//       .then((userResponse) => {
+//         const recommendCalories = userResponse.data.result.recommendCalories;
+//         const calculatedPercent = (todayCalories / recommendCalories) * 100;
+//         setPercent(calculatedPercent);
+//       });
+//   });
+
 const ProgressBarFill = styled.div`
   width: ${(props) => props.progress}%;
   height: 100%;
   background: linear-gradient(
     90deg,
-    #e7eaf2 0%,
-    #f2f5ff 0.01%,
-    #1a73e9 105.44%
+    ${(props) => (props.progress >= 100 ? "#F3DADA" : "#e7eaf2")} 0%,
+    ${(props) => (props.progress >= 100 ? "#f2f5ff" : "#f2f5ff")} 0.01%,
+    ${(props) => (props.progress >= 100 ? "#FF1B1B" : "#1a73e9")} 105.44%
   );
   border-radius: 10px;
   transition: width 0.3s ease-in-out;
