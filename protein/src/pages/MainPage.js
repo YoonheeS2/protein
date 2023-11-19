@@ -19,7 +19,6 @@ import MealData from "../components/data/RecommendedMeal.json";
 import LineComponent from "../components/main/LineComponent";
 import HealthyComponent from "../components/main/HealthyComponent";
 
-console.log(MealData);
 const PageBlock = styled.div`
   display: flex;
   flex-direction: column;

@@ -5,6 +5,7 @@ import styled from "styled-components";
 // 스타일을 정의합니다.
 const ProgressBarWrapper = styled.div`
   width: 100%;
+  max-width: 368px;
   height: 36px;
   background-color: #f0f0f0; 
   border-radius: 10px;

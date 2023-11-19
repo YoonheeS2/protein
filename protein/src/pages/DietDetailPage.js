@@ -32,7 +32,7 @@ const Dropdown = styled.select`
 `;
 
 const SaveButton = styled.button`
-height: 70px;
+  height: 70px;
   width: 368px;
   padding: 12px;
   background-color: #007bff;
@@ -53,11 +53,13 @@ height: 70px;
 `;
 
 const DietDetailPage = () => {
-  const [selectedTime, setSelectedTime] = useState("BREAKFAST");
+  const [selectedTime, setSelectedTime] = useState();
+  const [selectedType, setSelectedType] = useState("BREAKFAST");
   const [searchResults, setSearchResults] = useState([]); // 검색 결과를 저장하기 위한 state
   const [selectedFoods, setSelectedFoods] = useState([]); // 선택된 음식들을 저장하기 위한 state
   const location = useLocation();
   const navigate = useNavigate();
+  console.log(location.state);
   const { selectedDate } = location.state || {};
 
   useEffect(() => {
@@ -79,13 +81,13 @@ const DietDetailPage = () => {
       selectedMeal: selectedTime,
       foods: searchedFoods,
     };
-    console.log(selectedTime);
+    console.log("심장이 아퍼:", selectedTime);
     searchedFoods.map((data) => {
       const sendData = {
         userId: localStorage.getItem("userId"),
         productId: data.productId,
-        mealType: selectedTime,
-        mealDateTime: new Date(selectedDate),
+        mealType: selectedType,
+        mealDateTime: selectedTime,
       };
       const requestObj = {
         url: "/api/v1/meal/log",
@@ -113,7 +115,11 @@ const DietDetailPage = () => {
       hour = hour + 12;
     }
     const dateWithTime = `${selectedDate} ${hour}:${min}:00`;
-    selectedDate(new Date(dateWithTime));
+    console.log(dateWithTime);
+    const setDate = new Date(dateWithTime);
+    console.log("셑데이트 :", setDate);
+    setSelectedTime(setDate);
+    // selectedDate(new Date(dateWithTime));
   };
 
   return (
@@ -122,8 +128,8 @@ const DietDetailPage = () => {
         backButton={true}
         title={
           <Dropdown
-            value={selectedTime}
-            onChange={(e) => setSelectedTime(e.target.value)}
+            value={selectedType}
+            onChange={(e) => setSelectedType(e.target.value)}
           >
             <option value="BREAKFAST">아침</option>
             <option value="LUNCH">점심</option>

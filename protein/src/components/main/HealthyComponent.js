@@ -34,14 +34,24 @@ const Text = styled.span`
   line-height: 24px; /* 150% */
 `;
 
-const Box = styled.div`
-  width: 90px;
-  height: 90px;
+const Box = styled.img`
+  width: 118px;
+  margin-right: 7px;
+  margin-top: 10px;
 `;
 
-const HealthyComponent = () => {
+const HealthyComponent = ({ mealLog }) => {
+  let nowTime = new Date();
   const [selectedDate, setSelectedDate] = useState("");
+  const [logData, setLogData] = useState([]);
+  
   const [weekRange, setWeekRange] = useState({ start: "", end: "" });
+  const mealTimeRanges = [
+    { type: "BREAKFAST", start: 6, end: 10 },
+    { type: "LUNCH", start: 12, end: 15 },
+    { type: "DINNER", start: 18, end: 21 },
+  ];
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,6 +59,20 @@ const HealthyComponent = () => {
     setSelectedDate(moment(new Date()).format("YYYY-MM-DD"));
     getTodayMeal(new Date());
   }, []);
+
+  const isInMealTime = (mealType) => {
+    const currentTime = new Date();
+    console.log(mealType);
+    switch (mealType) {
+      case "BREAKFAST":
+        
+        break;
+      case "LUNCH":
+        break;
+      case "DINNER":
+        break;
+    }
+  };
 
   const getTodayMeal = (date) => {
     const userId = localStorage.getItem("userId");
@@ -74,12 +98,9 @@ const HealthyComponent = () => {
       },
     };
 
-    axios(requestOption)
-    .then((response) => {
-        console.log(response)
-        // if () {
-            
-        // };
+    axios(requestOption).then(({ data }) => {
+      console.log("test: ", data);
+      setLogData(data.result);
     });
   };
 
@@ -90,12 +111,43 @@ const HealthyComponent = () => {
         <Text>check!</Text>
       </Line>
       <Line>
-        <Box />
-        <Box />
-        <Box />
+        {}
       </Line>
+      <Line></Line>
     </Container>
   );
+};
+
+const ImageBox = ({ type, state }) => {
+  switch (type) {
+    case "BREAKFAST":
+      if (state === "C") {
+        return <Box src="/BC.png" />;
+      } else if (state === "N") {
+        return <Box src="/BX.png" />;
+      } else if (state === "Y") {
+        return <Box src="/BB.png" />;
+      }
+    case "LUNCH":
+      if (state === "C") {
+        return <Box src="/lC.png" />;
+      } else if (state === "N") {
+        return <Box src="/lX.png" />;
+      } else if (state === "Y") {
+        return <Box src="/lB.png" />;
+      }
+
+    case "DINNER":
+      if (state === "C") {
+        return <Box src="/DC.png" />;
+      } else if (state === "N") {
+        return <Box src="/DX.png" />;
+      } else if (state === "Y") {
+        return <Box src="/DB.png" />;
+      }
+    default:
+      return null;
+  }
 };
 
 export default HealthyComponent;
