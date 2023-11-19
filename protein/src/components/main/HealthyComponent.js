@@ -44,7 +44,7 @@ const HealthyComponent = ({ mealLog }) => {
   let nowTime = new Date();
   const [selectedDate, setSelectedDate] = useState("");
   const [logData, setLogData] = useState([]);
-  
+
   const [weekRange, setWeekRange] = useState({ start: "", end: "" });
   const mealTimeRanges = [
     { type: "BREAKFAST", start: 6, end: 10 },
@@ -65,7 +65,6 @@ const HealthyComponent = ({ mealLog }) => {
     console.log(mealType);
     switch (mealType) {
       case "BREAKFAST":
-        
         break;
       case "LUNCH":
         break;
@@ -111,7 +110,9 @@ const HealthyComponent = ({ mealLog }) => {
         <Text>check!</Text>
       </Line>
       <Line>
-        {}
+        <ImageBox type={"BREAKFAST"} state={"C"}></ImageBox>
+        <ImageBox type={"LUNCH"} state={"C"}></ImageBox>
+        <ImageBox type={"DINNER"} state={"C"}></ImageBox>
       </Line>
       <Line></Line>
     </Container>

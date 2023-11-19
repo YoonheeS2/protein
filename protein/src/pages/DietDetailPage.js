@@ -9,6 +9,8 @@ import ScrollableTimePicker from "../components/dietDetail/ScrollableTimePicker"
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Modal from "react-modal";
+import moment from "moment";
 
 const Container = styled.div`
   margin-top: 20px;
@@ -30,7 +32,16 @@ const Dropdown = styled.select`
   font-size: 1em;
   outline: none;
 `;
-
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
 const SaveButton = styled.button`
   height: 70px;
   width: 368px;
@@ -55,6 +66,7 @@ const SaveButton = styled.button`
 const DietDetailPage = () => {
   const [selectedTime, setSelectedTime] = useState();
   const [selectedType, setSelectedType] = useState("BREAKFAST");
+  const [isOpen, setIsOpen] = useState(false);
   const [searchResults, setSearchResults] = useState([]); // 검색 결과를 저장하기 위한 state
   const [selectedFoods, setSelectedFoods] = useState([]); // 선택된 음식들을 저장하기 위한 state
   const location = useLocation();
@@ -69,6 +81,7 @@ const DietDetailPage = () => {
       navigate("/diet");
     }
   }, []);
+
   const [searchedFoods, setSearchedFoods] = useState([]);
 
   const handleSearchedFoods = (food) => {
@@ -82,12 +95,13 @@ const DietDetailPage = () => {
       foods: searchedFoods,
     };
     console.log("심장이 아퍼:", selectedTime);
+    const sendDateAdded = moment(selectedTime).add(9, "hour");
     searchedFoods.map((data) => {
       const sendData = {
         userId: localStorage.getItem("userId"),
         productId: data.productId,
         mealType: selectedType,
-        mealDateTime: selectedTime,
+        mealDateTime: sendDateAdded,
       };
       const requestObj = {
         url: "/api/v1/meal/log",
@@ -97,12 +111,15 @@ const DietDetailPage = () => {
       axios(requestObj).then((response) => {
         console.log(response);
         if (response.data.success === true || response.status == 200) {
-          navigate("/diet");
+          setIsOpen(true);
         }
       });
     });
     console.log(searchedFoods);
-    alert("저장되었습니다!");
+  };
+
+  const popupNavi = () => {
+    navigate("/diet");
   };
 
   const handleDateChange = (changeTime) => {
@@ -144,6 +161,19 @@ const DietDetailPage = () => {
       </Container>
       <SearchInput onProductFound={handleSearchedFoods}></SearchInput>
       <FavoFoodList foods={searchedFoods}></FavoFoodList>
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={() => {
+          setIsOpen(false);
+          popupNavi();
+        }}
+        style={customStyles}
+        contentLabel="저장"
+      >
+        <b>저장완료</b>
+        <SaveButton onClick={popupNavi}>저장</SaveButton>
+      </Modal>
+
       <SaveButton onClick={handleSaveFoods}>저장</SaveButton>
     </div>
   );

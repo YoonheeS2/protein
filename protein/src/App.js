@@ -23,7 +23,7 @@ import { useNavigate } from "react-router-dom";
 function App() {
   //배포시 주석해제
   // axios.defaults.baseURL =
-  //   "http://ec2-43-200-165-23.ap-northeast-2.compute.amazonaws.com:8081";
+  //   "https://bhsworld.store/";
   axios.defaults.headers = {
     "Content-Type": `application/json`,
   };
