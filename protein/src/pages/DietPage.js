@@ -7,18 +7,36 @@ import IndividualInfo from "../components/diet/IndividualInfo";
 import axios from "axios";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import Modal from "react-modal";
 
 const DietContainer = styled.div`
   padding: 0px 10px 10px 10px;
   border-bottom: 1px solid #f2f2f2;
 `;
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
 
 const DietPage = () => {
   const [todayMeal, setTodayMeal] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [month, setMonth] = useState();
   const [weekRange, setWeekRange] = useState({ start: "", end: "" });
+  const [isOpen, setIsOpen] = useState(true);
+  const [warningMessage, setWarningMessage] = useState("");
+
   const navigate = useNavigate();
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     console.log("date : ", moment(new Date()).format("YYYY-MM-DD"));
@@ -58,16 +76,26 @@ const DietPage = () => {
         if (response.data && response.data.result) {
           setTodayMeal(response.data.result);
           const { BREAKFAST, LUNCH, DINNER } = response.data.result;
-          console.log("기록", BREAKFAST, LUNCH, DINNER);
-          // 아침, 점심, 저녁 중 하나라도 누락된 경우 경고창 표시
-          if (
-            BREAKFAST === undefined ||
-            LUNCH === undefined ||
-            DINNER === undefined
-          ) {
-            alert(
-              "아침, 점심, 저녁 중 하나 이상의 식사 기록이 누락되었습니다."
-            );
+
+          // 누락된 식사를 추적하는 배열
+          let missingMeals = [];
+
+          if (BREAKFAST === undefined) {
+            missingMeals.push("아침");
+          }
+          if (LUNCH === undefined) {
+            missingMeals.push("점심");
+          }
+          if (DINNER === undefined) {
+            missingMeals.push("저녁");
+          }
+
+          // 누락된 식사에 대한 메시지 설정
+          if (missingMeals.length > 0) {
+            setWarningMessage(`${missingMeals.join(", ")}을 먹지 않았습니다.`);
+            setIsOpen(true);
+          } else {
+            setIsOpen(false);
           }
         } else {
           console.error("Unexpected response structure");
@@ -123,6 +151,14 @@ const DietPage = () => {
           foodList={todayMeal.DINNER}
         ></IndividualInfo>
       )}
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Meal Warning"
+      >
+        {warningMessage}
+      </Modal>
     </div>
   );
 };

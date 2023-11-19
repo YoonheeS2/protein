@@ -19,19 +19,22 @@ const CalendarCustom = styled.div`
       max-width: initial !important;
       height: 46px;
       border: none;
+      position: relative;
       background: #fff;
     }
   }
 
   .all-meals-recorded {
     position: absolute;
-    background-color: #5f89f5;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* border: 2px solid #5f89f5; */
+    background-color: #5f89f559;
     border-radius: 50%;
-    color: white;
     width: 30px;
     height: 30px;
     z-index: 10;
-    // 추가적인 스타일링
   }
 
   .react-calendar__month-view__weekdays {
@@ -105,9 +108,11 @@ const DietCalendar = ({ handleClick, selectedDate }) => {
 
   const tileContent = ({ date, view }) => {
     if (view === "month") {
-      // date를 ISO 형식의 문자열로 변환하여 highlightedDates 배열에 있는지 확인
-      const isoDate = date.toISOString().split("T")[0];
-      if (highlightedDates.includes(isoDate)) {
+      // 달력의 날짜를 로컬 시간대 (예: 한국 시간대)로 변환
+      const localDate = moment(date).add(9, "hours").format("YYYY-MM-DD");
+
+      // highlightedDates 배열에 해당 날짜가 포함되어 있는지 확인
+      if (highlightedDates.includes(localDate)) {
         return <div className="all-meals-recorded"></div>;
       }
     }
