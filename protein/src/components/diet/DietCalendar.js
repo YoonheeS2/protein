@@ -86,15 +86,15 @@ const DietCalendar = ({ handleClick, selectedDate }) => {
 
   const getMonthAllMealEated = () => {
     let insideMonth;
+    const userId = localStorage.getItem("userId");
     if (month === undefined) {
       let monthInside = new Date();
       insideMonth = monthInside.getMonth() + 1;
-      console.log("먼쓰는:? ", monthInside);
     } else {
       insideMonth = month;
     }
     const request = {
-      url: `http://ec2-43-200-165-23.ap-northeast-2.compute.amazonaws.com:8081/api/v1/meal/log/summary/2/month/${insideMonth}`,
+      url: `/api/v1/meal/log/summary/${userId}/month/${insideMonth}`,
       method: "GET",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
