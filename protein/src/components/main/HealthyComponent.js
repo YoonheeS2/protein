@@ -2,7 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import moment from "moment";
+import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
+import SearchButton from "./SearchButton";
+import GoodEatingTime from "./GoodEatingTime";
+import GoodTimeButton from "./GoodTimeButton";
 
 const Container = styled.div`
   display: flex;
@@ -43,8 +47,8 @@ const Box = styled.img`
 const HealthyComponent = ({ mealLog }) => {
   let nowTime = new Date();
   const [selectedDate, setSelectedDate] = useState("");
+  const [modalIsOpen, setIsOpen] = useState(false);
   const [logData, setLogData] = useState([]);
-
   const [weekRange, setWeekRange] = useState({ start: "", end: "" });
   const mealTimeRanges = [
     { type: "BREAKFAST", start: 6, end: 10 },
@@ -103,11 +107,41 @@ const HealthyComponent = ({ mealLog }) => {
     });
   };
 
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+    },
+  };
+  
+  const handleModalButton = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   return (
     <Container>
       <Line>
         <Title>건강한 식습관</Title>
         <Text>check!</Text>
+        <GoodTimeButton handleClick={handleModalButton} />
+        <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            style={customStyles}
+          >
+            <GoodEatingTime
+              isOpen={modalIsOpen}
+              onClose={closeModal}
+            />
+          </Modal>
       </Line>
       <Line>
         <ImageBox type={"BREAKFAST"} state={"C"}></ImageBox>

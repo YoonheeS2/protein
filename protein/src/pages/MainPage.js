@@ -250,7 +250,8 @@ const MainPage = () => {
         ></Recommened>
       </RecomContainer>
       <LeftBlock>
-        <HealthyComponent></HealthyComponent>
+        <HealthyComponent>
+        </HealthyComponent>
       </LeftBlock>
       <LeftBlock>
         <SearchContainer>
