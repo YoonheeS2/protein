@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/protein/static/css/main.7603fa5a.css",
+    "main.js": "/protein/static/js/main.dbe0c392.js",
+    "index.html": "/protein/index.html",
+    "main.7603fa5a.css.map": "/protein/static/css/main.7603fa5a.css.map",
+    "main.dbe0c392.js.map": "/protein/static/js/main.dbe0c392.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7603fa5a.css",
+    "static/js/main.dbe0c392.js"
+  ]
+}
